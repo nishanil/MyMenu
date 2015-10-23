@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Title="{Binding Title}" x:Class="MyMenu.HomePage">
+	<ContentPage.Content>
+		<ListView x:Name="menuItems" HasUnevenRows="true" ItemsSource="{Binding FoodItems}">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ImageCell ImageSource="{Binding FoodItem.PictureLarge}" Text="{Binding FoodItem.Name}" />
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</ContentPage.Content>
+</ContentPage>
