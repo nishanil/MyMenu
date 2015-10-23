@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.Collections.ObjectModel;
 
 namespace MyMenu
 {
@@ -32,7 +33,31 @@ namespace MyMenu
 		public HomeViewModel ()
 		{
 			Title = "Home";
+			FoodItems = new ObservableCollection<FoodViewModel> ();
+			LoadFoodItems ();
 		}
+
+		async void LoadFoodItems ()
+		{
+			try {
+				IsBusy = true;
+
+				var items = await client.GetFoodItems ();
+				foreach (var item in items) {
+					FoodItems.Add (new FoodViewModel (item));
+				}
+				
+			} finally {
+				IsBusy = false;
+			}
+
+		}
+
+		public ObservableCollection<FoodViewModel> FoodItems {
+			get;
+			set;
+		}
+
+		readonly IFoodServiceClient client = new DummyFoodServiceClient ();
 	}
 }
-

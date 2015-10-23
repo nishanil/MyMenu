@@ -1,5 +1,5 @@
 ﻿//
-// BaseViewModel.cs
+// Food.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -22,49 +22,58 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE
-
+// THE SOFTWARE.
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace MyMenu
 {
-	public class BaseViewModel : INotifyPropertyChanged
+	public class Food
 	{
-		public string Title {
-			get { return title; }
-			set {
-				title = value;
-				RaisePropertyChanged ();
-			}
-		}
-
-		public bool IsBusy {
-			get {
-				return isBusy;
-			}
-			set {
-				isBusy = value;
-				RaisePropertyChanged ();
-			}
-		}
-
-		protected void RaisePropertyChanged ([CallerMemberName]  string propertyName = "")
+		public Food ()
 		{
-			if (PropertyChanged != null) {
-				PropertyChanged (this, new PropertyChangedEventArgs (propertyName));
-			}
+			IsEnabled = true;
+		}
+		
+		public Guid Id {
+			get;
+			set;
 		}
 
-		string title;
-		bool isBusy;
+		public string Name {
+			get;
+			set;
+		}
 
-		#region INotifyPropertyChanged implementation
+		public string Description {
+			get;
+			set;
+		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public string PictureLarge {
+			get;
+			set;
+		}
 
-		#endregion
+		public string PictureSmall {
+			get;
+			set;
+		}
+
+		public bool IsFeatured {
+			get;
+			set;
+		}
+
+		public bool IsEnabled {
+			get;
+			set;
+		}
+
+		public double Price {
+			get;
+			set;
+		}
+
 	}
 }
 
