@@ -1,5 +1,5 @@
 ﻿//
-// MyMenu.cs
+// LoginPage.xaml.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,32 +24,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.Collections.Generic;
 
 using Xamarin.Forms;
 
 namespace MyMenu
 {
-	public class App : Application
+	public partial class LoginPage : ContentPage
 	{
-		public App ()
+		public LoginPage ()
 		{
-			MainPage = new LoginPage ();
-			//MainPage = new NavigationPage (new HomePage ());
-		}
-
-		protected override void OnStart ()
-		{
-			// Handle when your app starts
-		}
-
-		protected override void OnSleep ()
-		{
-			// Handle when your app sleeps
-		}
-
-		protected override void OnResume ()
-		{
-			// Handle when your app resumes
+			InitializeComponent ();
 		}
 	}
 }
