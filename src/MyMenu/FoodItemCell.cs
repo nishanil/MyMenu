@@ -1,5 +1,5 @@
 ﻿//
-// FoodViewModel.cs
+// FoodItemCell.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,29 +24,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using Xamarin.Forms;
 
 namespace MyMenu
 {
-	public class FoodViewModel
+	public class FoodItemCell : ViewCell
 	{
-		readonly Food foodItem;
-
-		public Food FoodItem {
-			get {
-				return foodItem;
-			}
-		}
-
-		public FoodViewModel (Food foodItem)
-		{
-			this.foodItem = foodItem;
-		}
-
-		public string Price{
-			get{
-				return string.Format ("{0:C}", foodItem.Price);
-			}
-		}
+		
 	}
 }
 

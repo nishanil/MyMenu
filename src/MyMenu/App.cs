@@ -33,7 +33,8 @@ namespace MyMenu
 	{
 		public App ()
 		{
-			MainPage = new NavigationPage (new HomePage ());
+			MainPage = new LoginPage ();
+			//MainPage = new NavigationPage (new HomePage ());
 		}
 
 		protected override void OnStart ()
