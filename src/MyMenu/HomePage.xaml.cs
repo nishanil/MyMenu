@@ -38,6 +38,13 @@ namespace MyMenu
 			InitializeComponent ();
 			BindingContext = new HomeViewModel ();
 		}
+
+		protected override void OnAppearing ()
+		{
+			base.OnAppearing ();
+
+			//Navigation.PushModalAsync (new LoginPage ());
+		}
 	}
 }
 

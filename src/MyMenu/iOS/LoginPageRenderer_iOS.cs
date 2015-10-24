@@ -1,5 +1,5 @@
 ﻿//
-// LoginPage.xaml.cs
+// LoginPageRenderer.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,18 +24,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Collections.Generic;
-
+using Xamarin.Forms.Platform.iOS;
 using Xamarin.Forms;
+using MyMenu;
+using MyMenu.iOS;
+using Xamarin.Auth;
 
-namespace MyMenu
+[assembly: ExportRenderer (typeof(HomePage), typeof(LoginPageRenderer_iOS))]
+namespace MyMenu.iOS
 {
-	public partial class LoginPage : ContentPage
-	{
-		public LoginPage ()
+	public class LoginPageRenderer_iOS : PageRenderer
+	{	
+		OAuth2Authenticator authenticator;
+
+		public override void ViewDidAppear (bool animated)
 		{
-			InitializeComponent ();
+			base.ViewDidAppear (animated);
+			authenticator = new OAuth2Authenticator (
+				clientId: Helpers.ClientId, // your OAuth2 client id
+				scope: "", // the scopes for the particular API you're accessing, delimited by "+" symbols
+				authorizeUrl: new Uri (Helpers.AuthoriseUrl), // the auth URL for the service
+				redirectUrl: new Uri (Helpers.RedirectUrl)); // the redirect URL for the service
+
+			authenticator.Completed += (sender, e) => {
+				DismissViewController (true, null);
+				if (e.IsAuthenticated) {
+					Console.WriteLine (e.Account.Properties ["access_token"]);
+				}
+			};
+
+			PresentViewController (authenticator.GetUI (), true, null);
 		}
 	}
 }
-

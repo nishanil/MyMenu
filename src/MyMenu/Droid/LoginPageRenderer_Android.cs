@@ -1,5 +1,5 @@
 ﻿//
-// Helpers.cs
+// LoginPageRenderer_Android.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,28 +24,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using Xamarin.Forms.Platform.Android;
+using Xamarin.Forms;
+using MyMenu;
+using MyMenu.Droid;
+using Android.App;
+using Xamarin.Auth;
 
-namespace MyMenu
+[assembly: ExportRenderer (typeof(HomePage), typeof(LoginPageRenderer_Android))]
+namespace MyMenu.Droid
 {
-	public static class Helpers
+	public class LoginPageRenderer_Android : PageRenderer
 	{
-		public static string ClientId {
-			get {
-				return "";
-			}
-		}
+		OAuth2Authenticator authenticator;
 
-		public static string AuthoriseUrl {
-			get {
-				return "https://m.facebook.com/dialog/oauth/";
-			}
-		}
+		protected override void OnElementChanged (ElementChangedEventArgs<Page> e)
+		{
+			base.OnElementChanged (e);
+			var activity = Context as Activity;
 
-		public static string RedirectUrl {
-			get {
-				return "http://www.prashantvc.com";
-			}
-		}
+			authenticator = new OAuth2Authenticator (
+				clientId: Helpers.ClientId, // your OAuth2 client id
+				scope: "", // the scopes for the particular API you're accessing, delimited by "+" symbols
+				authorizeUrl: new Uri (Helpers.AuthoriseUrl), // the auth URL for the service
+				redirectUrl: new Uri (Helpers.RedirectUrl)); // the redirect URL for the service
+
+			authenticator.Completed += (sender, ee) => {
+				//DismissViewController (true, null);
+				if (ee.IsAuthenticated) {
+					Console.WriteLine (ee.Account.Properties ["access_token"]);
+				}
+			};
+
+			activity.StartActivity (authenticator.GetUI(activity));
+		}		
 	}
 }
 
