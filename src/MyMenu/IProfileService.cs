@@ -1,5 +1,5 @@
 ﻿//
-// Helpers.cs
+// IProfileService.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,28 +24,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.Threading.Tasks;
+using System.IO;
 
 namespace MyMenu
 {
-	public static class AuthHelpers
+	public interface IProfileService
 	{
-		public static string ClientId {
-			get {
-				return "1662988827247159";
-			}
-		}
-
-		public static string AuthoriseUrl {
-			get {
-				return "https://m.facebook.com/dialog/oauth/";
-			}
-		}
-
-		public static string RedirectUrl {
-			get {
-				return "http://www.prashantvc.com";
-			}
-		}
+		Task<Stream> GetProfilePictureAsync();
+		Task<FacebookProfile> GetProfileAsync();
 	}
 }
 

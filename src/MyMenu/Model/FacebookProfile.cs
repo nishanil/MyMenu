@@ -1,5 +1,5 @@
 ﻿//
-// Helpers.cs
+// FacebookProfile.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -23,29 +23,19 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 using System;
+using Newtonsoft.Json;
 
 namespace MyMenu
 {
-	public static class AuthHelpers
+	public class FacebookProfile
 	{
-		public static string ClientId {
-			get {
-				return "1662988827247159";
-			}
-		}
+		[JsonProperty ("name")]
+		public string Name { get; set; }
 
-		public static string AuthoriseUrl {
-			get {
-				return "https://m.facebook.com/dialog/oauth/";
-			}
-		}
-
-		public static string RedirectUrl {
-			get {
-				return "http://www.prashantvc.com";
-			}
-		}
+		[JsonProperty ("id")]
+		public string Id { get; set; }
 	}
 }
 
