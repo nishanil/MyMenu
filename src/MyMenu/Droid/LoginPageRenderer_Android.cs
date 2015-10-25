@@ -30,6 +30,7 @@ using MyMenu;
 using MyMenu.Droid;
 using Android.App;
 using Xamarin.Auth;
+using MyMenu.Helpers;
 
 [assembly: ExportRenderer (typeof(HomePage), typeof(LoginPageRenderer_Android))]
 namespace MyMenu.Droid
@@ -38,26 +39,37 @@ namespace MyMenu.Droid
 	{
 		OAuth2Authenticator authenticator;
 
-		protected override void OnElementChanged (ElementChangedEventArgs<Page> e)
+		protected override void OnElementChanged (ElementChangedEventArgs<Page> ee)
 		{
-			base.OnElementChanged (e);
+			base.OnElementChanged (ee);
+
+		
 			var activity = Context as Activity;
+		
+			if (!string.IsNullOrEmpty (Settings.AccessToken)) {
+				return;	
+			}
 
 			authenticator = new OAuth2Authenticator (
-				clientId: Helpers.ClientId, // your OAuth2 client id
+				clientId: AuthHelpers.ClientId, // your OAuth2 client id
 				scope: "", // the scopes for the particular API you're accessing, delimited by "+" symbols
-				authorizeUrl: new Uri (Helpers.AuthoriseUrl), // the auth URL for the service
-				redirectUrl: new Uri (Helpers.RedirectUrl)); // the redirect URL for the service
+				authorizeUrl: new Uri (AuthHelpers.AuthoriseUrl), // the auth URL for the service
+				redirectUrl: new Uri (AuthHelpers.RedirectUrl)); // the redirect URL for the service
 
-			authenticator.Completed += (sender, ee) => {
+			authenticator.Completed += (sender, e) => {
 				//DismissViewController (true, null);
-				if (ee.IsAuthenticated) {
-					Console.WriteLine (ee.Account.Properties ["access_token"]);
+				if (e.IsAuthenticated) {
+					const string accessTokenKey = "access_token";
+					if (e.IsAuthenticated && e.Account.Properties.ContainsKey (accessTokenKey)) {
+						Settings.AccessToken = e.Account.Properties [accessTokenKey];
+						AccountStore.Create (Forms.Context).Save (e.Account, "facebook");
+					}
 				}
 			};
 
-			activity.StartActivity (authenticator.GetUI(activity));
-		}		
+			activity.StartActivity (authenticator.GetUI (activity));
+
+		}
 	}
 }
 
