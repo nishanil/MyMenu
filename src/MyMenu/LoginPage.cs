@@ -1,5 +1,5 @@
 ﻿//
-// LoginPageRenderer_Android.cs
+// LoginPage.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,40 +24,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using Xamarin.Forms.Platform.Android;
+
 using Xamarin.Forms;
-using MyMenu;
-using MyMenu.Droid;
-using Android.App;
-using Xamarin.Auth;
 
-[assembly: ExportRenderer (typeof(HomePage), typeof(LoginPageRenderer_Android))]
-namespace MyMenu.Droid
+namespace MyMenu
 {
-	public class LoginPageRenderer_Android : PageRenderer
+	public class LoginPage : ContentPage
 	{
-		OAuth2Authenticator authenticator;
-
-		protected override void OnElementChanged (ElementChangedEventArgs<Page> e)
+		public LoginPage ()
 		{
-			base.OnElementChanged (e);
-			var activity = Context as Activity;
+			var button = new Button { Text = "Login" };
+			button.Clicked += Button_Clicked;
 
-			authenticator = new OAuth2Authenticator (
-				clientId: AuthHelpers.ClientId, // your OAuth2 client id
-				scope: "", // the scopes for the particular API you're accessing, delimited by "+" symbols
-				authorizeUrl: new Uri (AuthHelpers.AuthoriseUrl), // the auth URL for the service
-				redirectUrl: new Uri (AuthHelpers.RedirectUrl)); // the redirect URL for the service
-
-			authenticator.Completed += (sender, ee) => {
-				//DismissViewController (true, null);
-				if (ee.IsAuthenticated) {
-					Console.WriteLine (ee.Account.Properties ["access_token"]);
+			Content = new StackLayout { 
+				Children = {
+					button
 				}
 			};
+		}
 
-			activity.StartActivity (authenticator.GetUI(activity));
-		}		
+		void Button_Clicked (object sender, EventArgs e)
+		{
+			
+		}
 	}
 }
+
 
