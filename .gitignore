@@ -170,3 +170,5 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+src/MyMenu/Helpers.cs

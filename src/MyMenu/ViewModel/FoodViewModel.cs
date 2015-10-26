@@ -1,5 +1,5 @@
 ﻿//
-// MyMenu.cs
+// FoodViewModel.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -25,41 +25,27 @@
 // THE SOFTWARE.
 using System;
 
-using Xamarin.Forms;
-
 namespace MyMenu
 {
-	public class App : Application
+	public class FoodViewModel
 	{
-		public App ()
-		{
-			// The root page of your application
-			MainPage = new ContentPage {
-				Content = new StackLayout {
-					VerticalOptions = LayoutOptions.Center,
-					Children = {
-						new Label {
-							XAlign = TextAlignment.Center,
-							Text = "Welcome to Xamarin Forms!"
-						}
-					}
-				}
-			};
+		readonly Food foodItem;
+
+		public Food FoodItem {
+			get {
+				return foodItem;
+			}
 		}
 
-		protected override void OnStart ()
+		public FoodViewModel (Food foodItem)
 		{
-			// Handle when your app starts
+			this.foodItem = foodItem;
 		}
 
-		protected override void OnSleep ()
-		{
-			// Handle when your app sleeps
-		}
-
-		protected override void OnResume ()
-		{
-			// Handle when your app resumes
+		public string Price{
+			get{
+				return string.Format ("{0:C}", foodItem.Price);
+			}
 		}
 	}
 }
