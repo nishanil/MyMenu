@@ -1,5 +1,5 @@
 ﻿//
-// LoginPage.cs
+// User.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,55 +24,43 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-
-using Xamarin.Forms;
 using Microsoft.WindowsAzure.MobileServices;
-using MyMenu.Helpers;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace MyMenu
 {
-	public class LoginPage : ContentPage
+	[DataContract(Name="users")]
+	public class User
 	{
-		public LoginPage ()
+		public User (MobileServiceUser user)
 		{
-			var primaryColour = Color.FromHex ("E91E63");
-
-			var button = new Button { 
-				Text = "LOGIN WITH FACEBOOK",
-				BackgroundColor = Color.White,
-				TextColor = primaryColour,
-				WidthRequest = 200
-			};
-			button.Clicked += Button_Clicked;
-
-			Content = new StackLayout { 
-				Children = {
-					new Image{ Source = "logo.png" },
-					button
-				},
-				VerticalOptions = LayoutOptions.CenterAndExpand,
-				HorizontalOptions = LayoutOptions.CenterAndExpand
-			};
-
-			BackgroundColor = Color.FromHex ("E91E63");
+			UserId = user.UserId;
+			AuthToken = user.MobileServiceAuthenticationToken;
 		}
 
-		async void Button_Clicked (object sender, EventArgs e)
+		public User ()
 		{
-			var user = await DependencyService.Get<IMobileClient> ().LoginAsync 
-				(MobileServiceAuthenticationProvider.Facebook);
+			
+		}
 
-			Settings.CurrentUser = user.UserId;
-			Settings.AccessToken = user.MobileServiceAuthenticationToken;
+		[JsonProperty ("id")]
+		public string Id {
+			get;
+			set;
+		} 
 
-			var table = App.Client.GetTable<User> ();
-			await table.InsertAsync (new User (App.Client.CurrentUser));
+		[JsonProperty("userid")]
+		public string UserId {
+			get;
+			set;
+		}
 
-			Application.Current.MainPage = new NavigationPage (new HomePage ());
-
-			System.Diagnostics.Debug.WriteLine (user);
+		[JsonProperty("authToken")]
+		public string AuthToken {
+			get;
+			set;
 		}
 	}
 }
-
 
