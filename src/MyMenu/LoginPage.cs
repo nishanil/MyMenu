@@ -27,6 +27,7 @@ using System;
 
 using Xamarin.Forms;
 using Microsoft.WindowsAzure.MobileServices;
+using MyMenu.Helpers;
 
 namespace MyMenu
 {
@@ -60,6 +61,11 @@ namespace MyMenu
 		{
 			var user = await DependencyService.Get<IMobileClient> ().LoginAsync 
 				(MobileServiceAuthenticationProvider.Facebook);
+
+			Settings.CurrentUser = user.UserId;
+			Settings.AccessToken = user.MobileServiceAuthenticationToken;
+
+			Application.Current.MainPage = new NavigationPage (new HomePage ());
 
 			System.Diagnostics.Debug.WriteLine (user);
 		}

@@ -22,11 +22,23 @@ namespace MyMenu.Helpers
 		const string AccessTokenKey = "settings_key";
 		static readonly string AccessTokenDefault = string.Empty;
 
+		const string UserKey = "user_key";
+		static readonly string UserDefault = string.Empty;
+
 		const string IsProfileDownloadedKey = "profile_key";
 		static readonly bool IsProfileDownloadedDefault = false;
 
 		#endregion
 
+
+		public static string CurrentUser {
+			get {
+				return AppSettings.GetValueOrDefault (UserKey, UserDefault);
+			}
+			set {
+				AppSettings.AddOrUpdateValue (UserKey, value);
+			}
+		}
 
 		public static string AccessToken {
 			get {

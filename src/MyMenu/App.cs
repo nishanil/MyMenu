@@ -27,6 +27,7 @@ using System;
 
 using Xamarin.Forms;
 using Microsoft.WindowsAzure.MobileServices;
+using MyMenu.Helpers;
 
 namespace MyMenu
 {
@@ -40,8 +41,17 @@ namespace MyMenu
 			Client = new MobileServiceClient ("https://mymenu-ea.azure-mobile.net/", 
 				"");
 
-			//MainPage = new NavigationPage (new HomePage ());
-			MainPage = new LoginPage ();
+			if (string.IsNullOrEmpty (Settings.CurrentUser)) {
+				MainPage = new LoginPage ();
+				return;
+			}
+
+			var user = new MobileServiceUser (Settings.CurrentUser) { 
+				MobileServiceAuthenticationToken = Settings.AccessToken 
+			};
+
+			Client.CurrentUser = user;
+			MainPage = new NavigationPage (new HomePage ());
 		}
 
 		protected override void OnStart ()
