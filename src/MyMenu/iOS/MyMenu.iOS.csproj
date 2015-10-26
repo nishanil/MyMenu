@@ -135,10 +135,10 @@
     <BundleResource Include="Resources\logo%403x.png" />
     <BundleResource Include="Resources\user.png" />
     <BundleResource Include="Resources\user%402x.png" />
-    <BundleResource Include="Resources\medal.png" />
-    <BundleResource Include="Resources\medal%402x.png" />
     <BundleResource Include="Resources\cart.png" />
     <BundleResource Include="Resources\cart%402x.png" />
+    <BundleResource Include="Resources\favorite.png" />
+    <BundleResource Include="Resources\favorite%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

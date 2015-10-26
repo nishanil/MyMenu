@@ -119,6 +119,7 @@
     <Folder Include="Resources\values\" />
     <Folder Include="Resources\drawable-mdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
+    <Folder Include="Resources\values-v21\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
@@ -130,6 +131,24 @@
     <AndroidResource Include="Resources\drawable\logo.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\logo.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\logo.png" />
+    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values-v21\styles.xml" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\user.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\cart.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\favorite.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\user.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\cart.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\favorite.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\user.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\cart.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\favorite.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\user.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\cart.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\favorite.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\user.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\cart.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\favorite.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

@@ -51,7 +51,10 @@ namespace MyMenu
 			};
 
 			Client.CurrentUser = user;
-			MainPage = new NavigationPage (new HomePage ());
+			MainPage = new NavigationPage (new HomePage ()) {
+				BarBackgroundColor = Color.FromHex("E91E63"),
+				BarTextColor = Color.White
+			};
 		}
 
 		protected override void OnStart ()
