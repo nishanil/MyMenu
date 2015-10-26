@@ -1,5 +1,5 @@
 ﻿//
-// MyMenu.cs
+// IMobileClient.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,40 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-
-using Xamarin.Forms;
 using Microsoft.WindowsAzure.MobileServices;
+using System.Threading.Tasks;
 
 namespace MyMenu
 {
-	public class App : Application
+	public interface IMobileClient
 	{
-
-		public static MobileServiceClient Client { get; private set; }
-
-		public App ()
-		{
-			Client = new MobileServiceClient ("https://mymenu-ea.azure-mobile.net/", 
-				"");
-
-			//MainPage = new NavigationPage (new HomePage ());
-			MainPage = new LoginPage ();
-		}
-
-		protected override void OnStart ()
-		{
-			// Handle when your app starts
-		}
-
-		protected override void OnSleep ()
-		{
-			// Handle when your app sleeps
-		}
-
-		protected override void OnResume ()
-		{
-			// Handle when your app resumes
-		}
+		Task<MobileServiceUser>  LoginAsync (MobileServiceAuthenticationProvider provider);
 	}
 }
 

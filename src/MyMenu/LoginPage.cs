@@ -26,6 +26,7 @@
 using System;
 
 using Xamarin.Forms;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace MyMenu
 {
@@ -33,19 +34,34 @@ namespace MyMenu
 	{
 		public LoginPage ()
 		{
-			var button = new Button { Text = "Login" };
+			var primaryColour = Color.FromHex ("E91E63");
+
+			var button = new Button { 
+				Text = "LOGIN WITH FACEBOOK",
+				BackgroundColor = Color.White,
+				TextColor = primaryColour,
+				WidthRequest = 200
+			};
 			button.Clicked += Button_Clicked;
 
 			Content = new StackLayout { 
 				Children = {
+					new Image{ Source = "logo.png" },
 					button
-				}
+				},
+				VerticalOptions = LayoutOptions.CenterAndExpand,
+				HorizontalOptions = LayoutOptions.CenterAndExpand
 			};
+
+			BackgroundColor = Color.FromHex ("E91E63");
 		}
 
-		void Button_Clicked (object sender, EventArgs e)
+		async void Button_Clicked (object sender, EventArgs e)
 		{
-			
+			var user = await DependencyService.Get<IMobileClient> ().LoginAsync 
+				(MobileServiceAuthenticationProvider.Facebook);
+
+			System.Diagnostics.Debug.WriteLine (user);
 		}
 	}
 }

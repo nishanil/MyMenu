@@ -1,5 +1,5 @@
 ﻿//
-// MyMenu.cs
+// MobileClient.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,39 +24,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.Threading.Tasks;
 
-using Xamarin.Forms;
+using UIKit;
+using Foundation;
 using Microsoft.WindowsAzure.MobileServices;
+using Xamarin.Forms;
+using MyMenu.iOS;
 
-namespace MyMenu
+[assembly:Dependency (typeof(MobileClient))]
+namespace MyMenu.iOS
 {
-	public class App : Application
+	public class MobileClient : IMobileClient
 	{
-
-		public static MobileServiceClient Client { get; private set; }
-
-		public App ()
+		public async Task<MobileServiceUser> LoginAsync (MobileServiceAuthenticationProvider provider)
 		{
-			Client = new MobileServiceClient ("https://mymenu-ea.azure-mobile.net/", 
-				"");
-
-			//MainPage = new NavigationPage (new HomePage ());
-			MainPage = new LoginPage ();
+			var view = UIApplication.SharedApplication.KeyWindow.RootViewController;
+			return await App.Client.LoginAsync (view, provider);
 		}
 
-		protected override void OnStart ()
+		public void Logout ()
 		{
-			// Handle when your app starts
-		}
+			foreach (var cookie in NSHttpCookieStorage.SharedStorage.Cookies) {
+				NSHttpCookieStorage.SharedStorage.DeleteCookie (cookie);
+			}
 
-		protected override void OnSleep ()
-		{
-			// Handle when your app sleeps
-		}
-
-		protected override void OnResume ()
-		{
-			// Handle when your app resumes
+			App.Client.Logout ();
 		}
 	}
 }
