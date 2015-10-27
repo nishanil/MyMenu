@@ -1,12 +1,12 @@
-﻿using System;
-
+﻿
 using Android.App;
-using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Android.Graphics.Drawables;
+using Microsoft.WindowsAzure.MobileServices.Sync;
+using Microsoft.WindowsAzure.MobileServices;
+using System.IO;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 
 namespace MyMenu.Droid
 {
@@ -20,6 +20,25 @@ namespace MyMenu.Droid
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 
 			LoadApplication (new App ());
+
+			if ((int)Android.OS.Build.VERSION.SdkInt >= 21) {
+				ActionBar.SetIcon (new ColorDrawable (Resources.GetColor (Android.Resource.Color.Transparent)));
+			}
+
+			CurrentPlatform.Init ();
+			string path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "test1.db");
+			if (!File.Exists(path))
+			{
+				File.Create(path).Dispose();
+			}
+
+			var store = new MobileServiceSQLiteStore(path);
+			store.DefineTable<FavoriteItem> ();
+			App.Client.SyncContext.InitializeAsync(store).Wait();
+
+			var favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
+			App.Manager = new DataManager (App.Client, favoriteTable);
+
 		}
 	}
 }

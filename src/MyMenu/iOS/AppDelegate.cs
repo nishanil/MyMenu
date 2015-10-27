@@ -29,6 +29,11 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Microsoft.WindowsAzure.MobileServices;
+using System.Threading.Tasks;
+using Microsoft.WindowsAzure.MobileServices.Sync;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
+
 
 namespace MyMenu.iOS
 {
@@ -41,13 +46,36 @@ namespace MyMenu.iOS
 
 			// Code for starting up the Xamarin Test Cloud Agent
 			#if ENABLE_TEST_CLOUD
-			Xamarin.Calabash.Start();
+			Xamarin.Calabash.Start ();
 			#endif
 
 			LoadApplication (new App ());
 
+			#region Azure stuff
+
+			CurrentPlatform.Init ();
+			SQLitePCL.CurrentPlatform.Init ();
+
+			InitializeStoreAsync ().Wait ();
+
+			favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
+			App.Manager = new DataManager (App.Client, favoriteTable);
+
+			#endregion
+
 			return base.FinishedLaunching (app, options);
 		}
+
+		public async Task InitializeStoreAsync ()
+		{
+			string path = "syncstore.db";
+			var store = new MobileServiceSQLiteStore (path);
+			store.DefineTable<FavoriteItem> ();
+			await App.Client.SyncContext.InitializeAsync (store, new MobileServiceSyncHandler ());
+
+		}
+
+		IMobileServiceSyncTable<FavoriteItem> favoriteTable;
 	}
 }
 

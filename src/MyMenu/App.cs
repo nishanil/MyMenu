@@ -33,13 +33,12 @@ namespace MyMenu
 {
 	public class App : Application
 	{
-
 		public static MobileServiceClient Client { get; private set; }
 
 		public App ()
 		{
 			Client = new MobileServiceClient ("https://mymenu-ea.azure-mobile.net/", 
-				"");
+				"MCXpcoqnEmOwkDWhoAHAOJjxQtzMUa83");
 
 			if (string.IsNullOrEmpty (Settings.CurrentUser)) {
 				MainPage = new LoginPage ();
@@ -51,7 +50,15 @@ namespace MyMenu
 			};
 
 			Client.CurrentUser = user;
-			MainPage = new NavigationPage (new HomePage ());
+			MainPage = new NavigationPage (new HomePage ()) {
+				BarBackgroundColor = Color.FromHex("E91E63"),
+				BarTextColor = Color.White
+			};
+		}
+
+		public static DataManager Manager {
+			get;
+			set;
 		}
 
 		protected override void OnStart ()
