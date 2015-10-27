@@ -23,7 +23,7 @@
 							<Grid HorizontalOptions="StartAndExpand" Padding="8,0">
 								<Label LineBreakMode="WordWrap" Text="{Binding FoodItem.Description}" TextColor="Gray" />
 							</Grid>
-							<Button Text="Add" />
+							<Button Text="Add" Command="{Binding AddFavorite}"/>
 						</StackLayout>
 					</ViewCell>
 				</DataTemplate>
