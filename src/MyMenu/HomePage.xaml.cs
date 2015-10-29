@@ -42,8 +42,13 @@ namespace MyMenu
 		protected override void OnAppearing ()
 		{
 			base.OnAppearing ();
+			InitialiseSyncTable ();
+		}
 
-			//Navigation.PushModalAsync (new LoginPage ());
+		void InitialiseSyncTable ()
+		{
+			var favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
+			App.Manager = new DataManager (App.Client, favoriteTable);
 		}
 	}
 }
