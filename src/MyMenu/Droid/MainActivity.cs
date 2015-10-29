@@ -36,9 +36,6 @@ namespace MyMenu.Droid
 			store.DefineTable<FavoriteItem> ();
 			App.Client.SyncContext.InitializeAsync(store).Wait();
 
-			var favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
-			App.Manager = new DataManager (App.Client, favoriteTable);
-
 		}
 	}
 }

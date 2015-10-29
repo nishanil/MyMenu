@@ -58,9 +58,6 @@ namespace MyMenu.iOS
 
 			InitializeStoreAsync ().Wait ();
 
-			favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
-			App.Manager = new DataManager (App.Client, favoriteTable);
-
 			#endregion
 
 			return base.FinishedLaunching (app, options);
@@ -75,7 +72,6 @@ namespace MyMenu.iOS
 
 		}
 
-		IMobileServiceSyncTable<FavoriteItem> favoriteTable;
 	}
 }
 

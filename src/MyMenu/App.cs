@@ -50,11 +50,13 @@ namespace MyMenu
 			};
 
 			Client.CurrentUser = user;
+
 			MainPage = new NavigationPage (new HomePage ()) {
-				BarBackgroundColor = Color.FromHex("E91E63"),
+				BarBackgroundColor = Color.FromHex ("E91E63"),
 				BarTextColor = Color.White
 			};
 		}
+
 
 		public static DataManager Manager {
 			get;
