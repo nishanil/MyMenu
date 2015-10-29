@@ -1,5 +1,5 @@
 ﻿//
-// FoodViewModel.cs
+// ScreenSize.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -25,60 +25,21 @@
 // THE SOFTWARE.
 using System;
 using Xamarin.Forms;
+using UIKit;
+using MyMenu.iOS;
 
-namespace MyMenu
+[assembly:Dependency(typeof(ScreenSize))]
+namespace MyMenu.iOS
 {
-	public class FoodViewModel
+	public class ScreenSize : IScreenSize
 	{
-		readonly Food foodItem;
-
-		public Food FoodItem {
-			get {
-				return foodItem;
-			}
-		}
-
-		public FoodViewModel (Food foodItem)
+		#region IScreenSize implementation
+		public Size GetScreenSize ()
 		{
-			this.foodItem = foodItem;
+			return new Size(UIScreen.MainScreen.Bounds.Width, UIScreen.MainScreen.Bounds.Height);
 		}
-
-		public string Price {
-			get {
-				return string.Format ("{0:C}", foodItem.Price);
-			}
-		}
-
-		async void Method ()
-		{
-			await App.Manager.SaveFavorite (new FavoriteItem {
-				FoodItemId = foodItem.Id.ToString (),
-				UserId = App.Client.CurrentUser.UserId,
-				IsRemoved = false
-			});
-
-			await App.Manager.SyncTableAsync ();
-		}
-
-		public Command AddFavorite {
-			get {
-				return addFavorite ?? (addFavorite = new Command (Method));
-			}
-		}
-
-		public float ImageWidth {
-			get {
-				return (float)App.ScreenSize.Width;	
-			}
-		}
-
-		public float ImageHeight {
-			get {
-				return (float)(App.ScreenSize.Width / 1.333d);	
-			}
-		}
-
-		Command addFavorite;
+		#endregion
+		
 	}
 }
 

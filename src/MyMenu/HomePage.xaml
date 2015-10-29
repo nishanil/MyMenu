@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Title="{Binding Title}" x:Class="MyMenu.HomePage">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Name="Cart" Icon="cart"/>
+		<ToolbarItem Name="Cart" Icon="cart" />
 		<ToolbarItem Name="Favourites" Icon="favorite" />
-		<ToolbarItem Name="Profile" Icon="user"/>
+		<ToolbarItem Name="Profile" Icon="user" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<ListView x:Name="menuItems" HasUnevenRows="true" ItemsSource="{Binding FoodItems}">
@@ -11,7 +11,10 @@
 				<DataTemplate>
 					<ViewCell>
 						<StackLayout Orientation="Vertical">
-							<Image Source="{Binding FoodItem.PictureLarge}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+							<Image Source="{Binding FoodItem.PictureLarge}" 
+								HeightRequest="{Binding ImageHeight}"
+								WidthRequest="{Binding ImageWidth}"
+								/>
 							<Grid Padding="8,0">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />
@@ -23,7 +26,7 @@
 							<Grid HorizontalOptions="StartAndExpand" Padding="8,0">
 								<Label LineBreakMode="WordWrap" Text="{Binding FoodItem.Description}" TextColor="Gray" />
 							</Grid>
-							<Button Text="Add" Command="{Binding AddFavorite}"/>
+							<Button Text="Add" Command="{Binding AddFavorite}" />
 						</StackLayout>
 					</ViewCell>
 				</DataTemplate>

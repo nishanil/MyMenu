@@ -68,7 +68,10 @@ namespace MyMenu
 			var table = App.Client.GetTable<User> ();
 			await table.InsertAsync (new User (App.Client.CurrentUser));
 
-			Application.Current.MainPage = new NavigationPage (new HomePage ());
+			Application.Current.MainPage = new NavigationPage (new HomePage ()){
+				BarBackgroundColor = Color.FromHex ("E91E63"),
+				BarTextColor = Color.White
+			};
 
 			System.Diagnostics.Debug.WriteLine (user);
 		}

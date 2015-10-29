@@ -2,11 +2,10 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Android.Graphics.Drawables;
-using Microsoft.WindowsAzure.MobileServices.Sync;
 using Microsoft.WindowsAzure.MobileServices;
 using System.IO;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
+using Android.Graphics.Drawables;
 
 namespace MyMenu.Droid
 {
@@ -21,7 +20,7 @@ namespace MyMenu.Droid
 
 			LoadApplication (new App ());
 
-			if ((int)Android.OS.Build.VERSION.SdkInt >= 21) {
+			if ((int)Build.VERSION.SdkInt >= 21) {
 				ActionBar.SetIcon (new ColorDrawable (Resources.GetColor (Android.Resource.Color.Transparent)));
 			}
 
