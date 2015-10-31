@@ -33,7 +33,11 @@ namespace MyMenu
 {
 	public class App : Application
 	{
-		public static MobileServiceClient Client { get; private set; }
+        public static readonly string ApplicationURL = @"https://mymenu-demo.azurewebsites.net";
+        public static readonly string GatewayURL = @"https://mymenu-demo8eb72f69d7c94309a2d73935e5784b92.azurewebsites.net";
+        public static readonly string ApplicationKey = @"";
+
+        public static MobileServiceClient Client { get; private set; }
 
 		public static Size ScreenSize { get; set; }
 

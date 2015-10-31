@@ -30,7 +30,7 @@ using System.Runtime.Serialization;
 
 namespace MyMenu
 {
-	[DataContract(Name="users")]
+	[DataContract(Name="user")]
 	public class User
 	{
 		public User (MobileServiceUser user)

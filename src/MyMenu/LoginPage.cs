@@ -72,6 +72,7 @@ namespace MyMenu
 				
 				Settings.CurrntUserId = userRecord.Id;
 			} catch (Exception ex) {
+                await DisplayAlert("Error", "We're unable to log you in at the moment. Try later!","OK");
 				System.Diagnostics.Debug.WriteLine (ex.Message);
 			}
 

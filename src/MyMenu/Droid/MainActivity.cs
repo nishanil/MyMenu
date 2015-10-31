@@ -31,10 +31,9 @@ namespace MyMenu.Droid
 				File.Create(path).Dispose();
 			}
 
-			client = new MobileServiceClient ("https://mymenu-ea.azure-mobile.net/", 
-				"MCXpcoqnEmOwkDWhoAHAOJjxQtzMUa83");
+			client = new MobileServiceClient(App.ApplicationURL, App.GatewayURL, App.ApplicationKey);
 
-			var store = new MobileServiceSQLiteStore(path);
+            var store = new MobileServiceSQLiteStore(path);
 			store.DefineTable<FavoriteItem> ();
 			client.SyncContext.InitializeAsync(store).Wait();
 

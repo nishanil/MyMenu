@@ -56,8 +56,7 @@ namespace MyMenu.iOS
 			CurrentPlatform.Init ();
 			SQLitePCL.CurrentPlatform.Init ();
 
-			client = new MobileServiceClient ("https://mymenu-ea.azure-mobile.net/", 
-				"MCXpcoqnEmOwkDWhoAHAOJjxQtzMUa83");
+			client = new MobileServiceClient (App.ApplicationURL, App.GatewayURL, App.ApplicationKey);
 
 			InitializeStoreAsync ().Wait ();
 
