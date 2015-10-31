@@ -1,5 +1,5 @@
 ﻿//
-// HomePage.xaml.cs
+// ProgressDisplay_iOS.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -23,41 +23,30 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 using System;
-using System.Collections.Generic;
-
+using BigTed;
 using Xamarin.Forms;
+using MyMenu.iOS;
 
-namespace MyMenu
+[assembly:Dependency(typeof(ProgressDisplay_iOS))]
+namespace MyMenu.iOS
 {
-	public partial class HomePage : ContentPage
+	public class ProgressDisplay_iOS : IProgressDisplay
 	{
-		HomeViewModel vm;
+		#region IProgressDisplay implementation
 
-		public HomePage ()
+		public void Show ()
 		{
-			InitializeComponent ();
-
-			var favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
-			App.Manager = new DataManager (App.Client, favoriteTable);
-
-			vm = new HomeViewModel ();
-			vm.PropertyChanged += Vm_PropertyChanged;
-			BindingContext = vm;
+			BTProgressHUD.Show ();
 		}
 
-		void Vm_PropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		public void Dismiss ()
 		{
-			if (e.PropertyName != "IsBusy")
-				return;
-
-			var progress = DependencyService.Get<IProgressDisplay> ();
-			if (vm.IsBusy && progress != null)
-				progress.Show ();
-			else
-				progress.Dismiss ();
+			BTProgressHUD.Dismiss ();
 		}
+
+		#endregion
+
 
 	}
 }

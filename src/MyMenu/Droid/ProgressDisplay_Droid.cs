@@ -1,5 +1,5 @@
 ﻿//
-// HomePage.xaml.cs
+// ProgressDisplay_Droid.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -23,42 +23,25 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 using System;
-using System.Collections.Generic;
-
 using Xamarin.Forms;
+using MyMenu.Droid;
+using AndroidHUD;
 
-namespace MyMenu
+[assembly:Dependency (typeof(ProgressDisplay_Droid))]
+namespace MyMenu.Droid
 {
-	public partial class HomePage : ContentPage
+	public class ProgressDisplay_Droid : IProgressDisplay
 	{
-		HomeViewModel vm;
-
-		public HomePage ()
+		public void Show ()
 		{
-			InitializeComponent ();
-
-			var favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
-			App.Manager = new DataManager (App.Client, favoriteTable);
-
-			vm = new HomeViewModel ();
-			vm.PropertyChanged += Vm_PropertyChanged;
-			BindingContext = vm;
+			AndHUD.Shared.Show (Forms.Context);	
 		}
 
-		void Vm_PropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		public void Dismiss ()
 		{
-			if (e.PropertyName != "IsBusy")
-				return;
-
-			var progress = DependencyService.Get<IProgressDisplay> ();
-			if (vm.IsBusy && progress != null)
-				progress.Show ();
-			else
-				progress.Dismiss ();
+			AndHUD.Shared.Dismiss (Forms.Context);
 		}
-
 	}
 }
 
