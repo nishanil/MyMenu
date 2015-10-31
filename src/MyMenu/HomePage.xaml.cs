@@ -47,6 +47,11 @@ namespace MyMenu
 			BindingContext = vm;
 		}
 
+		void Favourites_Clicked (object sender, EventArgs e)
+		{
+			Navigation.PushAsync (new FavoritePage());
+		}
+
 		void Vm_PropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName != "IsBusy")

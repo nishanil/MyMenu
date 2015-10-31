@@ -1,5 +1,5 @@
 ﻿//
-// HomeViewModel.cs
+// FavoriteViewModel.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -25,49 +25,46 @@
 // THE SOFTWARE.
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
-using System.Threading.Tasks;
 
 namespace MyMenu
 {
-	public class HomeViewModel : BaseViewModel
+	public class FavoriteViewModel : BaseViewModel
 	{
-		public HomeViewModel ()
+		public FavoriteViewModel ()
 		{
-			Title = "Home";
+			Title = "Favourites";
 			FoodItems = new ObservableCollection<FoodViewModel> ();
-			LoadFoodItems ();
+
+			LoadDataAsync ();
 		}
 
-		async Task LoadFoodItems ()
+		async Task LoadDataAsync ()
 		{
 			try {
 				IsBusy = true;
 
-				var items = await DependencyService.Get<IDataService>().GetFoodItems();
+				var items = await DependencyService.Get<IDataService> ().GetFoodItems ();
 				var favorites = await App.Manager.GetUserFavoritesAsync ();
 
 				var fooditems = from fi in items
-				                join  fav in favorites on fi.Id equals fav.FoodItemId into prodGroup
-				                from g in prodGroup.DefaultIfEmpty (null)
-				                select new {FoodItem = fi, FavoriteItem = g};
+				                join  fav in favorites on fi.Id equals fav.FoodItemId
+				                select fi;
 
 				foreach (var item in fooditems) {
-					item.FoodItem.IsFavorite = (item.FavoriteItem != null);
-					FoodItems.Add (new FoodViewModel (item.FoodItem));
+					FoodItems.Add (new FoodViewModel (item));
 				}
-				
 			} finally {
 				IsBusy = false;
 			}
-
 		}
 
 		public ObservableCollection<FoodViewModel> FoodItems {
 			get;
 			set;
 		}
-
 	}
 }
+

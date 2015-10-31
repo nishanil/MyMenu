@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="{Binding Title}" xmlns:controls="clr-namespace:MyMenu;assembly=MyMenu" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyMenu.FavoritePage">
+	<ContentPage.Content>
+		<ListView x:Name="menuItems" HasUnevenRows="true" ItemsSource="{Binding FoodItems}">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Orientation="Vertical" BackgroundColor="White">
+							<Grid Padding="8,0">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition />
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+								<Label Text="{Binding FoodItem.Name}" VerticalOptions="Fill" Grid.Row="0" FontSize="20" TextColor="#E91E63" Grid.Column="1" />
+								<Label Text="{Binding Price}" FontSize="20" Grid.Column="2" Grid.Row="0" TextColor="#E91E63" />
+								<Label LineBreakMode="WordWrap" FontSize="12" Text="{Binding FoodItem.Description}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" TextColor="Gray" />
+								<controls:ImageButton Source="addcart" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
+							</Grid>
+						</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</ContentPage.Content>
+</ContentPage>

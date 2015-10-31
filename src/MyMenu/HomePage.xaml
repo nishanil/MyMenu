@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:MyMenu;assembly=MyMenu" Title="{Binding Title}" x:Class="MyMenu.HomePage">
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Name="Cart" Icon="cart" />
-		<ToolbarItem Name="Favourites" Icon="favorite" />
+		<ToolbarItem Name="Favourites" Icon="favorite" Clicked="Favourites_Clicked"/>
 		<ToolbarItem Name="Profile" Icon="user" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
