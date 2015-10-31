@@ -11,6 +11,7 @@
 Components/
 
 # Build results
+.[vV]s
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
