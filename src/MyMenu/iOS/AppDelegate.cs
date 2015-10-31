@@ -71,7 +71,6 @@ namespace MyMenu.iOS
 			string path = "syncstore.db";
 			var store = new MobileServiceSQLiteStore (path);
 			store.DefineTable<FavoriteItem> ();
-			store.DefineTable<Food> ();
 			await client.SyncContext.InitializeAsync (store, new MobileServiceSyncHandler ());
 
 		}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Xamarin.Forms;
 using MyMenu;
 using Microsoft.WindowsAzure.MobileServices;
@@ -11,21 +12,21 @@ namespace MyMenu
 {
 	public class AzureDataService : IDataService
 	{
-		IMobileServiceSyncTable<Food> foodTable;
+		readonly IMobileServiceTable<Food> foodTable;
 
 		#region IFoodServiceClient implementation
 
 		public async Task<List<Food>> GetFoodItems ()
 		{
-			await foodTable.PullAsync ("allFoods", foodTable.CreateQuery ().Where( f=> f.IsEnabled == true));
-			return await foodTable.ToListAsync();
+			var foodItems = await foodTable.ReadAsync ();
+			return foodItems.ToList();
 		}
 
 		#endregion
 
 		public AzureDataService ()
 		{
-			foodTable = App.Client.GetSyncTable<Food> ();
+			foodTable = App.Client.GetTable<Food> ();
 		}
 	}
 }

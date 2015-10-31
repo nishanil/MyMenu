@@ -78,7 +78,7 @@ namespace MyMenu
 			try {
 				await client.SyncContext.PushAsync ();
 				await favoriteTable.PullAsync ("favourites" + userId, 
-					favoriteTable.Where (p => p.UserId == userId && !p.IsRemoved));
+					favoriteTable.Where (p => p.UserId == userId));
 
 			} catch (MobileServiceInvalidOperationException ex) {
 				Debug.WriteLine (@"Sync Failed: {0}", ex.Message);

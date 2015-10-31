@@ -35,7 +35,6 @@ namespace MyMenu.Droid
 
             var store = new MobileServiceSQLiteStore(path);
 			store.DefineTable<FavoriteItem> ();
-			store.DefineTable<Food> ();
 			client.SyncContext.InitializeAsync(store).Wait();
 
 			LoadApplication (new App (client));
