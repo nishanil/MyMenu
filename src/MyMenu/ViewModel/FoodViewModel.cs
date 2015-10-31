@@ -52,7 +52,7 @@ namespace MyMenu
 
 		public string Price {
 			get {
-				return string.Format ("{0:C}", foodItem.Price);
+				return string.Format ("{0:C}", foodItem.PricePerQty);
 			}
 		}
 

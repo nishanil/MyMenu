@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using Newtonsoft.Json;
 
 namespace MyMenu
 {
@@ -33,47 +34,15 @@ namespace MyMenu
 		{
 			IsEnabled = true;
 		}
-		
-		public string Id {
-			get;
-			set;
-		}
-
-		public string Name {
-			get;
-			set;
-		}
-
-		public string Description {
-			get;
-			set;
-		}
-
-		public string PictureLarge {
-			get;
-			set;
-		}
-
-		public string PictureSmall {
-			get;
-			set;
-		}
-
-		public bool IsFeatured {
-			get;
-			set;
-		}
-
-		public bool IsEnabled {
-			get;
-			set;
-		}
-
-		public double Price {
-			get;
-			set;
-		}
-
+		[JsonProperty(PropertyName = "id")]
+		public string Id { get; set; }
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public string ImageUrl { get; set; }
+		public double PricePerQty { get; set; }
+		public bool IsFeatured { get; set; }
+		public bool IsEnabled { get; set; }
+		[JsonIgnore]
 		public bool IsFavorite {
 			get;
 			set;

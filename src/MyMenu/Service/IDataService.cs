@@ -29,13 +29,13 @@ using System.Collections.Generic;
 
 namespace MyMenu
 {
-	public interface IFoodServiceClient
+	public interface IDataService
 	{
 		Task<List<Food>> GetFoodItems ();
 	}
 
 	//TODO: Replce with actual implementation later
-	public class DummyFoodServiceClient : IFoodServiceClient
+	public class DummyFoodServiceClient : IDataService
 	{
 		//Waffles - http://i.imgur.com/IfVirWF.jpg
 		//Dosa -  http://i.imgur.com/q2BqGza.jpg
@@ -48,25 +48,25 @@ namespace MyMenu
 			var tcs = new TaskCompletionSource<List<Food>> ();
 			var foodItems = new List<Food>{ 
 				new Food{
-					Id = "012af9d1-0d3d-4246-af70-36ccdd79b33a",
+					//Id = "012af9d1-0d3d-4246-af70-36ccdd79b33a",
 					Name = "Waffles",
 					Description = "Fresh waffles with honey and strawberries",
-					PictureLarge = "http://i.imgur.com/IfVirWF.jpg",
-					Price = 80
+					ImageUrl = "http://i.imgur.com/IfVirWF.jpg",
+					PricePerQty = 80
 				},
 				new Food{
-					Id = "4c8cd309-7ed3-4036-a804-838f873c757a",
+					//Id = "4c8cd309-7ed3-4036-a804-838f873c757a",
 					Name = "Pasta",
 					Description = "Italian pasta with garlic bread on the side",
-					PictureLarge = "http://i.imgur.com/rOPvbnl.jpg",
-					Price = 150
+					ImageUrl = "http://i.imgur.com/rOPvbnl.jpg",
+					PricePerQty = 150
 				},
 				new Food{
-					Id = "2d46fa35-4fc7-4bac-8827-7df1cbfb2177",
+					//Id = "2d46fa35-4fc7-4bac-8827-7df1cbfb2177",
 					Name = "Dosa",
 					Description = "Authentic South Indian masala dosa",
-					PictureLarge = "http://i.imgur.com/q2BqGza.jpg",
-					Price = 40
+					ImageUrl = "http://i.imgur.com/q2BqGza.jpg",
+					PricePerQty = 40
 				}
 			};
 

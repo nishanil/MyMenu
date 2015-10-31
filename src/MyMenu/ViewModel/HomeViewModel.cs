@@ -26,6 +26,7 @@
 using System;
 using System.Linq;
 using System.Collections.ObjectModel;
+using Xamarin.Forms;
 
 namespace MyMenu
 {
@@ -43,7 +44,7 @@ namespace MyMenu
 			try {
 				IsBusy = true;
 
-				var items = await client.GetFoodItems ();
+				var items = await DependencyService.Get<IDataService>().GetFoodItems();
 				var favorites = await App.Manager.GetUserFavoritesAsync ();
 
 				var fooditems = from fi in items
@@ -67,6 +68,6 @@ namespace MyMenu
 			set;
 		}
 
-		readonly IFoodServiceClient client = new DummyFoodServiceClient ();
+		readonly IDataService client = new DummyFoodServiceClient ();
 	}
 }
