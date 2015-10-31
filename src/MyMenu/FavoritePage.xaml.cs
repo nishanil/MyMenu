@@ -1,5 +1,5 @@
 ﻿//
-// HomeViewModel.cs
+// FavoritePage.xaml.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,50 +24,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Linq;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+
 using Xamarin.Forms;
-using System.Threading.Tasks;
 
 namespace MyMenu
 {
-	public class HomeViewModel : BaseViewModel
+	public partial class FavoritePage : ContentPage
 	{
-		public HomeViewModel ()
+		public FavoritePage ()
 		{
-			Title = "Home";
-			FoodItems = new ObservableCollection<FoodViewModel> ();
-			LoadFoodItems ();
+			InitializeComponent ();
+			BindingContext = new FavoriteViewModel ();
 		}
-
-		async Task LoadFoodItems ()
-		{
-			try {
-				IsBusy = true;
-
-				var items = await DependencyService.Get<IDataService>().GetFoodItems();
-				var favorites = await App.Manager.GetUserFavoritesAsync ();
-
-				var fooditems = from fi in items
-				                join  fav in favorites on fi.Id equals fav.FoodItemId into prodGroup
-				                from g in prodGroup.DefaultIfEmpty (null)
-				                select new {FoodItem = fi, FavoriteItem = g};
-
-				foreach (var item in fooditems) {
-					item.FoodItem.IsFavorite = (item.FavoriteItem != null);
-					FoodItems.Add (new FoodViewModel (item.FoodItem));
-				}
-				
-			} finally {
-				IsBusy = false;
-			}
-
-		}
-
-		public ObservableCollection<FoodViewModel> FoodItems {
-			get;
-			set;
-		}
-
 	}
 }
+

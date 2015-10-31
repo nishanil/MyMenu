@@ -28,7 +28,7 @@ using BigTed;
 using Xamarin.Forms;
 using MyMenu.iOS;
 
-[assembly:Dependency(typeof(ProgressDisplay_iOS))]
+[assembly:Dependency (typeof(ProgressDisplay_iOS))]
 namespace MyMenu.iOS
 {
 	public class ProgressDisplay_iOS : IProgressDisplay
@@ -37,17 +37,16 @@ namespace MyMenu.iOS
 
 		public void Show ()
 		{
-			BTProgressHUD.Show ();
+			Device.BeginInvokeOnMainThread (() => BTProgressHUD.Show ());
 		}
 
 		public void Dismiss ()
 		{
-			BTProgressHUD.Dismiss ();
+			Device.BeginInvokeOnMainThread (BTProgressHUD.Dismiss);
+
 		}
 
 		#endregion
-
-
 	}
 }
 

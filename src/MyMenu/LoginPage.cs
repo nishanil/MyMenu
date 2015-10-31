@@ -65,18 +65,22 @@ namespace MyMenu
 			Settings.CurrentUser = user.UserId;
 			Settings.AccessToken = user.MobileServiceAuthenticationToken;
 
+			var progress = DependencyService.Get<IProgressDisplay> ();
 			try {
+				progress.Show ();
 				var table = App.Client.GetTable<User> ();
 				var userRecord = new User (App.Client.CurrentUser);
 				await table.InsertAsync (userRecord);
 				
 				Settings.CurrntUserId = userRecord.Id;
 			} catch (Exception ex) {
-                await DisplayAlert("Error", "We're unable to log you in at the moment. Try later!","OK");
+				await DisplayAlert ("Error", "We're unable to log you in at the moment. Try later!", "OK");
 				System.Diagnostics.Debug.WriteLine (ex.Message);
+			} finally {
+				progress.Dismiss ();
 			}
 
-			Application.Current.MainPage = new NavigationPage (new HomePage ()){
+			Application.Current.MainPage = new NavigationPage (new HomePage ()) {
 				BarBackgroundColor = Color.FromHex ("E91E63"),
 				BarTextColor = Color.White
 			};
