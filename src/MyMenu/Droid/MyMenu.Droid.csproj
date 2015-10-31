@@ -159,6 +159,21 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\user.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\cart.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\favorite.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\nofav.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\fav.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\addcart.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\nofav.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\fav.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\addcart.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\nofav.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\fav.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\addcart.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\nofav.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\fav.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\addcart.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\nofav.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\fav.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\addcart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

@@ -52,9 +52,6 @@ namespace MyMenu
 
 			Client.CurrentUser = user;
 
-			var favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
-			Manager = new DataManager (Client, favoriteTable);
-
 			InitialiseHomePage ();
 
 			var screen = DependencyService.Get<IScreenSize> ();

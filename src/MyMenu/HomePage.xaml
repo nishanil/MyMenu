@@ -10,7 +10,7 @@
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<ViewCell>
-						<StackLayout Orientation="Vertical">
+						<StackLayout Orientation="Vertical" BackgroundColor="White">
 							<RelativeLayout>
 								<Image x:Name="foodImage" Source="{Binding FoodItem.PictureLarge}" HeightRequest="{Binding ImageHeight}" WidthRequest="{Binding ImageWidth}" />
 								<controls:FavoriteButton Source="nofav" RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, &#xA;					                                        Constant=0}" RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, &#xA;					                 						Property=Width,&#xA;					                 						ElementName=foodImage,&#xA;					                                        Constant=-48}" />
