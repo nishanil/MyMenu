@@ -12,7 +12,7 @@
 					<ViewCell>
 						<StackLayout Orientation="Vertical" BackgroundColor="White">
 							<RelativeLayout>
-								<Image x:Name="foodImage" Source="{Binding FoodItem.PictureLarge}" HeightRequest="{Binding ImageHeight}" WidthRequest="{Binding ImageWidth}" />
+								<Image x:Name="foodImage" Source="{Binding FoodItem.ImageUrl}" HeightRequest="{Binding ImageHeight}" WidthRequest="{Binding ImageWidth}" />
 								<controls:FavoriteButton Source="nofav" RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, &#xA;					                                        Constant=0}" RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, &#xA;					                 						Property=Width,&#xA;					                 						ElementName=foodImage,&#xA;					                                        Constant=-48}" />
 							</RelativeLayout>
 							<Grid Padding="8,0">
