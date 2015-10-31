@@ -184,10 +184,12 @@
   <ItemGroup>
     <Compile Include="App_Start\Startup.MobileApp.cs" />
     <Compile Include="Controllers\FavoriteController.cs" />
+    <Compile Include="Controllers\FoodController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataObjects\Favorite.cs" />
+    <Compile Include="DataObjects\Food.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="Models\MyMenuContext.cs" />

@@ -33,6 +33,8 @@ namespace MyMenuAppService.Models
         public System.Data.Entity.DbSet<MyMenuAppService.DataObjects.User> Users { get; set; }
 
         public System.Data.Entity.DbSet<MyMenuAppService.DataObjects.Favorite> Favorites { get; set; }
+
+        public System.Data.Entity.DbSet<MyMenuAppService.DataObjects.Food> Foods { get; set; }
     }
 
 }

@@ -37,15 +37,37 @@ namespace MyMenuAppService
     {
         protected override void Seed(MyMenuContext context)
         {
-            List<TodoItem> todoItems = new List<TodoItem>
-            {
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
+            var foodItems = new List<Food>{
+                new Food{
+                    Id = "012af9d1-0d3d-4246-af70-36ccdd79b33a",
+                    Name = "Waffles",
+                    Description = "Fresh waffles with honey and strawberries",
+                    ImageUrl = "http://i.imgur.com/IfVirWF.jpg",
+                    PricePerQty = 80,
+                    IsEnabled = true
+                },
+                new Food{
+                    Id = "4c8cd309-7ed3-4036-a804-838f873c757a",
+                    Name = "Pasta",
+                    Description = "Italian pasta with garlic bread on the side",
+                    ImageUrl = "http://i.imgur.com/rOPvbnl.jpg",
+                    PricePerQty = 150,
+                    IsEnabled = true
+                },
+                new Food{
+                    Id = "2d46fa35-4fc7-4bac-8827-7df1cbfb2177",
+                    Name = "Dosa",
+                    Description = "Authentic South Indian masala dosa",
+                    ImageUrl = "http://i.imgur.com/q2BqGza.jpg",
+                    PricePerQty = 40,
+                    IsEnabled = true,
+                    IsFeatured = true
+                }
             };
 
-            foreach (TodoItem todoItem in todoItems)
+            foreach (Food food in foodItems)
             {
-                context.Set<TodoItem>().Add(todoItem);
+                context.Set<Food>().Add(food);
             }
 
             base.Seed(context);

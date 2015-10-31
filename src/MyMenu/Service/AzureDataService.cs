@@ -12,7 +12,9 @@ namespace MyMenu
 {
 	public class AzureDataService : IDataService
 	{
-		readonly IMobileServiceTable<Food> foodTable;
+	    public MobileServiceClient MobileService { get; set; }
+
+	    readonly IMobileServiceTable<Food> foodTable;
 
 		#region IFoodServiceClient implementation
 
@@ -26,8 +28,10 @@ namespace MyMenu
 
 		public AzureDataService ()
 		{
-			foodTable = App.Client.GetTable<Food> ();
-		}
+            MobileService = new MobileServiceClient(App.ApplicationURL, App.GatewayURL, App.ApplicationKey);
+            foodTable = MobileService.GetTable<Food>();
+        }
+
 	}
 }
 
