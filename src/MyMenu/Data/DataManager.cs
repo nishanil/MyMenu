@@ -30,6 +30,7 @@ using Microsoft.WindowsAzure.MobileServices.Sync;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Collections.Generic;
+using MyMenu.Helpers;
 
 namespace MyMenu
 {
@@ -40,7 +41,7 @@ namespace MyMenu
 			this.client = client;
 			this.favoriteTable = favoriteTable;
 
-			userId = this.client.CurrentUser.UserId;
+			userId = Settings.CurrntUserId;
 		}
 
 		public async Task<List<FavoriteItem>> GetUserFavoritesAsync ()
@@ -55,20 +56,21 @@ namespace MyMenu
 				Debug.WriteLine (ex.ToString ());
 			}
 
-			return null;
+			return null;		
 		}
 
-		public async Task SaveFavorite (FavoriteItem item)
+		public async Task<RecordStatus> SaveFavorite (FavoriteItem item)
 		{
-			try {
-				if (item.Id == null)
-					await favoriteTable.InsertAsync (item);
-				else
-					await favoriteTable.UpdateAsync (item);
+			var currentItem = await favoriteTable.ReadAsync ();
+			var foodItem = currentItem.FirstOrDefault (p => p.FoodItemId == item.FoodItemId
+			               && p.UserId == item.UserId);
+			if (foodItem == null) {
+				await favoriteTable.InsertAsync (item);
+				return RecordStatus.Inserted;
+			} 
 
-			} catch (Exception ex) {
-				Debug.WriteLine (ex.ToString ());
-			}
+			await favoriteTable.DeleteAsync (foodItem);
+			return RecordStatus.Deleted;
 		}
 
 		public async Task SyncTableAsync ()

@@ -36,19 +36,16 @@ namespace MyMenu
 		public HomePage ()
 		{
 			InitializeComponent ();
+
+			var favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
+			App.Manager = new DataManager (App.Client, favoriteTable);
+
 			BindingContext = new HomeViewModel ();
 		}
 
 		protected override void OnAppearing ()
 		{
 			base.OnAppearing ();
-			InitialiseSyncTable ();
-		}
-
-		void InitialiseSyncTable ()
-		{
-			var favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
-			App.Manager = new DataManager (App.Client, favoriteTable);
 		}
 	}
 }

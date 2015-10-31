@@ -28,8 +28,23 @@ namespace MyMenu.Helpers
 		const string IsProfileDownloadedKey = "profile_key";
 		static readonly bool IsProfileDownloadedDefault = false;
 
+
+		const string UserIdKey = "useridkey";
+
+		static string UserIdDefault = string.Empty;
+
 		#endregion
 
+
+
+		public static string CurrntUserId {
+			get {
+				return AppSettings.GetValueOrDefault (UserIdKey, UserIdDefault);
+			}
+			set {
+				AppSettings.AddOrUpdateValue (UserIdKey, value);
+			}
+		}
 
 		public static string CurrentUser {
 			get {

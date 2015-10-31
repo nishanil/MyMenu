@@ -1,5 +1,5 @@
 ﻿//
-// FoodViewModel.cs
+// ScreenSize.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -25,78 +25,32 @@
 // THE SOFTWARE.
 using System;
 using Xamarin.Forms;
-using MyMenu.Helpers;
 
-namespace MyMenu
+using Android.Util;
+using Android.App;
+using MyMenu.Droid;
+
+[assembly:Dependency (typeof(ScreenSize))]
+namespace MyMenu.Droid
 {
-	public enum RecordStatus
+	public class ScreenSize : IScreenSize
 	{
-		Inserted,
-		Deleted
-	}
+		#region IScreenSize implementation
 
-	public class FoodViewModel : BaseViewModel
-	{
-		readonly Food foodItem;
-
-		public Food FoodItem {
-			get {
-				return foodItem;
-			}
-		}
-
-		public FoodViewModel (Food foodItem)
+		public Xamarin.Forms.Size GetScreenSize ()
 		{
-			this.foodItem = foodItem;
+			var displaymetrics = new DisplayMetrics ();
+			var defaultDisplay = ((Activity)Forms.Context).WindowManager.DefaultDisplay;
+			defaultDisplay.GetMetrics (displaymetrics);
+
+			float height = displaymetrics.HeightPixels / displaymetrics.Density;
+			float width = displaymetrics.WidthPixels / displaymetrics.Density;
+
+			return new Xamarin.Forms.Size (width, height);
 		}
 
-		public string Price {
-			get {
-				return string.Format ("{0:C}", foodItem.Price);
-			}
-		}
-
-		async void AddFavoriteMethod ()
-		{
-			var status = await App.Manager.SaveFavorite (new FavoriteItem {
-				FoodItemId = foodItem.Id,
-				UserId = Settings.CurrntUserId,
-				IsRemoved = false
-			});
-
-			IsFavourite = (status == RecordStatus.Inserted);
-
-			await App.Manager.SyncTableAsync ();
-		}
-
-		public Command AddFavorite {
-			get {
-				return addFavorite ?? (addFavorite = new Command (AddFavoriteMethod));
-			}
-		}
-
-		public float ImageWidth {
-			get {
-				return (float)App.ScreenSize.Width;	
-			}
-		}
-
-		public float ImageHeight {
-			get {
-				return (float)(App.ScreenSize.Width / 1.333d);	
-			}
-		}
-
-		public bool IsFavourite {
-			get {
-				return foodItem.IsFavorite;
-			}
-			set {
-				foodItem.IsFavorite = value;
-				RaisePropertyChanged ();
-			}
-		}
-		Command addFavorite;
+		#endregion
+		
 	}
 }
 

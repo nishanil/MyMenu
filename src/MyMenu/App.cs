@@ -35,28 +35,41 @@ namespace MyMenu
 	{
 		public static MobileServiceClient Client { get; private set; }
 
-		public App ()
+		public static Size ScreenSize { get; set; }
+
+		public App (MobileServiceClient client)
 		{
-			Client = new MobileServiceClient ("https://mymenu-ea.azure-mobile.net/", 
-				"MCXpcoqnEmOwkDWhoAHAOJjxQtzMUa83");
+			Client = client;
 
 			if (string.IsNullOrEmpty (Settings.CurrentUser)) {
 				MainPage = new LoginPage ();
 				return;
 			}
 
-			var user = new MobileServiceUser (Settings.CurrentUser) { 
-				MobileServiceAuthenticationToken = Settings.AccessToken 
+			var user = new MobileServiceUser (Settings.CurrentUser) {
+				MobileServiceAuthenticationToken = Settings.AccessToken
 			};
 
 			Client.CurrentUser = user;
 
+			InitialiseHomePage ();
+
+			var screen = DependencyService.Get<IScreenSize> ();
+			if (screen != null) {
+				ScreenSize = screen.GetScreenSize ();
+			} else {
+				ScreenSize = new Size (300, 600);
+			}
+		}
+
+		void InitialiseHomePage ()
+		{
+			
 			MainPage = new NavigationPage (new HomePage ()) {
 				BarBackgroundColor = Color.FromHex ("E91E63"),
 				BarTextColor = Color.White
 			};
 		}
-
 
 		public static DataManager Manager {
 			get;
@@ -77,6 +90,11 @@ namespace MyMenu
 		{
 			// Handle when your app resumes
 		}
+	}
+
+	public interface IScreenSize
+	{
+		Size GetScreenSize ();
 	}
 }
 

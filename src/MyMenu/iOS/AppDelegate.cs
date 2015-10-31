@@ -40,6 +40,8 @@ namespace MyMenu.iOS
 	[Register ("AppDelegate")]
 	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
 	{
+		MobileServiceClient client;
+
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init ();
@@ -49,17 +51,19 @@ namespace MyMenu.iOS
 			Xamarin.Calabash.Start ();
 			#endif
 
-			LoadApplication (new App ());
-
 			#region Azure stuff
 
 			CurrentPlatform.Init ();
 			SQLitePCL.CurrentPlatform.Init ();
 
+			client = new MobileServiceClient ("https://mymenu-ea.azure-mobile.net/", 
+				"MCXpcoqnEmOwkDWhoAHAOJjxQtzMUa83");
+
 			InitializeStoreAsync ().Wait ();
 
 			#endregion
 
+			LoadApplication (new App (client));
 			return base.FinishedLaunching (app, options);
 		}
 
@@ -68,7 +72,7 @@ namespace MyMenu.iOS
 			string path = "syncstore.db";
 			var store = new MobileServiceSQLiteStore (path);
 			store.DefineTable<FavoriteItem> ();
-			await App.Client.SyncContext.InitializeAsync (store, new MobileServiceSyncHandler ());
+			await client.SyncContext.InitializeAsync (store, new MobileServiceSyncHandler ());
 
 		}
 
