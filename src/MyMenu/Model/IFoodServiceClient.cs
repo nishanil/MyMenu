@@ -48,21 +48,21 @@ namespace MyMenu
 			var tcs = new TaskCompletionSource<List<Food>> ();
 			var foodItems = new List<Food>{ 
 				new Food{
-					Id = Guid.NewGuid(),
+					Id = "012af9d1-0d3d-4246-af70-36ccdd79b33a",
 					Name = "Waffles",
 					Description = "Fresh waffles with honey and strawberries",
 					PictureLarge = "http://i.imgur.com/IfVirWF.jpg",
 					Price = 80
 				},
 				new Food{
-					Id = Guid.NewGuid(),
+					Id = "4c8cd309-7ed3-4036-a804-838f873c757a",
 					Name = "Pasta",
 					Description = "Italian pasta with garlic bread on the side",
 					PictureLarge = "http://i.imgur.com/rOPvbnl.jpg",
 					Price = 150
 				},
 				new Food{
-					Id = Guid.NewGuid(),
+					Id = "2d46fa35-4fc7-4bac-8827-7df1cbfb2177",
 					Name = "Dosa",
 					Description = "Authentic South Indian masala dosa",
 					PictureLarge = "http://i.imgur.com/q2BqGza.jpg",

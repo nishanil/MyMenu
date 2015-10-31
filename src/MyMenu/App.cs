@@ -37,15 +37,23 @@ namespace MyMenu
 
 		public static Size ScreenSize { get; set; }
 
-		public App ()
+		public App (MobileServiceClient client)
 		{
-			Client = new MobileServiceClient ("https://mymenu-ea.azure-mobile.net/", 
-				"MCXpcoqnEmOwkDWhoAHAOJjxQtzMUa83");
+			Client = client;
 
 			if (string.IsNullOrEmpty (Settings.CurrentUser)) {
 				MainPage = new LoginPage ();
 				return;
 			}
+
+			var user = new MobileServiceUser (Settings.CurrentUser) {
+				MobileServiceAuthenticationToken = Settings.AccessToken
+			};
+
+			Client.CurrentUser = user;
+
+			var favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
+			Manager = new DataManager (Client, favoriteTable);
 
 			InitialiseHomePage ();
 
@@ -59,10 +67,7 @@ namespace MyMenu
 
 		void InitialiseHomePage ()
 		{
-			var user = new MobileServiceUser (Settings.CurrentUser) {
-				MobileServiceAuthenticationToken = Settings.AccessToken
-			};
-			Client.CurrentUser = user;
+			
 			MainPage = new NavigationPage (new HomePage ()) {
 				BarBackgroundColor = Color.FromHex ("E91E63"),
 				BarTextColor = Color.White

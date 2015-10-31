@@ -34,7 +34,7 @@ namespace MyMenu
 			IsEnabled = true;
 		}
 		
-		public Guid Id {
+		public string Id {
 			get;
 			set;
 		}
@@ -74,6 +74,10 @@ namespace MyMenu
 			set;
 		}
 
+		public bool IsFavorite {
+			get;
+			set;
+		}
 	}
 }
 

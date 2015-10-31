@@ -65,8 +65,15 @@ namespace MyMenu
 			Settings.CurrentUser = user.UserId;
 			Settings.AccessToken = user.MobileServiceAuthenticationToken;
 
-			var table = App.Client.GetTable<User> ();
-			await table.InsertAsync (new User (App.Client.CurrentUser));
+			try {
+				var table = App.Client.GetTable<User> ();
+				var userRecord = new User (App.Client.CurrentUser);
+				await table.InsertAsync (userRecord);
+				
+				Settings.CurrntUserId = userRecord.Id;
+			} catch (Exception ex) {
+				System.Diagnostics.Debug.WriteLine (ex.Message);
+			}
 
 			Application.Current.MainPage = new NavigationPage (new HomePage ()){
 				BarBackgroundColor = Color.FromHex ("E91E63"),

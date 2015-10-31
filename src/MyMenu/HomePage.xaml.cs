@@ -42,13 +42,6 @@ namespace MyMenu
 		protected override void OnAppearing ()
 		{
 			base.OnAppearing ();
-			InitialiseSyncTable ();
-		}
-
-		void InitialiseSyncTable ()
-		{
-			var favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
-			App.Manager = new DataManager (App.Client, favoriteTable);
 		}
 	}
 }

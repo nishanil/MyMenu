@@ -1,5 +1,5 @@
 ﻿//
-// FoodViewModel.cs
+// ImageButton.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -25,78 +25,57 @@
 // THE SOFTWARE.
 using System;
 using Xamarin.Forms;
-using MyMenu.Helpers;
+using System.Diagnostics;
+
 
 namespace MyMenu
 {
-	public enum RecordStatus
+	public class FavoriteButton : Image
 	{
-		Inserted,
-		Deleted
+		readonly TapGestureRecognizer tap;
+		FoodViewModel vm;
+
+		public FavoriteButton ()
+		{
+			tap = new TapGestureRecognizer ();
+			tap.Tapped += Tap_Tapped;
+
+			GestureRecognizers.Add (tap);
+			vm = BindingContext as FoodViewModel;
+		}
+
+
+		protected override void OnBindingContextChanged ()
+		{
+			base.OnBindingContextChanged ();
+			vm = BindingContext as FoodViewModel;
+			Source = vm != null && vm.IsFavourite ? "fav.png" : "nofav.png";
+		}
+
+		void Tap_Tapped (object sender, EventArgs e)
+		{
+			vm.AddFavorite.Execute (null);
+			Source = vm.IsFavourite ? "fav.png" : "nofav.png";
+		}
 	}
 
-	public class FoodViewModel : BaseViewModel
+	public class ImageButton : Image
 	{
-		readonly Food foodItem;
-
-		public Food FoodItem {
-			get {
-				return foodItem;
-			}
-		}
-
-		public FoodViewModel (Food foodItem)
+		public ImageButton ()
 		{
-			this.foodItem = foodItem;
+			tap = new TapGestureRecognizer ();
+			tap.Tapped += Tap_Tapped;
+
+			GestureRecognizers.Add (tap);
 		}
 
-		public string Price {
-			get {
-				return string.Format ("{0:C}", foodItem.Price);
-			}
-		}
-
-		async void AddFavoriteMethod ()
+		void Tap_Tapped (object sender, EventArgs e)
 		{
-			var status = await App.Manager.SaveFavorite (new FavoriteItem {
-				FoodItemId = foodItem.Id,
-				UserId = Settings.CurrntUserId,
-				IsRemoved = false
-			});
-
-			IsFavourite = (status == RecordStatus.Inserted);
-
-			await App.Manager.SyncTableAsync ();
+			Debug.WriteLine ("tapped");
+		
 		}
 
-		public Command AddFavorite {
-			get {
-				return addFavorite ?? (addFavorite = new Command (AddFavoriteMethod));
-			}
-		}
-
-		public float ImageWidth {
-			get {
-				return (float)App.ScreenSize.Width;	
-			}
-		}
-
-		public float ImageHeight {
-			get {
-				return (float)(App.ScreenSize.Width / 1.333d);	
-			}
-		}
-
-		public bool IsFavourite {
-			get {
-				return foodItem.IsFavorite;
-			}
-			set {
-				foodItem.IsFavorite = value;
-				RaisePropertyChanged ();
-			}
-		}
-		Command addFavorite;
+		readonly TapGestureRecognizer tap;
 	}
 }
 
