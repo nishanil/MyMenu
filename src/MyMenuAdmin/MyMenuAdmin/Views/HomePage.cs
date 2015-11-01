@@ -11,7 +11,7 @@ namespace MyMenuAdmin
     {
         public HomePage()
         {
-             Children.Add(new NavigationPage(new FoodsPage()) {Title = "Foods", Icon = "Spoon.png"});
+             Children.Add(new NavigationPage(new FoodListPage()) {Title = "Foods", Icon = "Spoon.png"});
              Children.Add(new NavigationPage(new OrdersPage()) {Title = "Orders", Icon = "Orders.png"});
              
         }

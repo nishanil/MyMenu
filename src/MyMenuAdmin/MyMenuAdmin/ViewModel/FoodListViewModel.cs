@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace MyMenuAdmin
 {
-    public class FoodsViewModel : BaseViewModel
+    public class FoodListViewModel : BaseViewModel
     {
         private ObservableCollection<Food> foodItems;
 
@@ -22,18 +22,18 @@ namespace MyMenuAdmin
 
         IDataService azureService;
         
-        public FoodsViewModel()
+        public FoodListViewModel()
         {
             // Since Android tabs appear on top, the repeating title does not make any sense
             Title = Device.OnPlatform<string>("Food Items", "My Menu (Admin)","");
             azureService = DependencyService.Get<IDataService>();
-            LoadFoodItems();
+            //LoadFoodItems();
         }
 
-        async void LoadFoodItems()
+        public async void LoadFoodItems()
         {
             IsBusy = true;
-            FoodItems = new ObservableCollection<Food>(await azureService.GetFoodItems());
+            FoodItems = new ObservableCollection<Food>(await azureService.GetFoodItemsAsync());
             IsBusy = false;
         }
     }

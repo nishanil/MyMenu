@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyMenuAdmin.FoodsPage"
+             x:Class="MyMenuAdmin.FoodListPage"
              xmlns:plugin="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" Title="{Binding Title}">
   <ContentPage.ToolbarItems>
-    <ToolbarItem Name="Add" >
+    <ToolbarItem Name="Add" Clicked="MenuItem_OnClicked" >
       <ToolbarItem.Icon>
         <OnPlatform x:TypeArguments="FileImageSource" Android="ic_action_new" />
       </ToolbarItem.Icon>>
@@ -18,7 +18,9 @@
       </Grid.RowDefinitions>
       
       <SearchBar x:Name="SearchBar" Grid.Row="0" Placeholder="Search food" CancelButtonColor="#E91E63" TextChanged="SearchBar_OnTextChanged"></SearchBar>
-      <ListView Grid.Row="1" x:Name="FoodList" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding FoodItems}" BackgroundColor="White">
+      <ListView Grid.Row="1" x:Name="FoodList" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding FoodItems}" BackgroundColor="White"
+                ItemSelected="FoodList_OnItemSelected"
+                ItemTapped="FoodList_OnItemTapped">
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>

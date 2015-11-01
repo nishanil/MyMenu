@@ -32,6 +32,20 @@ namespace MyMenu
 	public interface IDataService
 	{
 		Task<List<Food>> GetFoodItems ();
-	}
+	    Task InitializeStoreAsync();
+
+        #region methods specific to offline data sync
+        Task<List<Food>> GetFoodItemsAsync();
+
+	    Task InsertFoodItemAsync(Food food);
+
+	    Task<bool> DeleteFoodItemAsync(Food food);
+
+        Task UpdateFoodItemAsync(Food food);
+
+
+        #endregion
+
+    }
 }
 

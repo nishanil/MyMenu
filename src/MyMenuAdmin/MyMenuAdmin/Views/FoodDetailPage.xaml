@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyMenuAdmin.Views.FoodDetailPage">
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Name="Save" Command="{Binding SaveCommand}"/>
+     
+  </ContentPage.ToolbarItems>
+ <Grid>
+   <TableView Intent="Form">
+     <TableView.BackgroundColor>
+       <OnPlatform x:TypeArguments="Color" Android="White"></OnPlatform>
+     </TableView.BackgroundColor>
+    <TableRoot>
+        <TableSection Title="">
+            <EntryCell Label="Name" Text="{Binding Name}" />
+            <EntryCell Label="Description" Text="{Binding Description}" />
+            <EntryCell Label="Price" Keyboard="Numeric" Text="{Binding Price}" />
+        </TableSection>
+      <TableSection Title="Photo">
+        <EntryCell Text="{Binding ImageUrl}" Keyboard="Url" />
+        <ImageCell ImageSource="{Binding ImageUrl}" Detail="edit url above"></ImageCell>
+      </TableSection>
+      <TableSection Title="">
+      <SwitchCell Text="Featured" On="{Binding IsFeatured}" />
+    </TableSection>
+    </TableRoot>
+</TableView>
+   <ActivityIndicator HeightRequest="50" WidthRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Color="#E91E63" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"></ActivityIndicator>
+
+ </Grid>
+</ContentPage>
