@@ -174,3 +174,4 @@ FakesAssemblies/
 
 src/MyMenu/Helpers.cs
 *.DS_Store
+*.pubxml

@@ -64,12 +64,57 @@ namespace MyMenuAppService
                     IsFeatured = true
                 }
             };
+            var orderId = Guid.NewGuid().ToString();
+            var orders = new List<Order>
+            {
+                new Order {
+                    Id = orderId,
+                    SpecialInstruction = "Alergic to gluten",
+                    Address = "328 NGV Koramangala Bangalore",
+                    Status = "Order Placed",
+                    UserEmail = "nnish@live.com",
+                    UserPhone = "+91 9123456789",
+                    Payment = "Cash Payment",
+                    HasFeedback = false
+                    
+                },
+            };
+            var orderDetailItems = new List<OrderDetail>
+            {
+                new OrderDetail
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    OrderId = orderId,
+                    FoodId = "2d46fa35-4fc7-4bac-8827-7df1cbfb2177",
+                    FoodName = "Dosa",
+                    SellingPrice = 40,
+                    Quantity = 4
+                },
+                new OrderDetail
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    OrderId = orderId,
+                    FoodId = "4c8cd309-7ed3-4036-a804-838f873c757a",
+                    FoodName = "Pasta",
+                    SellingPrice = 80,
+                    Quantity = 2
+                },
+            };
 
             foreach (Food food in foodItems)
             {
                 context.Set<Food>().Add(food);
             }
 
+            foreach (var order in orders)
+            {
+                context.Set<Order>().Add(order);
+            }
+
+            foreach (var orderDetail in orderDetailItems)
+            {
+                context.Set<OrderDetail>().Add(orderDetail);
+            }
             base.Seed(context);
         }
     }

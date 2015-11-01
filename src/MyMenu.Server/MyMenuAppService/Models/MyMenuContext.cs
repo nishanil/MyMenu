@@ -35,6 +35,16 @@ namespace MyMenuAppService.Models
         public System.Data.Entity.DbSet<MyMenuAppService.DataObjects.Favorite> Favorites { get; set; }
 
         public System.Data.Entity.DbSet<MyMenuAppService.DataObjects.Food> Foods { get; set; }
+
+        public System.Data.Entity.DbSet<MyMenuAppService.DataObjects.OrderDetail> OrderDetails { get; set; }
+
+        public System.Data.Entity.DbSet<MyMenuAppService.DataObjects.Coupon> Coupons { get; set; }
+
+        public System.Data.Entity.DbSet<MyMenuAppService.DataObjects.Address> Addresses { get; set; }
+
+        public System.Data.Entity.DbSet<MyMenuAppService.DataObjects.Order> Orders { get; set; }
+
+        public System.Data.Entity.DbSet<MyMenuAppService.DataObjects.Feedback> Feedbacks { get; set; }
     }
 
 }
