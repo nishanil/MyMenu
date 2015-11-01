@@ -65,6 +65,9 @@ namespace MyMenuAppService
                 }
             };
             var orderId = Guid.NewGuid().ToString();
+            var orderId2 = Guid.NewGuid().ToString();
+            var orderId3 = Guid.NewGuid().ToString();
+
             var orders = new List<Order>
             {
                 new Order {
@@ -75,8 +78,33 @@ namespace MyMenuAppService
                     UserEmail = "nnish@live.com",
                     UserPhone = "+91 9123456789",
                     Payment = "Cash Payment",
-                    HasFeedback = false
+                    HasFeedback = false,
+                    TotalAmount = 320
                     
+                },
+                new Order {
+                    Id = orderId2,
+                    SpecialInstruction = "Alergic to gluten",
+                    Address = "256 M.G Road Bangalore",
+                    Status = "Out for Delivery",
+                    UserEmail = "nnish@live.com",
+                    UserPhone = "+91 9123456789",
+                    Payment = "Cash Payment",
+                    HasFeedback = false,
+                    TotalAmount = 160
+
+                },
+                 new Order {
+                    Id = orderId3,
+                    SpecialInstruction = "Alergic to gluten",
+                    Address = "413 Domlur Bangalore",
+                    Status = "Delivered",
+                    UserEmail = "nnish@live.com",
+                    UserPhone = "+91 9123456789",
+                    Payment = "Cash Payment",
+                    HasFeedback = false,
+                    TotalAmount = 160
+
                 },
             };
             var orderDetailItems = new List<OrderDetail>
@@ -98,6 +126,24 @@ namespace MyMenuAppService
                     FoodName = "Pasta",
                     SellingPrice = 80,
                     Quantity = 2
+                },
+                new OrderDetail
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    OrderId = orderId2,
+                    FoodId = "4c8cd309-7ed3-4036-a804-838f873c757a",
+                    FoodName = "Pasta",
+                    SellingPrice = 80,
+                    Quantity = 2
+                },
+                 new OrderDetail
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    OrderId = orderId3,
+                    FoodId = "2d46fa35-4fc7-4bac-8827-7df1cbfb2177",
+                    FoodName = "Dosa",
+                    SellingPrice = 40,
+                    Quantity = 4
                 },
             };
 

@@ -40,6 +40,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\FoodDetailViewModel.cs" />
     <Compile Include="ViewModel\FoodListViewModel.cs" />
+    <Compile Include="ViewModel\OrdersViewModel.cs" />
     <Compile Include="Views\FoodDetailPage.xaml.cs">
       <DependentUpon>FoodDetailPage.xaml</DependentUpon>
     </Compile>

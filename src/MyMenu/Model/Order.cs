@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Web;
-using Microsoft.Azure.Mobile.Server;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-namespace MyMenuAppService.DataObjects
+namespace MyMenu
 {
-    public class Order : EntityData
+    public class Order
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [JsonProperty(PropertyName = "id")]
+        public string Id { get; set; }
         public long Number { get; set; }
         public string SpecialInstruction { get; set; }
         public string Address { get; set; }
@@ -17,15 +18,16 @@ namespace MyMenuAppService.DataObjects
         public string UserEmail { get; set; }
         public string UserPhone { get; set; }
         public string Payment { get; set; }
-        
+
         // Order Placed, Out for Delivery, Delivered 
         public string Status { get; set; }
         public bool HasFeedback { get; set; }
 
+        [Microsoft.WindowsAzure.MobileServices.CreatedAt]
+        public DateTime CreatedDateTime { get; set; }
+
         public double TotalAmount { get; set; }
         public double Discount { get; set; }
         public string CouponId { get; set; }
-
-
     }
 }

@@ -1,6 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyMenuAdmin.OrdersPage">
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+             x:Class="MyMenuAdmin.OrdersPage" Title="{Binding Title}">
+  <ContentPage.Content>
+    <Grid BackgroundColor="White">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="40"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <SearchBar x:Name="SearchBar" Grid.Row="0" Placeholder="Search Orders" CancelButtonColor="#E91E63" TextChanged="SearchBar_OnTextChanged"></SearchBar>
+      <ListView 
+        Grid.Row="1" 
+        x:Name="OrderList" 
+        HasUnevenRows="True" 
+        SeparatorVisibility="None" 
+        ItemsSource="{Binding OrderItems}" 
+        BackgroundColor="White" ItemSelected="OrderList_OnItemSelected" ItemTapped="OrderList_OnItemTapped">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <Grid Padding="10,1,2,1" RowSpacing="1" ColumnSpacing="1" BackgroundColor="#e3e3e3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="4" />
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="150" />
+                  <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="*" />
+                  <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+              
+               <BoxView Grid.Column="0" Grid.RowSpan="2" BackgroundColor="{Binding OrderColorHex}"></BoxView>
+             
+                 <Grid Grid.Column="1" Padding="2" Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="White">
+                   <Grid.RowDefinitions>
+                     <RowDefinition Height="*"/>
+                     <RowDefinition Height="Auto"/>
+                   </Grid.RowDefinitions>
+                   <Grid.ColumnDefinitions>
+                     <ColumnDefinition/>
+                     <ColumnDefinition/>
+                   </Grid.ColumnDefinitions>
+                   <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" RowSpacing="4" >
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="*"></RowDefinition>
+                      <RowDefinition Height="Auto"></RowDefinition>
+                      <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                   <Label Grid.Row="0" Text="{Binding OrderName}" FontSize="20" TextColor="#212121" />
+                   <Label Grid.Row="1"  LineBreakMode="TailTruncation" Text="{Binding OrderDetails}"  FontSize="10" TextColor="#212121"/>
+                   <Label Grid.Row="2" LineBreakMode="TailTruncation" Text="{Binding DeliveryAddress}"  FontSize="10" TextColor="#212121"/>
+                   </Grid>
+                   <Label Text="{Binding Price}" HorizontalOptions="EndAndExpand" VerticalOptions="Fill" Grid.Row="1" FontSize="25" TextColor="#E91E63" Grid.Column="1" XAlign="End"/>
+                 </Grid>
+                
+               <Grid Grid.Column="1" Grid.Row="1" BackgroundColor="#ececec" Padding="2">
+                 <Label LineBreakMode="WordWrap" Text="{Binding OrderStatus}" VerticalOptions="Fill" FontSize="14" TextColor="{Binding OrderColorHex}"/>
+               </Grid>
+                
+                <Grid Grid.Column="2" Grid.Row="1" BackgroundColor="#ececec" Padding="2">
+                  <Label Text="{Binding Moment}" VerticalOptions="Fill" FontSize="10" TextColor="#212121" XAlign="End"/>
+
+                </Grid>
+
+              </Grid>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+
+      </ListView>
+      <ActivityIndicator Grid.Row="1" HeightRequest="50" WidthRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Color="#E91E63" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"></ActivityIndicator>
+
+    </Grid>
+    </ContentPage.Content>
 </ContentPage>
