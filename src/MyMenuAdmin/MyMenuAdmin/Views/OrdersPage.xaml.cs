@@ -23,9 +23,12 @@ namespace MyMenuAdmin
             base.OnAppearing();
         }
 
-        private void OrderList_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void OrderList_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (e.SelectedItem == null) return;
+            var selectedItem = e.SelectedItem as OrderItemViewModel;
+            var orderDetailVm = await vm.GetViewModelForOrderDetail(selectedItem);
+            await  Navigation.PushAsync(new OrderDetailsPage(orderDetailVm), true);
         }
 
         private void OrderList_OnItemTapped(object sender, ItemTappedEventArgs e)

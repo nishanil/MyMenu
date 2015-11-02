@@ -16,5 +16,9 @@ namespace MyMenu
         public double Quantity { get; set; }
         public double SellingPrice { get; set; }
         public string OrderId { get; set; }
+        [JsonIgnore]
+        public double TotalPrice {
+            get { return SellingPrice * Quantity; }
+        }
     }
 }

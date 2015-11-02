@@ -1,6 +1,132 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyMenuAdmin.OrderDetailsPage">
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+             x:Class="MyMenuAdmin.OrderDetailsPage" Title="{Binding Title}">
+  <Grid BackgroundColor="White">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="40"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <ListView
+      Grid.Row="1"
+      x:Name="FoodList"
+      HasUnevenRows="True"
+      SeparatorVisibility="None"
+      ItemsSource="{Binding SelectedOrderDetails}"
+      Header="{Binding SelectedOrderItemViewModel}"
+      Footer="{Binding SelectedOrderItemViewModel}"
+      ItemTapped="FoodList_OnItemTapped"
+      BackgroundColor="White">
+      <ListView.HeaderTemplate>
+        <DataTemplate>
+            <Grid Padding="10,1,2,1" RowSpacing="1" ColumnSpacing="1" BackgroundColor="#e3e3e3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
+              </Grid.RowDefinitions>
+
+              <BoxView Grid.Column="0" Grid.RowSpan="2" BackgroundColor="{Binding OrderColorHex}"></BoxView>
+
+              <Grid Grid.Column="1" Padding="2" Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="White">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="*"/>
+                  <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" RowSpacing="4" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                  <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                  </Grid.RowDefinitions>
+                  <Label Grid.Row="0" Text="{Binding OrderName}" FontSize="20" TextColor="#212121" />
+                  <Label Grid.Row="0" Grid.Column="1" Text="{Binding UserName}" FontSize="20" TextColor="#212121" />
+
+                  <Label Grid.Row="1"  LineBreakMode="TailTruncation" Text="{Binding Payment}"  FontSize="10" TextColor="#212121"/>
+                  <Label Grid.Row="1" Grid.Column="1"  LineBreakMode="TailTruncation" Text="{Binding UserEmail}"  FontSize="10" TextColor="#212121"/>
+
+                  <Label Grid.Row="2" LineBreakMode="WordWrap" Text="{Binding DeliveryAddress}"  FontSize="10" TextColor="#212121"/>
+                  <Label Grid.Row="2" Grid.Column="1" LineBreakMode="WordWrap" Text="{Binding UserPhone}"  FontSize="10" TextColor="#212121"/>
+
+                </Grid>
+              </Grid>
+
+              <Grid Grid.Column="1" Grid.Row="1" BackgroundColor="#ececec" Padding="2">
+                <Label LineBreakMode="WordWrap" Text="{Binding OrderStatus}" VerticalOptions="Fill" FontSize="14" TextColor="{Binding OrderColorHex}"/>
+              </Grid>
+
+              <Grid Grid.Column="2" Grid.Row="1" BackgroundColor="#ececec" Padding="2">
+                <Label Text="{Binding Moment}" VerticalOptions="Fill" FontSize="10" TextColor="#212121" XAlign="End"/>
+
+              </Grid>
+
+            </Grid>
+        </DataTemplate>
+      </ListView.HeaderTemplate>
+
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <Grid Padding="10" RowSpacing="1">
+           <Grid.ColumnDefinitions>
+             <ColumnDefinition Width="2*"/>
+             <ColumnDefinition Width="Auto"/>
+             <ColumnDefinition Width="10"/>
+             <ColumnDefinition Width="Auto"/>
+             <ColumnDefinition Width="*"/>
+    
+           </Grid.ColumnDefinitions>
+              
+              <Label Grid.Column="0" XAlign="End" Text="{Binding FoodName}"></Label>
+              <Label Grid.Column="1" XAlign="End" Text="{Binding SellingPrice}"></Label>
+
+              <Label Grid.Column="2" VerticalOptions="Center" XAlign="Center" FontSize="10" Text="X"></Label>
+              <Label Grid.Column="3" VerticalOptions="Center" XAlign="Start" Text="{Binding Quantity}}"></Label>
+              <Label Grid.Column="4" XAlign="End" Text="{Binding TotalPrice}"></Label>
+
+
+            </Grid>
+           </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+      <ListView.FooterTemplate>
+      <DataTemplate>
+      <Grid Padding="10">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Text="Discount: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="10" TextColor="#212121" XAlign="End"/>
+
+        <Label Grid.Column="1" Grid.Row="0" Text="{Binding Discount}" HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="14" TextColor="#212121" XAlign="End"/>
+        <Label Grid.Column="0" Grid.Row="1" Text="Total: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="20" TextColor="#212121" XAlign="End"/>
+
+        <Label  Grid.Column="1" Grid.Row="1" Text="{Binding Price}" HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="25" TextColor="#E91E63" XAlign="End"/>
+
+      </Grid>
+      </DataTemplate>
+      </ListView.FooterTemplate>
+    </ListView>
+    <ActivityIndicator Grid.Row="1" HeightRequest="50" WidthRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Color="#E91E63" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"></ActivityIndicator>
+
+  </Grid>
 </ContentPage>

@@ -25,27 +25,33 @@ namespace MyMenuAdmin.ViewModel
             }
         }
 
+        public List<Order> Orders { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
+
+
         public OrdersViewModel()
         {
-            Title = "Order";
+            Title = "Orders";
         }
 
         public async void LoadOrders()
         {
             var azureService = DependencyService.Get<IDataService>();
             IsBusy = true;
-            var orderItems = await azureService.GetOrdersAsync();
-            var orderDetailItems = await azureService.GetOrderDetailsAsync();
+            Orders = await azureService.GetOrdersAsync();
+            OrderDetails = await azureService.GetOrderDetailsAsync();
 
             var orderVmList = new ObservableCollection<OrderItemViewModel>();
-            foreach (var orderItem in orderItems)
+            foreach (var orderItem in Orders)
             {
-                var orderVm = new OrderItemViewModel();
-                orderVm.OrderName = string.Format("Order: {0}", orderItem.Number);
-                orderVm.DeliveryAddress = orderItem.Address;
-                orderVm.CreatedDateTime = orderItem.CreatedDateTime;
-                orderVm.OrderStatus = orderItem.Status;
-                var orderDetailSpecificToOrder = orderDetailItems.Where((detail => detail.OrderId == orderItem.Id));
+                var orderVm = new OrderItemViewModel
+                {
+                    OrderName = string.Format("Order: {0}", orderItem.Number),
+                    DeliveryAddress = orderItem.Address,
+                    CreatedDateTime = orderItem.CreatedDateTime,
+                    OrderStatus = orderItem.Status
+                };
+                var orderDetailSpecificToOrder = OrderDetails.Where((detail => detail.OrderId == orderItem.Id));
                 string formatter = "{0} ({1}), ";
                 var strBuilder = new StringBuilder();
                 foreach (var orderDetail in orderDetailSpecificToOrder)
@@ -53,11 +59,39 @@ namespace MyMenuAdmin.ViewModel
                     strBuilder.Append(string.Format(formatter, orderDetail.FoodName, orderDetail.Quantity));
                 }
                 orderVm.OrderDetails = strBuilder.ToString();
+                orderVm.Discount = orderItem.Discount.ToString() + " %";
                 orderVm.TotalAmount = orderItem.TotalAmount;
+                orderVm.UserEmail = orderItem.UserEmail;
+                orderVm.UserPhone = orderItem.UserPhone;
+                orderVm.UserName = orderItem.UserName;
+                orderVm.OrderId = orderItem.Id;
+                orderVm.Payment = orderItem.Payment;
                 orderVmList.Add(orderVm);
+                
             }
             OrderItems = orderVmList;
             IsBusy = false;
+        }
+
+        public async Task<OrderDetailViewModel> GetViewModelForOrderDetail(OrderItemViewModel selectedOrderItemViewModel)
+        {
+
+            return await  Task.Run(() =>
+            {
+                var selectedOrder = Orders.Find((order => selectedOrderItemViewModel.OrderId == order.Id));
+
+                var orderDetailSpecificToOrder =
+                    OrderDetails.Where((detail => detail.OrderId == selectedOrder.Id)).ToList();
+                var orderDetailViewModel = new OrderDetailViewModel
+                {
+                    SelectedOrderItemViewModel = selectedOrderItemViewModel,
+                    SelectedOrder = selectedOrder,
+                    SelectedOrderDetails = orderDetailSpecificToOrder,
+
+                };
+                return orderDetailViewModel;
+
+            });
         }
     }
 
@@ -66,6 +100,8 @@ namespace MyMenuAdmin.ViewModel
     /// </summary>
     public class OrderItemViewModel : BaseViewModel
     {
+        public string OrderId { get; set; }
+
         private string orderName;
 
         public string OrderName
@@ -73,6 +109,38 @@ namespace MyMenuAdmin.ViewModel
             get { return orderName; }
             set { orderName = value; RaisePropertyChanged(); }
         }
+
+        private string userName;
+
+        public string UserName
+        {
+            get { return userName; }
+            set { userName = value; RaisePropertyChanged(); }
+        }
+        private string payment;
+
+        public string Payment
+        {
+            get { return payment; }
+            set { payment = value; RaisePropertyChanged(); }
+        }
+
+        private string userEmail;
+
+        public string UserEmail
+        {
+            get { return userEmail; }
+            set { userEmail = value; RaisePropertyChanged(); }
+        }
+
+        private string userPhone;
+
+        public string UserPhone
+        {
+            get { return userPhone; }
+            set { userPhone = value; RaisePropertyChanged();}
+        }
+
 
         private string orderDetails;
 
@@ -142,6 +210,15 @@ namespace MyMenuAdmin.ViewModel
             get { return amount; }
             set { amount = value; RaisePropertyChanged(); RaisePropertyChanged("Price"); }
         }
+
+        private string discount;
+
+        public string Discount
+        {
+            get { return discount; }
+            set { discount = value; RaisePropertyChanged(); }
+        }
+
 
         public string Price
         {

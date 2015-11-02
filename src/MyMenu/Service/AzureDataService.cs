@@ -95,7 +95,6 @@ namespace MyMenu
             await SyncFoodItemsAsync();
         }
 
-
         public async Task SyncOrdersAsync()
         {
             try

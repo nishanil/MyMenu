@@ -79,32 +79,32 @@ namespace MyMenuAppService
                     UserPhone = "+91 9123456789",
                     Payment = "Cash Payment",
                     HasFeedback = false,
-                    TotalAmount = 320
-                    
+                    TotalAmount = 320,
+                    UserName = "Nish"
                 },
                 new Order {
                     Id = orderId2,
                     SpecialInstruction = "Alergic to gluten",
                     Address = "256 M.G Road Bangalore",
                     Status = "Out for Delivery",
-                    UserEmail = "nnish@live.com",
+                    UserEmail = "anil@live.com",
                     UserPhone = "+91 9123456789",
                     Payment = "Cash Payment",
                     HasFeedback = false,
-                    TotalAmount = 160
-
+                    TotalAmount = 16,
+                    UserName = "Anil"
                 },
                  new Order {
                     Id = orderId3,
                     SpecialInstruction = "Alergic to gluten",
                     Address = "413 Domlur Bangalore",
                     Status = "Delivered",
-                    UserEmail = "nnish@live.com",
+                    UserEmail = "prashant@live.com",
                     UserPhone = "+91 9123456789",
                     Payment = "Cash Payment",
                     HasFeedback = false,
-                    TotalAmount = 160
-
+                    TotalAmount = 160,
+                    UserName = "Prashant"
                 },
             };
             var orderDetailItems = new List<OrderDetail>

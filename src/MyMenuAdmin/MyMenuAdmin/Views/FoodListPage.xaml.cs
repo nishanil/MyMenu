@@ -48,7 +48,7 @@ namespace MyMenuAdmin
             if (e.SelectedItem == null) return;
             var selectedItem = vm.FoodItems.First(x => x.Name == (e.SelectedItem as Food).Name);
 
-            Navigation.PushAsync(new FoodDetailPage(new FoodDetailViewModel(selectedItem)), true);
+            await Navigation.PushAsync(new FoodDetailPage(new FoodDetailViewModel(selectedItem)), true);
         }
 
         private void FoodList_OnItemTapped(object sender, ItemTappedEventArgs e)

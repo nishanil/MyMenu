@@ -17,7 +17,8 @@ namespace MyMenuAppService.DataObjects
         public string UserEmail { get; set; }
         public string UserPhone { get; set; }
         public string Payment { get; set; }
-        
+        public string UserName { get; set; }
+
         // Order Placed, Out for Delivery, Delivered 
         public string Status { get; set; }
         public bool HasFeedback { get; set; }
