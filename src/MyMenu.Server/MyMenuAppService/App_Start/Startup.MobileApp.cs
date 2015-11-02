@@ -101,11 +101,13 @@ namespace MyMenuAppService
                     Address = "413 Domlur Bangalore",
                     Status = "Delivered",
                     UserEmail = "prashant@live.com",
-                    UserPhone = "+91 9123456789",
+                    UserPhone = "+919900121638",
                     Payment = "Cash Payment",
                     HasFeedback = false,
                     TotalAmount = 160,
-                    UserName = "Prashant"
+                    UserName = "Prashant",
+                    SendSms = true
+
                 },
             };
             var orderDetailItems = new List<OrderDetail>
