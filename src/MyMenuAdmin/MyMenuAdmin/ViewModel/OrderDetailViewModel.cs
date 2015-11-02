@@ -37,6 +37,7 @@ namespace MyMenuAdmin.ViewModel
         public async void UpdateOrder(string updateStatus)
         {
             SelectedOrder.Status = updateStatus;
+            SelectedOrder.SendSms = true;
             await DependencyService.Get<IDataService>().UpdateOrderAsync(SelectedOrder);
         }
 
