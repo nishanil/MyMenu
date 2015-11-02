@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyMenu.CheckoutPage"
+ x:Name="myPage" Title="Summary">
+	<ContentPage.Content>
+		<StackLayout Orientation="Vertical">
+			<ListView x:Name="summary" SeparatorVisibility="None" HasUnevenRows="true" VerticalOptions="Start" HeightRequest="300" BackgroundColor="White" ItemsSource="{Binding CheckoutItems}" Footer="{Binding Price}" Header="ITEM SUMMARY">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<Grid Padding="10" RowSpacing="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="2*" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="10" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+								<StackLayout Grid.Column="0" Orientation="Horizontal">
+									<Button Text="+" VerticalOptions="Center" WidthRequest="30" Command="{Binding AddCommand}"/>
+									<Button Text="-" VerticalOptions="Center" WidthRequest="30" Command="{Binding RemoveCommand}"/>
+								</StackLayout>
+								<Label Grid.Column="0" VerticalOptions="Center" XAlign="End" Text="{Binding Details.FoodName}" />
+								<Label Grid.Column="1" XAlign="End" VerticalOptions="Center" Text="{Binding Details.SellingPrice}" />
+								<Label Grid.Column="2" VerticalOptions="Center" XAlign="Center" FontSize="10" Text="X" />
+								<Label Grid.Column="3" VerticalOptions="Center" XAlign="Start" Text="{Binding Quantity}" />
+								<Label Grid.Column="4" XAlign="End" VerticalOptions="Center" Text="{Binding TotalPrice}" />
+							</Grid>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+				<ListView.HeaderTemplate>
+					<DataTemplate>
+						<StackLayout Padding="8">
+							<Label Text="{Binding}" Font="12" TextColor="Gray" />
+						</StackLayout>
+					</DataTemplate>
+				</ListView.HeaderTemplate>
+				<ListView.FooterTemplate>
+					<DataTemplate>
+						<Grid Padding="10">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
+							<Label Grid.Column="0" Grid.Row="0" Text="Discount: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="10" TextColor="#212121" XAlign="End" />
+							<Label Grid.Column="1" Grid.Row="0" Text="0 %" HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="14" TextColor="#212121" XAlign="End" />
+							<Label Grid.Column="0" Grid.Row="1" Text="Total: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="20" TextColor="#212121" XAlign="End" />
+							<Label Grid.Column="1" Grid.Row="1" Text="{Binding}" HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="25" TextColor="#E91E63" XAlign="End" />
+						</Grid>
+					</DataTemplate>
+				</ListView.FooterTemplate>
+			</ListView>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

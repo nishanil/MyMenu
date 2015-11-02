@@ -1,5 +1,5 @@
 ﻿//
-// FoodViewModel.cs
+// OrderDetailsViewModel.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -25,91 +25,80 @@
 // THE SOFTWARE.
 using System;
 using Xamarin.Forms;
-using MyMenu.Helpers;
+using System.Diagnostics;
 
 namespace MyMenu
 {
-	public enum RecordStatus
+	public class OrderDetailsViewModel :BaseViewModel
 	{
-		Inserted,
-		Deleted
-	}
+		readonly OrderDetail order;
+		readonly ICheckoutViewModel checkoutVM;
 
-	public class FoodViewModel : BaseViewModel
-	{
-		readonly Food foodItem;
-
-		public Food FoodItem {
-			get {
-				return foodItem;
-			}
-		}
-
-		public FoodViewModel (Food foodItem)
+		public OrderDetailsViewModel (OrderDetail order, ICheckoutViewModel checkoutVM)
 		{
-			this.foodItem = foodItem;
+			this.checkoutVM = checkoutVM;
+			this.order = order;
 		}
 
-		public string Price {
+		public OrderDetail Details {
 			get {
-				return string.Format ("{0:C}", foodItem.PricePerQty);
+				return order;
 			}
 		}
 
-		async void AddFavoriteMethod ()
-		{
-			var status = await App.Manager.SaveFavorite (new FavoriteItem {
-				FoodItemId = foodItem.Id,
-				UserId = Settings.CurrntUserId,
-				IsRemoved = false
-			});
-
-			IsFavourite = (status == RecordStatus.Inserted);
-
-			await App.Manager.SyncTableAsync ();
-		}
-
-		void AddToBasketMethod ()
-		{
-			App.CheckoutItems.Add (foodItem);
-		}
-
-		public Command AddFavorite {
+		Command addCommand;
+		public Command AddCommand {
 			get {
-				return addFavorite ?? (addFavorite = new Command (AddFavoriteMethod));
+				return addCommand ?? (addCommand = new Command (AddCommandMethod));
 			}
 		}
 
-		public Command AddToBasket {
+		Command removeCommand;
+		public Command RemoveCommand {
 			get {
-				return addToBasket ?? (addToBasket = new Command (AddToBasketMethod));
+				return removeCommand ?? (removeCommand = new Command (RemoveCommandMethod));
 			}
 		}
 
-		public float ImageWidth {
-			get {
-				return (float)App.ScreenSize.Width;	
-			}
-		}
 
-		public float ImageHeight {
+		public double Quantity {
 			get {
-				return (float)(App.ScreenSize.Width / 1.333d);	
-			}
-		}
-
-		public bool IsFavourite {
-			get {
-				return foodItem.IsFavorite;
+				return order.Quantity;
 			}
 			set {
-				foodItem.IsFavorite = value;
+				order.Quantity = value;
 				RaisePropertyChanged ();
 			}
 		}
 
-		Command addToBasket;
-		Command addFavorite;
+		public double TotalPrice {
+			get{ 
+				return order.TotalPrice;
+			}
+		}
+
+
+		void AddCommandMethod ()
+		{
+			if (Quantity == 5) {
+				return;
+			}
+
+			Quantity = Quantity + 1;
+			RaisePropertyChanged ("TotalPrice");
+			checkoutVM.UpdateTotalPrice ();
+		}
+
+		void RemoveCommandMethod ()
+		{
+			if (Quantity == 1) {
+				return;
+			}
+			
+			Quantity = Quantity - 1;
+			RaisePropertyChanged ("TotalPrice");
+			checkoutVM.UpdateTotalPrice ();
+		}
 	}
 }
 

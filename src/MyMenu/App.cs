@@ -28,6 +28,7 @@ using System;
 using Xamarin.Forms;
 using Microsoft.WindowsAzure.MobileServices;
 using MyMenu.Helpers;
+using System.Collections.Generic;
 
 namespace MyMenu
 {
@@ -41,6 +42,11 @@ namespace MyMenu
 
 		public static Size ScreenSize { get; set; }
 
+		public static List<Food> CheckoutItems {
+			get;
+			set;
+		}
+
 		public App (MobileServiceClient client)
 		{
 			Client = client;
@@ -49,6 +55,9 @@ namespace MyMenu
 				MainPage = new LoginPage ();
 				return;
 			}
+
+
+			CheckoutItems = new List<Food> ();
 
 			var user = new MobileServiceUser (Settings.CurrentUser) {
 				MobileServiceAuthenticationToken = Settings.AccessToken

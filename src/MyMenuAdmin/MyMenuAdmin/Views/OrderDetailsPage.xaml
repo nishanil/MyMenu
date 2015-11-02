@@ -114,8 +114,6 @@
         <Grid.RowDefinitions>
           <RowDefinition/>
           <RowDefinition Height="*"/>
-          <RowDefinition Height="2*"/>
-
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" Text="Discount: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="10" TextColor="#212121" XAlign="End"/>
 

@@ -1,5 +1,5 @@
 ﻿//
-// HomePage.xaml.cs
+// CheckoutPage.xaml.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -23,7 +23,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 using System;
 using System.Collections.Generic;
 
@@ -31,42 +30,12 @@ using Xamarin.Forms;
 
 namespace MyMenu
 {
-	public partial class HomePage : ContentPage
+	public partial class CheckoutPage : ContentPage
 	{
-		HomeViewModel vm;
-
-		public HomePage ()
+		public CheckoutPage ()
 		{
 			InitializeComponent ();
-
-			var favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
-			App.Manager = new DataManager (App.Client, favoriteTable);
-
-			vm = new HomeViewModel ();
-			vm.PropertyChanged += Vm_PropertyChanged;
-			BindingContext = vm;
-		}
-
-		void Favourites_Clicked (object sender, EventArgs e)
-		{
-			Navigation.PushAsync (new FavoritePage());
-		}
-
-		void Vm_PropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
-		{
-			if (e.PropertyName != "IsBusy")
-				return;
-
-			var progress = DependencyService.Get<IProgressDisplay> ();
-			if (vm.IsBusy && progress != null)
-				progress.Show ();
-			else
-				progress.Dismiss ();
-		}
-
-		void Cart_Clicked (object sender, EventArgs e)
-		{
-			Navigation.PushAsync (new CheckoutPage());
+			BindingContext = new CheckoutViewModel ();
 		}
 	}
 }

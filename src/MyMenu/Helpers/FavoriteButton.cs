@@ -69,13 +69,20 @@ namespace MyMenu
 			GestureRecognizers.Add (tap);
 		}
 
+		protected override void OnBindingContextChanged ()
+		{
+			base.OnBindingContextChanged ();
+			vm = BindingContext as FoodViewModel;
+		}
+
 		void Tap_Tapped (object sender, EventArgs e)
 		{
-			Debug.WriteLine ("tapped");
-		
+			Debug.WriteLine ("Add item tapped");
+			vm.AddToBasket.Execute (null);
 		}
 
 		readonly TapGestureRecognizer tap;
+		FoodViewModel vm;
 	}
 }
 
