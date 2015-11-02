@@ -27,6 +27,7 @@ namespace MyMenuAppService.DataObjects
         public double Discount { get; set; }
         public string CouponId { get; set; }
 
-
+        public bool SendSms { get; set; }
+        public bool SendEmail { get; set; }
     }
 }

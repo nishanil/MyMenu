@@ -170,6 +170,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="mymenu-demo - Web Deploy.pubxml.user" />
     <Content Include="PluginsHelp\SettingsReadme.txt" />
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />

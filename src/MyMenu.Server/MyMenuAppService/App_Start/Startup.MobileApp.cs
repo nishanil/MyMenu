@@ -33,7 +33,7 @@ namespace MyMenuAppService
         }
     }
 
-    public class MyMenuAppInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<MyMenuContext>
+    public class MyMenuAppInitializer : System.Data.Entity.DropCreateDatabaseAlways<MyMenuContext>
     {
         protected override void Seed(MyMenuContext context)
         {
@@ -76,11 +76,12 @@ namespace MyMenuAppService
                     Address = "328 NGV Koramangala Bangalore",
                     Status = "Order Placed",
                     UserEmail = "nnish@live.com",
-                    UserPhone = "+91 9123456789",
+                    UserPhone = "+919980163667",
                     Payment = "Cash Payment",
                     HasFeedback = false,
                     TotalAmount = 320,
-                    UserName = "Nish"
+                    UserName = "Nish",
+                    SendSms = true
                 },
                 new Order {
                     Id = orderId2,

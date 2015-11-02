@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyMenu;
+using Xamarin.Forms;
 
 namespace MyMenuAdmin.ViewModel
 {
@@ -31,6 +32,12 @@ namespace MyMenuAdmin.ViewModel
         {
             get { return selectedOrderDetails; }
             set { selectedOrderDetails = value; RaisePropertyChanged();}
+        }
+
+        public async void UpdateOrder(string updateStatus)
+        {
+            SelectedOrder.Status = updateStatus;
+            await DependencyService.Get<IDataService>().UpdateOrderAsync(SelectedOrder);
         }
 
         public OrderDetailViewModel()

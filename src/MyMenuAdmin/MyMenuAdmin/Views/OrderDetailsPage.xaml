@@ -114,6 +114,8 @@
         <Grid.RowDefinitions>
           <RowDefinition/>
           <RowDefinition Height="*"/>
+          <RowDefinition Height="2*"/>
+
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" Text="Discount: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="10" TextColor="#212121" XAlign="End"/>
 
@@ -121,7 +123,14 @@
         <Label Grid.Column="0" Grid.Row="1" Text="Total: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="20" TextColor="#212121" XAlign="End"/>
 
         <Label  Grid.Column="1" Grid.Row="1" Text="{Binding Price}" HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="25" TextColor="#E91E63" XAlign="End"/>
+        <Picker x:Name="PerformOrderPicker" SelectedIndexChanged="PerformOrderPicker_OnSelectedIndexChanged" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Title="Process Order">
+          <Picker.Items>
+            <x:String>Order Placed</x:String>
+            <x:String>Out for Delivery</x:String>
+            <x:String>Delivered</x:String>
 
+          </Picker.Items>
+        </Picker>
       </Grid>
       </DataTemplate>
       </ListView.FooterTemplate>
