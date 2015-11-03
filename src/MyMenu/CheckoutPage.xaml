@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyMenu.CheckoutPage" x:Name="myPage" Title="Summary">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+ xmlns:controls="clr-namespace:MyMenu;assembly=MyMenu"
+ x:Class="MyMenu.CheckoutPage" x:Name="myPage" Title="Summary">
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Check Out" Command="{Binding CheckOutCommand}" Clicked="chekout_Clicked"/>
 	</ContentPage.ToolbarItems>
@@ -22,9 +25,9 @@
 										<ColumnDefinition Width="Auto" />
 										<ColumnDefinition Width="*" />
 									</Grid.ColumnDefinitions>
-									<StackLayout Grid.Column="0" Orientation="Horizontal">
-										<Button Text="+" VerticalOptions="Center" WidthRequest="30" Command="{Binding AddCommand}" />
-										<Button Text="-" VerticalOptions="Center" WidthRequest="30" Command="{Binding RemoveCommand}" />
+									<StackLayout Grid.Column="0"  Orientation="Horizontal">
+										<controls:QuantityButton Source="add" VerticalOptions="Center" StyleId="add" />
+										<controls:QuantityButton Source="remove" VerticalOptions="Center" StyleId="remove" />
 									</StackLayout>
 									<Label Grid.Column="0" VerticalOptions="Center" XAlign="End" Text="{Binding Details.FoodName}" />
 									<Label Grid.Column="1" XAlign="End" VerticalOptions="Center" Text="{Binding Details.SellingPrice}" />

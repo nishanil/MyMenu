@@ -46,20 +46,36 @@ namespace MyMenu
 			}
 		}
 
-		Command addCommand;
-		public Command AddCommand {
+		Command quantityCommand;
+
+		public Command QuantityCommand {
 			get {
-				return addCommand ?? (addCommand = new Command (AddCommandMethod));
+				return quantityCommand ?? (quantityCommand = new Command<string> (QuantityCommandMethod));
 			}
 		}
 
-		Command removeCommand;
-		public Command RemoveCommand {
-			get {
-				return removeCommand ?? (removeCommand = new Command (RemoveCommandMethod));
-			}
-		}
+		void QuantityCommandMethod (string command)
+		{
+			Debug.WriteLine (command);
 
+			if (command == "add") {
+				if (Quantity == 5) {
+					return;
+				}
+				Quantity = Quantity + 1;
+			}
+
+			if (command == "remove") {
+				if (Quantity == 1) {
+					return;
+				}
+
+				Quantity = Quantity - 1;
+			}
+
+			RaisePropertyChanged ("TotalPrice");
+			checkoutVM.UpdateTotalPrice ();
+		}
 
 		public double Quantity {
 			get {
@@ -72,33 +88,11 @@ namespace MyMenu
 		}
 
 		public double TotalPrice {
-			get{ 
+			get { 
 				return order.TotalPrice;
 			}
 		}
 
-
-		void AddCommandMethod ()
-		{
-			if (Quantity == 5) {
-				return;
-			}
-
-			Quantity = Quantity + 1;
-			RaisePropertyChanged ("TotalPrice");
-			checkoutVM.UpdateTotalPrice ();
-		}
-
-		void RemoveCommandMethod ()
-		{
-			if (Quantity == 1) {
-				return;
-			}
-			
-			Quantity = Quantity - 1;
-			RaisePropertyChanged ("TotalPrice");
-			checkoutVM.UpdateTotalPrice ();
-		}
 	}
 }
 

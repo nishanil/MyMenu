@@ -59,6 +59,31 @@ namespace MyMenu
 		}
 	}
 
+	public class QuantityButton : Image
+	{
+		public QuantityButton ()
+		{
+			tap = new TapGestureRecognizer ();
+			tap.Tapped += Tap_Tapped;
+
+			GestureRecognizers.Add (tap);
+		}
+
+		void Tap_Tapped (object sender, EventArgs e)
+		{
+			vm.QuantityCommand.Execute (StyleId);
+		}
+
+		protected override void OnBindingContextChanged ()
+		{
+			base.OnBindingContextChanged ();
+			vm = BindingContext as OrderDetailsViewModel;
+		}
+
+		OrderDetailsViewModel vm;
+		readonly TapGestureRecognizer tap;
+	}
+
 	public class ImageButton : Image
 	{
 		public ImageButton ()

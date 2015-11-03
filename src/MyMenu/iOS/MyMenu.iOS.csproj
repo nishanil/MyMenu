@@ -165,6 +165,13 @@
     <BundleResource Include="Resources\addcart.png" />
     <BundleResource Include="Resources\addcart%402x.png" />
     <BundleResource Include="Resources\check.png" />
+    <BundleResource Include="Resources\remove.png" />
+    <BundleResource Include="Resources\add.png" />
+    <BundleResource Include="Resources\remove%402x.png" />
+    <BundleResource Include="Resources\add%402x.png" />
+    <BundleResource Include="Resources\favorite%403x.png" />
+    <BundleResource Include="Resources\user%403x.png" />
+    <BundleResource Include="Resources\cart%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

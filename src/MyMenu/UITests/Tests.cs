@@ -28,6 +28,7 @@ namespace MyMenu.UITests
 		[Test]
 		public void WelcomeTextIsDisplayed ()
 		{
+			app.Repl ();
 			AppResult[] results = app.WaitForElement (c => c.Marked ("Welcome to Xamarin Forms!"));
 			app.Screenshot ("Welcome screen.");
 
