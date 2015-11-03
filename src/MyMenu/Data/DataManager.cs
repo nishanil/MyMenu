@@ -47,7 +47,7 @@ namespace MyMenu
 		public async Task<List<FavoriteItem>> GetUserFavoritesAsync ()
 		{
 			try {
-				await SyncTableAsync ();
+				//await SyncTableAsync ();
 				var favourites = await favoriteTable.ReadAsync ();
 
 				return favourites.ToList ();

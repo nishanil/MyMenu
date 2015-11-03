@@ -39,7 +39,6 @@ namespace MyMenu
 
 	public partial class CheckoutPage : ContentPage, ICheckoutPage
 	{
-		CheckoutViewModel vm;
 
 		public CheckoutPage ()
 		{

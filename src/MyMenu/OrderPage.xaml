@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="{Binding Title}" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyMenu.OrderPage">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Order Now" Command="{Binding OrderCommand}" />
+		<ToolbarItem Text="Order Now" Command="{Binding OrderCommand}" Clicked="Order_Clicked"/>
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<Grid BackgroundColor="White">
@@ -34,7 +34,7 @@
 						<RowDefinition Height="*" />
 					</Grid.RowDefinitions>
 					<Label Text="PHONE" Grid.Row="0" HorizontalOptions="StartAndExpand" FontSize="15" TextColor="#212121" XAlign="Start" />
-					<Label Text="+919900121638" Grid.Row="1" YAlign="Center" FontSize="32" XAlign="End" />
+					<Label Text="+919900121638" Grid.Row="1" YAlign="Center" FontSize="28" XAlign="End" />
 				</Grid>
 				<Grid Padding="8">
 					<Grid.ColumnDefinitions>

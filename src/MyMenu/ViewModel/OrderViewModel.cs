@@ -29,7 +29,7 @@ using Xamarin.Forms;
 using MyMenu;
 using System.Threading.Tasks;
 
-[assembly:Dependency(typeof(OrderViewModel))]
+[assembly:Dependency (typeof(OrderViewModel))]
 namespace MyMenu
 {
 	public class OrderViewModel : BaseViewModel, IOrderViewModel
@@ -46,24 +46,24 @@ namespace MyMenu
 		}
 
 		public string Price {
-			get{
+			get {
 				return string.Format ("{0:C}", order.TotalAmount);
 			}
 		}
 
 		public string Address {
-			get{
+			get {
 				return order.Address;
 			}
 		}
 
-		public Command OrderCommand{
-			get{
+		public Command OrderCommand {
+			get {
 				return orderCommand ?? (orderCommand = new Command (async () => await PlaceOrder ()));
 			}
 		}
 
-		async Task PlaceOrder()
+		async Task PlaceOrder ()
 		{
 			var orderService = DependencyService.Get<IDataService> ();
 
@@ -76,21 +76,30 @@ namespace MyMenu
 					item.OrderId = order.Id;
 					await orderService.InsertOrderDetailAsync (item);
 				}
+
+				var orderConfitm = DependencyService.Get<IOrderConfirm> ();
+				orderConfitm.SetOrder (order);
+
 			} finally {
 				IsBusy = false;
 			}
 		}
 
+		public Order CurrentOrder {
+			get {
+				return order;
+			}
+		}
+
 		Command orderCommand;
 		List<OrderDetail> orderDetails;
-
 		Order order;
-
 	}
 
 	public interface IOrderViewModel
 	{
-		void SetOrderDetails(Order order, List<OrderDetail> orderDetails);
+		void SetOrderDetails (Order order, List<OrderDetail> orderDetails);
+		Order CurrentOrder{ get; }
 	}
 }
 

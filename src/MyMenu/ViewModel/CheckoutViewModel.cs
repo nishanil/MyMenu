@@ -108,17 +108,15 @@ namespace MyMenu
 
 		public Command CheckOutCommand {
 			get {
-				return checkOutCommand ?? (checkOutCommand = new Command (async () => await CheckOutMethod()));
+				return checkOutCommand ?? (checkOutCommand = new Command (CheckOutMethod));
 			}
 		}
 
-		async Task CheckOutMethod ()
+		void CheckOutMethod ()
 		{
 			if (string.IsNullOrEmpty (view.Address)) {
 				return;
 			}
-
-			var dataService = DependencyService.Get<IDataService> ();
 
 			var order = new Order {
 
@@ -135,33 +133,25 @@ namespace MyMenu
 				Status = "Order Placed"
 			};
 
-			IsBusy = true;
-
-			try {
 				
-				Debug.WriteLine (order.Id);
+			Debug.WriteLine (order.Id);
 				
-				foreach (var orderItem in CheckoutItems) {
-					var detail = orderItem.Details;
-					detail.OrderId = order.Id;
-				
-
-				}
-
-				var orderItems = CheckoutItems.Select(x=>x.Details).ToList();
-
-				var vm = DependencyService.Get<OrderViewModel> (); 
-				vm.SetOrderDetails(order, orderItems);
-
-			} finally {
-				IsBusy = false;
+			foreach (var orderItem in CheckoutItems) {
+				var detail = orderItem.Details;
+				detail.OrderId = order.Id;
 			}
+
+			var orderItems = CheckoutItems.Select (x => x.Details).ToList ();
+
+			var vm = DependencyService.Get<IOrderViewModel> (); 
+			vm.SetOrderDetails (order, orderItems);
 		}
 
 		Command checkOutCommand;
 
 		double totalPrice;
 		readonly ICheckoutPage view;
+
 		public ObservableCollection<OrderDetailsViewModel> CheckoutItems { get; set; }
 	}
 }

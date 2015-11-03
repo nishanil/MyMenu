@@ -1,5 +1,5 @@
 ﻿//
-// OrderPage.xaml.cs
+// OrderConfirmPage.xaml.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -30,20 +30,19 @@ using Xamarin.Forms;
 
 namespace MyMenu
 {
-	public partial class OrderPage : ContentPage
+	public partial class OrderConfirmPage : ContentPage
 	{
-		
-
-		public OrderPage ()
+		public OrderConfirmPage ()
 		{
 			InitializeComponent ();
-			var vm = DependencyService.Get<IOrderViewModel> ();
+			var orderVM = DependencyService.Get<IOrderViewModel> ();
+			var vm = DependencyService.Get<IOrderConfirm> ();
+			vm.SetOrder (orderVM.CurrentOrder);
 			BindingContext = vm;
 		}
 
-		void Order_Clicked (object sender, EventArgs e)
-		{
-			Navigation.PushAsync (new OrderConfirmPage ());
+		void Done_Clicked (object sender, EventArgs e){
+			Navigation.PopToRootAsync ();
 		}
 	}
 }

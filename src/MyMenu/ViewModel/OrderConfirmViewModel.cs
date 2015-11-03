@@ -1,5 +1,5 @@
 ﻿//
-// OrderPage.xaml.cs
+// OrderConfirm.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,27 +24,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Collections.Generic;
-
 using Xamarin.Forms;
+using MyMenu;
 
+[assembly:Dependency(typeof(OrderConfirmViewModel))]
 namespace MyMenu
 {
-	public partial class OrderPage : ContentPage
+	public interface IOrderConfirm
 	{
-		
+		void SetOrder (Order order);
+	}
 
-		public OrderPage ()
+	public class OrderConfirmViewModel : BaseViewModel, IOrderConfirm
+	{
+		public void SetOrder (Order order)
 		{
-			InitializeComponent ();
-			var vm = DependencyService.Get<IOrderViewModel> ();
-			BindingContext = vm;
+			this.order = order;
+			Title = string.Format ("Order #{0}", this.order.Number);
 		}
 
-		void Order_Clicked (object sender, EventArgs e)
-		{
-			Navigation.PushAsync (new OrderConfirmPage ());
+
+		public string Price {
+			get {
+				return string.Format ("TOTAL: {0:C}", order.TotalAmount);
+			}
 		}
+
+		public string Status {
+			get {
+				return order.Status;
+			}
+		}
+
+		Order order;
 	}
 }
 
