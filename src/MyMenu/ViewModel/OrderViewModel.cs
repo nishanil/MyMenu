@@ -1,5 +1,5 @@
 ﻿//
-// CheckoutPage.xaml.cs
+// OrderViewModel.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -25,44 +25,72 @@
 // THE SOFTWARE.
 using System;
 using System.Collections.Generic;
-
 using Xamarin.Forms;
+using MyMenu;
+using System.Threading.Tasks;
 
+[assembly:Dependency(typeof(OrderViewModel))]
 namespace MyMenu
 {
-	public interface ICheckoutPage
+	public class OrderViewModel : BaseViewModel, IOrderViewModel
 	{
-		string Instructions{ get; }
-
-		string Address{ get; }
-	}
-
-	public partial class CheckoutPage : ContentPage, ICheckoutPage
-	{
-		CheckoutViewModel vm;
-
-		public CheckoutPage ()
+		public OrderViewModel ()
 		{
-			InitializeComponent ();
-			BindingContext = new CheckoutViewModel (this);
+			Title = "Orders";
 		}
 
-		public string Instructions {
-			get {
-				return Comments.Text;
+		public void SetOrderDetails (Order order, List<OrderDetail> orderDetails)
+		{
+			this.order = order;
+			this.orderDetails = orderDetails;
+		}
+
+		public string Price {
+			get{
+				return string.Format ("{0:C}", order.TotalAmount);
 			}
 		}
 
 		public string Address {
-			get {
-				return UserAddress.Text;
+			get{
+				return order.Address;
 			}
 		}
 
-		async void chekout_Clicked (object sender, EventArgs e)
-		{
-			await Navigation.PushAsync (new OrderPage ());
+		public Command OrderCommand{
+			get{
+				return orderCommand ?? (orderCommand = new Command (async () => await PlaceOrder ()));
+			}
 		}
+
+		async Task PlaceOrder()
+		{
+			var orderService = DependencyService.Get<IDataService> ();
+
+			IsBusy = true;
+
+			try {
+				await orderService.InsertOrderAsync (order);
+				
+				foreach (var item in orderDetails) {
+					item.OrderId = order.Id;
+					await orderService.InsertOrderDetailAsync (item);
+				}
+			} finally {
+				IsBusy = false;
+			}
+		}
+
+		Command orderCommand;
+		List<OrderDetail> orderDetails;
+
+		Order order;
+
+	}
+
+	public interface IOrderViewModel
+	{
+		void SetOrderDetails(Order order, List<OrderDetail> orderDetails);
 	}
 }
 

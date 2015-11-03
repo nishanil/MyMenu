@@ -164,6 +164,7 @@
     <BundleResource Include="Resources\nofav%402x.png" />
     <BundleResource Include="Resources\addcart.png" />
     <BundleResource Include="Resources\addcart%402x.png" />
+    <BundleResource Include="Resources\check.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

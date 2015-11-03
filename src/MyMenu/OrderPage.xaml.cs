@@ -1,5 +1,5 @@
 ﻿//
-// CheckoutPage.xaml.cs
+// OrderPage.xaml.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -30,38 +30,13 @@ using Xamarin.Forms;
 
 namespace MyMenu
 {
-	public interface ICheckoutPage
+	public partial class OrderPage : ContentPage
 	{
-		string Instructions{ get; }
-
-		string Address{ get; }
-	}
-
-	public partial class CheckoutPage : ContentPage, ICheckoutPage
-	{
-		CheckoutViewModel vm;
-
-		public CheckoutPage ()
+		public OrderPage ()
 		{
 			InitializeComponent ();
-			BindingContext = new CheckoutViewModel (this);
-		}
-
-		public string Instructions {
-			get {
-				return Comments.Text;
-			}
-		}
-
-		public string Address {
-			get {
-				return UserAddress.Text;
-			}
-		}
-
-		async void chekout_Clicked (object sender, EventArgs e)
-		{
-			await Navigation.PushAsync (new OrderPage ());
+			var vm = DependencyService.Get<OrderViewModel> ();
+			BindingContext = vm;
 		}
 	}
 }

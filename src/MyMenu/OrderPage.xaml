@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="{Binding Title}" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyMenu.OrderPage">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Order Now" Command="{Binding OrderCommand}" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
+		<Grid BackgroundColor="White">
+			<StackLayout Padding="8" HorizontalOptions="StartAndExpand">
+				<Label Text="Your Order" FontSize="20" TextColor="#E91E63" HorizontalOptions="Center" />
+				<Grid Padding="8">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<Label Text="TOTAL" Grid.Column="0" HorizontalOptions="StartAndExpand" FontSize="15" TextColor="#212121" XAlign="Start" />
+					<Label Text="{Binding Price}" Grid.Column="1" HorizontalOptions="EndAndExpand" FontSize="15" TextColor="#E91E63" XAlign="End" />
+				</Grid>
+				<Grid Padding="8">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Label Text="DELIVER TO" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" FontSize="15" TextColor="#212121" XAlign="Start" />
+					<Image Source="check" HeightRequest="28" WidthRequest="32" Grid.Column="0" Grid.Row="1" />
+					<Label Text="{Binding Address}" Grid.Column="1" Grid.Row="1" HorizontalOptions="StartAndExpand" FontSize="15" XAlign="Start" YAlign="Center" />
+				</Grid>
+				<Grid Padding="8">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Label Text="PHONE" Grid.Row="0" HorizontalOptions="StartAndExpand" FontSize="15" TextColor="#212121" XAlign="Start" />
+					<Label Text="+919900121638" Grid.Row="1" YAlign="Center" FontSize="32" XAlign="End" />
+				</Grid>
+				<Grid Padding="8">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Image Source="check" HeightRequest="32" WidthRequest="32" Grid.Column="0" />
+					<Label Text="CASH ON DELIVERY" Grid.Column="1" FontSize="15" YAlign="Center" XAlign="Start" />
+				</Grid>
+			</StackLayout>
+			<ActivityIndicator 
+				HeightRequest="50" WidthRequest="50" 
+				VerticalOptions="Center" HorizontalOptions="Center" 
+				Color="#E91E63" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" />
+		</Grid>
+	</ContentPage.Content>
+</ContentPage>

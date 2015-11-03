@@ -120,10 +120,8 @@ namespace MyMenu
 
 			var dataService = DependencyService.Get<IDataService> ();
 
-			var rand = new Random ();
-
 			var order = new Order {
-				Number = rand.Next (),
+
 				SpecialInstruction = view.Instructions,
 				Address = view.Address,
 				UserId = Settings.CurrntUserId,
@@ -140,7 +138,6 @@ namespace MyMenu
 			IsBusy = true;
 
 			try {
-				await dataService.InsertOrderAsync (order);
 				
 				Debug.WriteLine (order.Id);
 				
@@ -148,10 +145,14 @@ namespace MyMenu
 					var detail = orderItem.Details;
 					detail.OrderId = order.Id;
 				
-					await dataService.InsertOrderDetailAsync (detail);
-				
-					Debug.WriteLine (detail.Id);
+
 				}
+
+				var orderItems = CheckoutItems.Select(x=>x.Details).ToList();
+
+				var vm = DependencyService.Get<OrderViewModel> (); 
+				vm.SetOrderDetails(order, orderItems);
+
 			} finally {
 				IsBusy = false;
 			}

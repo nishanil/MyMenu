@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyMenu.CheckoutPage" x:Name="myPage" Title="Summary">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Check Out" Command="{Binding CheckOutCommand}" />
+		<ToolbarItem Text="Check Out" Command="{Binding CheckOutCommand}" Clicked="chekout_Clicked"/>
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<Grid BackgroundColor="White">
