@@ -1,5 +1,5 @@
-﻿//
-// IFoodServiceClient.cs
+//
+// IScreenSize.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -23,69 +23,19 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+
+using Xamarin.Forms;
 using Microsoft.WindowsAzure.MobileServices;
+using MyMenu.Helpers;
+using System.Collections.Generic;
 
 namespace MyMenu
 {
 
-	public interface IAzureClient
+	public interface IScreenSize
 	{
-		MobileServiceClient MobileService{ get; }
-	}
-
-	public interface IDataService
-	{
-		Task<List<Food>> GetFoodItems ();
-
-		Task InitializeStoreAsync ();
-
-		#region methods specific to offline data sync
-
-		#region Food
-
-		Task<List<Food>> GetFoodItemsAsync ();
-
-		Task InsertFoodItemAsync (Food food);
-
-		Task<bool> DeleteFoodItemAsync (Food food);
-
-		Task UpdateFoodItemAsync (Food food);
-
-		#endregion
-
-		#region Order
-
-		Task<List<Order>> GetOrdersAsync ();
-
-		Task InsertOrderAsync (Order food);
-
-		Task<bool> DeleteOrderAsync (Order food);
-
-		Task UpdateOrderAsync (Order food);
-
-		#endregion
-
-		#region Order Detail
-
-		Task<List<OrderDetail>> GetOrderDetailsAsync ();
-
-		Task InsertOrderDetailAsync (OrderDetail orderDetail);
-
-		Task<bool> DeleteOrderDetailAsync (OrderDetail orderDetail);
-
-		Task UpdateOrderDetailAsync (OrderDetail orderDetail);
-
-		#endregion
-
-		#endregion
-
-
-		Task<List<FavoriteItem>> GetUserFavoritesAsync ();
-		Task<RecordStatus> SaveFavorite (FavoriteItem item);
-		Task SyncFavoriteItemsAysnc ();
+		Size GetScreenSize ();
 	}
 }
-

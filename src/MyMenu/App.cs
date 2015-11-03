@@ -47,9 +47,9 @@ namespace MyMenu
 			set;
 		}
 
-		public App (MobileServiceClient client)
+		public App ()
 		{
-			Client = client;
+			Client = DependencyService.Get<IAzureClient> ().MobileService;
 
 			if (string.IsNullOrEmpty (Settings.CurrentUser)) {
 				MainPage = new LoginPage ();
@@ -84,11 +84,6 @@ namespace MyMenu
 			};
 		}
 
-		public static DataManager Manager {
-			get;
-			set;
-		}
-
 		protected override void OnStart ()
 		{
 			// Handle when your app starts
@@ -105,9 +100,5 @@ namespace MyMenu
 		}
 	}
 
-	public interface IScreenSize
-	{
-		Size GetScreenSize ();
-	}
 }
 

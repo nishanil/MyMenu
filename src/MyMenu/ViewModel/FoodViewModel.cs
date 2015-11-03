@@ -58,7 +58,9 @@ namespace MyMenu
 
 		async void AddFavoriteMethod ()
 		{
-			var status = await App.Manager.SaveFavorite (new FavoriteItem {
+			var dataService = DependencyService.Get<IDataService> ();
+
+			var status = await dataService.SaveFavorite (new FavoriteItem {
 				FoodItemId = foodItem.Id,
 				UserId = Settings.CurrntUserId,
 				IsRemoved = false
@@ -66,7 +68,7 @@ namespace MyMenu
 
 			IsFavourite = (status == RecordStatus.Inserted);
 
-			await App.Manager.SyncTableAsync ();
+			await dataService.SyncFavoriteItemsAysnc ();
 		}
 
 		void AddToBasketMethod ()

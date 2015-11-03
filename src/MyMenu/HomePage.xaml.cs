@@ -39,9 +39,6 @@ namespace MyMenu
 		{
 			InitializeComponent ();
 
-			var favoriteTable = App.Client.GetSyncTable<FavoriteItem> ();
-			App.Manager = new DataManager (App.Client, favoriteTable);
-
 			vm = new HomeViewModel ();
 			vm.PropertyChanged += Vm_PropertyChanged;
 			BindingContext = vm;

@@ -56,24 +56,13 @@ namespace MyMenu.iOS
 			CurrentPlatform.Init ();
 			SQLitePCL.CurrentPlatform.Init ();
 
-			client = new MobileServiceClient (App.ApplicationURL, App.GatewayURL, App.ApplicationKey);
-
-			InitializeStoreAsync ().Wait ();
-
 			#endregion
 
-			LoadApplication (new App (client));
+			LoadApplication (new App ());
 			return base.FinishedLaunching (app, options);
 		}
 
-		public async Task InitializeStoreAsync ()
-		{
-			string path = "syncstore.db";
-			var store = new MobileServiceSQLiteStore (path);
-			store.DefineTable<FavoriteItem> ();
-			await client.SyncContext.InitializeAsync (store, new MobileServiceSyncHandler ());
 
-		}
 
 	}
 }

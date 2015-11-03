@@ -44,9 +44,9 @@ namespace MyMenu
 		{
 			try {
 				IsBusy = true;
-
-				var items = await DependencyService.Get<IDataService>().GetFoodItems();
-				var favorites = await App.Manager.GetUserFavoritesAsync ();
+				var dataService = DependencyService.Get<IDataService> ();
+				var items = await dataService.GetFoodItemsAsync ();
+				var favorites = await dataService.GetUserFavoritesAsync ();
 
 				var fooditems = from fi in items
 				                join  fav in favorites on fi.Id equals fav.FoodItemId into prodGroup
