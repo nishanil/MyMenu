@@ -25,19 +25,9 @@ namespace MyMenu.Droid
 			}
 
 			CurrentPlatform.Init ();
-			string path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "test1.db");
-			if (!File.Exists(path))
-			{
-				File.Create(path).Dispose();
-			}
 
-			client = new MobileServiceClient(App.ApplicationURL, App.GatewayURL, App.ApplicationKey);
 
-            var store = new MobileServiceSQLiteStore(path);
-			store.DefineTable<FavoriteItem> ();
-			client.SyncContext.InitializeAsync(store).Wait();
-
-			LoadApplication (new App (client));
+			LoadApplication (new App ());
 
 		}
 	}

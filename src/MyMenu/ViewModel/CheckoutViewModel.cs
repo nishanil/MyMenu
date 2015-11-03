@@ -51,6 +51,10 @@ namespace MyMenu
 
 		void PopulateOrders ()
 		{
+			if (App.CheckoutItems == null) {
+				return;
+			}
+
 			var foodItems = App.CheckoutItems.GroupBy (p => p.Id);
 			foreach (var item in foodItems) {
 				var food = item.FirstOrDefault ();

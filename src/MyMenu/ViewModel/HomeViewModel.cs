@@ -46,6 +46,7 @@ namespace MyMenu
 				IsBusy = true;
 				var dataService = DependencyService.Get<IDataService> ();
 				var items = await dataService.GetFoodItemsAsync ();
+				await dataService.SyncFavoriteItemsAysnc();
 				var favorites = await dataService.GetUserFavoritesAsync ();
 
 				var fooditems = from fi in items
