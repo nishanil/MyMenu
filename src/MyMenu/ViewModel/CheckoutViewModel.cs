@@ -28,6 +28,8 @@ using System.Linq;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using MyMenu.Helpers;
 
 namespace MyMenu
 {
@@ -38,8 +40,9 @@ namespace MyMenu
 
 	public class CheckoutViewModel : BaseViewModel, ICheckoutViewModel
 	{
-		public CheckoutViewModel ()
+		public CheckoutViewModel (ICheckoutPage view)
 		{
+			this.view = view;
 			CheckoutItems = new ObservableCollection<OrderDetailsViewModel> ();
 			TotalPrice = 0;
 
@@ -89,7 +92,7 @@ namespace MyMenu
 			}
 		}
 
-		public void UpdateTotalPrice()
+		public void UpdateTotalPrice ()
 		{
 			TotalPrice = CheckoutItems.Sum (p => p.Details.TotalPrice);
 		}
@@ -102,8 +105,62 @@ namespace MyMenu
 			}
 		}
 
-		double totalPrice;
 
+		public Command CheckOutCommand {
+			get {
+				return checkOutCommand ?? (checkOutCommand = new Command (async () => await CheckOutMethod()));
+			}
+		}
+
+		async Task CheckOutMethod ()
+		{
+			if (string.IsNullOrEmpty (view.Address)) {
+				return;
+			}
+
+			var dataService = DependencyService.Get<IDataService> ();
+
+			var rand = new Random ();
+
+			var order = new Order {
+				Number = rand.Next (),
+				SpecialInstruction = view.Instructions,
+				Address = view.Address,
+				UserId = Settings.CurrntUserId,
+				UserEmail = "prshntvc@gmail", //TODO: get user email address
+				UserPhone = "0918892320619",
+				Payment = "Cash On Delivery",
+				UserName = "Prashant C", //TODO: get user name
+				TotalAmount = totalPrice,
+				Discount = 0,
+				CouponId = string.Empty,
+				Status = "Order Placed"
+			};
+
+			IsBusy = true;
+
+			try {
+				await dataService.InsertOrderAsync (order);
+				
+				Debug.WriteLine (order.Id);
+				
+				foreach (var orderItem in CheckoutItems) {
+					var detail = orderItem.Details;
+					detail.OrderId = order.Id;
+				
+					await dataService.InsertOrderDetailAsync (detail);
+				
+					Debug.WriteLine (detail.Id);
+				}
+			} finally {
+				IsBusy = false;
+			}
+		}
+
+		Command checkOutCommand;
+
+		double totalPrice;
+		readonly ICheckoutPage view;
 		public ObservableCollection<OrderDetailsViewModel> CheckoutItems { get; set; }
 	}
 }

@@ -30,12 +30,33 @@ using Xamarin.Forms;
 
 namespace MyMenu
 {
-	public partial class CheckoutPage : ContentPage
+	public interface ICheckoutPage
 	{
+		string Instructions{ get; }
+
+		string Address{ get; }
+	}
+
+	public partial class CheckoutPage : ContentPage, ICheckoutPage
+	{
+		CheckoutViewModel vm;
+
 		public CheckoutPage ()
 		{
 			InitializeComponent ();
-			BindingContext = new CheckoutViewModel ();
+			BindingContext = new CheckoutViewModel (this);
+		}
+
+		public string Instructions {
+			get {
+				return Comments.Text;
+			}
+		}
+
+		public string Address {
+			get {
+				return UserAddress.Text;
+			}
 		}
 	}
 }

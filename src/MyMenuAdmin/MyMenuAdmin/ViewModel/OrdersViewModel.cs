@@ -173,6 +173,11 @@ namespace MyMenuAdmin.ViewModel
             get
             {
                 var colorHex = "#F44336";
+
+				if (string.IsNullOrEmpty(OrderStatus)) {
+					return Color.FromHex(colorHex);
+				}
+
                 switch (OrderStatus.ToLower())
                 {
                     case "delivered":
