@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="{Binding Title}" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyMenuAdmin.CouponsPage">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Add" Clicked="Add_Clicked" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
+		<ListView IsPullToRefreshEnabled="true" SeparatorVisibility="None" RefreshCommand="{Binding Refresh}" IsRefreshing="{Binding IsBusy}" ItemsSource="{Binding Coupons}">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<Grid Padding="8">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<Label Text="{Binding Code}" Grid.Column="0" XAlign="Start" FontSize="24"/>
+							<Label Text="{Binding Discount, StringFormat='{0:N} %'}" XAlign="End" Grid.Column="1"/>
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</ContentPage.Content>
+</ContentPage>
