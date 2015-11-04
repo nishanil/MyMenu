@@ -56,6 +56,10 @@
       <DependentUpon>OrdersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CouponsViewModel.cs" />
+    <Compile Include="Views\CouponsPage.xaml.cs">
+      <DependentUpon>CouponsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddCouponPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.WindowsAzure.Mobile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
@@ -104,6 +108,12 @@
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\CouponsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\OrdersPage.xaml">

@@ -1,5 +1,5 @@
 ﻿//
-// CouponsViewModel.cs
+// CouponsPage.xaml.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,46 +24,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using MyMenu;
+using System.Collections.Generic;
+
 using Xamarin.Forms;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
 
 namespace MyMenuAdmin
 {
-	public class CouponsViewModel : BaseViewModel
+	public partial class CouponsPage : ContentPage
 	{
-		public CouponsViewModel ()
+		public CouponsPage ()
 		{
-			Title = "Coupons";
-			dataService = DependencyService.Get<IDataService> ();
-			Coupons = new ObservableCollection<Coupon> ();
-			LoadCoupons ();
+			InitializeComponent ();
+			BindingContext = new CouponsViewModel ();
 		}
 
-		public Command Refresh {
-			get {
-				return refresh ?? (refresh = new Command (async () => await LoadCoupons ()));
-			}
-		}
-
-		async Task LoadCoupons ()
+		void Add_Clicked (object sender, EventArgs e)
 		{
-			IsBusy = true;
-
-			var coupons = await dataService.GetCouponsAsync ();
-			Coupons.Clear ();
-			foreach (var coupon in coupons) {
-				Coupons.Add (coupon);
-			}
-
-			IsBusy = false;
+			Navigation.PushModalAsync (new AddCouponPage (), true);
 		}
-
-		public ObservableCollection<Coupon> Coupons { get;  set; }
-
-		readonly IDataService dataService;
-		Command refresh;
 	}
 }
 

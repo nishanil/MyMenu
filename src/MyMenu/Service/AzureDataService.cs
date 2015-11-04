@@ -82,6 +82,8 @@ namespace MyMenu
 			} catch (Exception ex) {
 				Debug.WriteLine (@"Failed: {0}", ex.Message);
 			}
+
+			return null;
 		}
 
 		public async Task InsertCouponAsync (Coupon coupon)

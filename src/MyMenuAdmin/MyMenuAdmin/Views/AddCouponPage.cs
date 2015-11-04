@@ -1,5 +1,5 @@
 ﻿//
-// CouponsViewModel.cs
+// AddCouponPage.cs
 //
 // Author:
 //       Prashant Cholachagudda <prashant@xamarin.com>
@@ -24,46 +24,51 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using MyMenu;
+
 using Xamarin.Forms;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
+using MyMenu;
 
 namespace MyMenuAdmin
 {
-	public class CouponsViewModel : BaseViewModel
+	public class AddCouponPage : ContentPage
 	{
-		public CouponsViewModel ()
+		public AddCouponPage ()
 		{
-			Title = "Coupons";
-			dataService = DependencyService.Get<IDataService> ();
-			Coupons = new ObservableCollection<Coupon> ();
-			LoadCoupons ();
+			
+			var addButton = new Button {
+				Text = "Add",
+				VerticalOptions = LayoutOptions.Center,
+			};
+
+			var code = new Entry {
+				HorizontalOptions = LayoutOptions.FillAndExpand,
+				Placeholder = "Code",
+			};
+
+			var discount = new Entry {
+				HorizontalOptions = LayoutOptions.FillAndExpand,
+				Placeholder = "Discount",
+			};
+
+			var dataService = DependencyService.Get<IDataService> ();
+
+			addButton.Clicked += async (sender, e) => {
+				var discountValue = Double.Parse (discount.Text);
+				await dataService.InsertCouponAsync (new Coupon{ Code = code.Text, Discount = discountValue });
+				await Navigation.PopModalAsync ();
+			};
+
+			Content = new StackLayout { 
+				Padding = 8,
+				VerticalOptions = LayoutOptions.Center,
+				Children = {
+					code,
+					discount,
+					addButton
+				}
+			};
 		}
-
-		public Command Refresh {
-			get {
-				return refresh ?? (refresh = new Command (async () => await LoadCoupons ()));
-			}
-		}
-
-		async Task LoadCoupons ()
-		{
-			IsBusy = true;
-
-			var coupons = await dataService.GetCouponsAsync ();
-			Coupons.Clear ();
-			foreach (var coupon in coupons) {
-				Coupons.Add (coupon);
-			}
-
-			IsBusy = false;
-		}
-
-		public ObservableCollection<Coupon> Coupons { get;  set; }
-
-		readonly IDataService dataService;
-		Command refresh;
 	}
 }
+
 

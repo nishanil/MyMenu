@@ -86,6 +86,9 @@ namespace MyMenu
 		Task<List<FavoriteItem>> GetUserFavoritesAsync ();
 		Task<RecordStatus> SaveFavorite (FavoriteItem item);
 		Task SyncFavoriteItemsAysnc ();
+
+		Task InsertCouponAsync (Coupon coupon);
+		Task<List<Coupon>> GetCouponsAsync ();
 	}
 }
 
