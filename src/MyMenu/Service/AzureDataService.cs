@@ -18,6 +18,8 @@ namespace MyMenu
 		public MobileServiceClient MobileService { get; set; }
 
 		readonly IMobileServiceTable<Food> foodTable;
+		readonly IMobileServiceTable<Coupon> couponTable;
+
 		readonly IMobileServiceSyncTable<Food> foodsyncTable;
 		readonly IMobileServiceSyncTable<Order> ordersyncTable;
 		readonly IMobileServiceSyncTable<OrderDetail> orderDetailsyncTable;
@@ -38,6 +40,8 @@ namespace MyMenu
 		{
 			MobileService = new MobileServiceClient (App.ApplicationURL, App.GatewayURL, App.ApplicationKey);
 			foodTable = MobileService.GetTable<Food> ();
+			couponTable = MobileService.GetTable<Coupon> ();
+
 			foodsyncTable = MobileService.GetSyncTable<Food> ();
 			ordersyncTable = MobileService.GetSyncTable<Order> ();
 			orderDetailsyncTable = MobileService.GetSyncTable<OrderDetail> ();
@@ -68,6 +72,25 @@ namespace MyMenu
 			} catch (MobileServiceInvalidOperationException e) {
 				//TODO: Insights
 				Debug.WriteLine (@"Sync Failed: {0}", e.Message);
+			}
+		}
+
+		public async Task<List<Coupon>> GetCouponsAsync ()
+		{
+			try {
+				return await couponTable.ToListAsync ();
+			} catch (Exception ex) {
+				Debug.WriteLine (@"Failed: {0}", ex.Message);
+			}
+		}
+
+		public async Task InsertCouponAsync (Coupon coupon)
+		{
+			try {
+				await couponTable.InsertAsync (coupon);
+				Debug.WriteLine ("Coupon ID: {0}", coupon.Id);
+			} catch (Exception ex) {
+				Debug.WriteLine (ex.ToString ());
 			}
 		}
 
