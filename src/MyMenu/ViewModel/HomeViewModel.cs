@@ -28,6 +28,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace MyMenu
 {
@@ -36,9 +37,20 @@ namespace MyMenu
 		public HomeViewModel ()
 		{
 			Title = "Home";
+			IsBusy = false;
 			FoodItems = new ObservableCollection<FoodViewModel> ();
 			LoadFoodItems ();
 		}
+
+		public Command Refresh {
+			get {
+				return refresh ?? (refresh = new Command (async () => await LoadFoodItems()));
+			}
+		}
+
+		Command refresh;
+
+
 
 		async Task LoadFoodItems ()
 		{
@@ -46,13 +58,15 @@ namespace MyMenu
 				IsBusy = true;
 				var dataService = DependencyService.Get<IDataService> ();
 				var items = await dataService.GetFoodItemsAsync ();
-				await dataService.SyncFavoriteItemsAysnc();
+				await dataService.SyncFavoriteItemsAysnc ();
 				var favorites = await dataService.GetUserFavoritesAsync ();
 
 				var fooditems = from fi in items
 				                join  fav in favorites on fi.Id equals fav.FoodItemId into prodGroup
 				                from g in prodGroup.DefaultIfEmpty (null)
 				                select new {FoodItem = fi, FavoriteItem = g};
+
+				FoodItems.Clear ();
 
 				foreach (var item in fooditems) {
 					item.FoodItem.IsFavorite = (item.FavoriteItem != null);
@@ -62,7 +76,6 @@ namespace MyMenu
 			} finally {
 				IsBusy = false;
 			}
-
 		}
 
 		public ObservableCollection<FoodViewModel> FoodItems {

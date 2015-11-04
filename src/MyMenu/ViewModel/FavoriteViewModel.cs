@@ -41,6 +41,14 @@ namespace MyMenu
 			LoadDataAsync ();
 		}
 
+		public Command Refresh {
+			get {
+				return refresh ?? (refresh = new Command (async () => await LoadDataAsync()));
+			}
+		}
+
+		Command refresh;
+
 		async Task LoadDataAsync ()
 		{
 			try {
@@ -53,6 +61,8 @@ namespace MyMenu
 				var fooditems = from fi in items
 				                join  fav in favorites on fi.Id equals fav.FoodItemId
 				                select fi;
+
+				FoodItems.Clear();
 
 				foreach (var item in fooditems) {
 					FoodItems.Add (new FoodViewModel (item));

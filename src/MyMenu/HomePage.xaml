@@ -6,7 +6,13 @@
 		<ToolbarItem Name="Profile" Icon="user" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
-		<ListView x:Name="menuItems" SeparatorVisibility="None" HasUnevenRows="true" ItemsSource="{Binding FoodItems}">
+		<ListView x:Name="menuItems" 
+			SeparatorVisibility="None" 
+			HasUnevenRows="true" 
+			IsPullToRefreshEnabled="true"
+			RefreshCommand="{Binding Refresh}"
+			IsRefreshing="{Binding IsBusy}"
+			ItemsSource="{Binding FoodItems}">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<ViewCell>
