@@ -1,10 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
- xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
- xmlns:controls="clr-namespace:MyMenu;assembly=MyMenu"
- x:Class="MyMenu.CheckoutPage" x:Name="myPage" Title="Summary">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:MyMenu;assembly=MyMenu" x:Class="MyMenu.CheckoutPage" x:Name="myPage" Title="Summary">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Check Out" Command="{Binding CheckOutCommand}" Clicked="chekout_Clicked"/>
+		<ToolbarItem Text="Check Out" Command="{Binding CheckOutCommand}" Clicked="chekout_Clicked" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<Grid BackgroundColor="White">
@@ -12,8 +9,8 @@
 				<RowDefinition Height="40" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
-			<StackLayout  Grid.Row="1" Orientation="Vertical" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
-				<ListView x:Name="summary" SeparatorVisibility="None" HasUnevenRows="true" VerticalOptions="Start" HeightRequest="300" BackgroundColor="White" ItemsSource="{Binding CheckoutItems}" Footer="{Binding Price}" Header="ITEM SUMMARY">
+			<StackLayout Grid.Row="1" Orientation="Vertical" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
+				<ListView x:Name="summary" SeparatorVisibility="None" HasUnevenRows="true" VerticalOptions="Start" HeightRequest="300" BackgroundColor="White" ItemsSource="{Binding CheckoutItems}" Footer="{Binding PricingVm}" Header="ITEM SUMMARY">
 					<ListView.ItemTemplate>
 						<DataTemplate>
 							<ViewCell>
@@ -25,7 +22,7 @@
 										<ColumnDefinition Width="Auto" />
 										<ColumnDefinition Width="*" />
 									</Grid.ColumnDefinitions>
-									<StackLayout Grid.Column="0"  Orientation="Horizontal">
+									<StackLayout Grid.Column="0" Orientation="Horizontal">
 										<controls:QuantityButton Source="add" VerticalOptions="Center" StyleId="add" />
 										<controls:QuantityButton Source="remove" VerticalOptions="Center" StyleId="remove" />
 									</StackLayout>
@@ -55,11 +52,16 @@
 								<Grid.RowDefinitions>
 									<RowDefinition />
 									<RowDefinition Height="*" />
+									<RowDefinition Height="*" />
 								</Grid.RowDefinitions>
-								<Label Grid.Column="0" Grid.Row="0" Text="Discount: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="10" TextColor="#212121" XAlign="End" />
-								<Label Grid.Column="1" Grid.Row="0" Text="0 %" HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="14" TextColor="#212121" XAlign="End" />
-								<Label Grid.Column="0" Grid.Row="1" Text="Total: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="20" TextColor="#212121" XAlign="End" />
-								<Label Grid.Column="1" Grid.Row="1" Text="{Binding}" HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="25" TextColor="#E91E63" XAlign="End" />
+								<StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+									<Entry Placeholder="Coupon" Text="{Binding Coupon}" HorizontalOptions="EndAndExpand"/>
+									<Button Text="APPLY" Command="{Binding ApplyCoupon}"/>
+								</StackLayout>
+								<Label Grid.Column="0" Grid.Row="1" Text="Discount: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="14" TextColor="#212121" XAlign="End" />
+								<Label Grid.Column="1" Grid.Row="1" Text="{Binding Discount, StringFormat='{0:N} %'}" HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="14" TextColor="#212121" XAlign="End" />
+								<Label Grid.Column="0" Grid.Row="2" Text="Total: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="20" TextColor="#212121" XAlign="End" />
+								<Label Grid.Column="1" Grid.Row="2" Text="{Binding Price}" HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="25" TextColor="#E91E63" XAlign="End" />
 							</Grid>
 						</DataTemplate>
 					</ListView.FooterTemplate>
@@ -81,7 +83,8 @@
 					<Editor Grid.Row="1" x:Name="UserAddress" HeightRequest="60" />
 				</Grid>
 			</StackLayout>
-			<ActivityIndicator Grid.Row="1" HeightRequest="50" WidthRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Color="#E91E63" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"></ActivityIndicator>
+			<ActivityIndicator Grid.Row="1" HeightRequest="50" WidthRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Color="#E91E63" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}">
+			</ActivityIndicator>
 		</Grid>
 	</ContentPage.Content>
 </ContentPage>

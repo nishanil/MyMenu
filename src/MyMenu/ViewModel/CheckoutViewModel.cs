@@ -36,6 +36,12 @@ namespace MyMenu
 	public interface ICheckoutViewModel
 	{
 		void UpdateTotalPrice ();
+
+		string Price{ get; }
+
+		string Coupon{ get; }
+
+		Command ApplyCoupon { get; }
 	}
 
 	public class CheckoutViewModel : BaseViewModel, ICheckoutViewModel
@@ -90,6 +96,36 @@ namespace MyMenu
 			}
 		}
 
+		string coupon;
+
+		public string Coupon {
+			get {
+				return coupon;
+			}
+			set {
+				coupon = value;
+				RaisePropertyChanged ();
+			}
+		}
+
+		double discount;
+
+		public double Discount {
+			get {
+				return discount;
+			}
+			set {
+				discount = value;
+				RaisePropertyChanged ();
+			}
+		}
+
+		public Command ApplyCoupon {
+			get {
+				return applyCoupon ?? (applyCoupon = new Command (async () => await ApplyCouponMethod ()));
+			}
+		}
+
 		public Command AddCommand {
 			get {
 				return addCommand ?? (addCommand = new Command (() => Debug.WriteLine (DateTime.Now)));
@@ -99,6 +135,8 @@ namespace MyMenu
 		public void UpdateTotalPrice ()
 		{
 			TotalPrice = CheckoutItems.Sum (p => p.Details.TotalPrice);
+
+			CalculateDiscount ();
 		}
 
 		Command addCommand;
@@ -109,11 +147,38 @@ namespace MyMenu
 			}
 		}
 
-
 		public Command CheckOutCommand {
 			get {
 				return checkOutCommand ?? (checkOutCommand = new Command (CheckOutMethod));
 			}
+		}
+
+		async Task ApplyCouponMethod ()
+		{
+			IsBusy = true;
+			try {
+				var dependencyService = DependencyService.Get<IDataService> ();
+				var couponCode = await dependencyService.GetCouponAsync (Coupon);
+				if (couponCode == null) {
+					Discount = 0;
+					UpdateTotalPrice(); //Recalculate the total price, so we don't apply multiple coupons
+
+					return;
+				}
+
+				Discount = couponCode.Discount;
+
+				UpdateTotalPrice(); 
+
+			} finally {
+				IsBusy = false;
+			}
+		}
+
+		void CalculateDiscount ()
+		{
+			var discountedValue = TotalPrice * (Discount / 100d);
+			TotalPrice = TotalPrice - discountedValue;
 		}
 
 		void CheckOutMethod ()
@@ -127,10 +192,10 @@ namespace MyMenu
 				SpecialInstruction = view.Instructions,
 				Address = view.Address,
 				UserId = Settings.CurrntUserId,
-				UserEmail = "prshntvc@gmail", //TODO: get user email address
+				UserEmail = "nishanil@outlook.com", //TODO: get user email address
 				UserPhone = "0918892320619",
 				Payment = "Cash On Delivery",
-				UserName = "Prashant C", //TODO: get user name
+				UserName = "Nishant Anil", //TODO: get user name
 				TotalAmount = totalPrice,
 				Discount = 0,
 				CouponId = string.Empty,
@@ -150,6 +215,14 @@ namespace MyMenu
 			var vm = DependencyService.Get<IOrderViewModel> (); 
 			vm.SetOrderDetails (order, orderItems);
 		}
+
+		public ICheckoutViewModel PricingVm {
+			get {
+				return this;
+			}
+		}
+
+		Command applyCoupon;
 
 		Command checkOutCommand;
 

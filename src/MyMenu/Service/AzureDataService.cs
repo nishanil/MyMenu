@@ -238,7 +238,17 @@ namespace MyMenu
 			await SyncOrderDetailsAsync ();
 		}
 
+		public async  Task<Coupon> GetCouponAsync(string code){
+			if (string.IsNullOrEmpty(code)) {
+				return null;
+			}
+
+			code = code.ToLower ();
+			var coupons = await couponTable.Where (p => p.Code.ToLower() == code).ToEnumerableAsync ();
+			return coupons.FirstOrDefault ();
+		}
+
 		#endregion
 	}
 }
-
+	
