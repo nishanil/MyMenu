@@ -89,6 +89,7 @@ namespace MyMenu
 
 		Task InsertCouponAsync (Coupon coupon);
 		Task<List<Coupon>> GetCouponsAsync ();
+		Task<Coupon> GetCouponAsync(string code);
 	}
 }
 
