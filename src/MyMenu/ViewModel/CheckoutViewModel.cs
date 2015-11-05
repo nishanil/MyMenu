@@ -135,6 +135,8 @@ namespace MyMenu
 		public void UpdateTotalPrice ()
 		{
 			TotalPrice = CheckoutItems.Sum (p => p.Details.TotalPrice);
+
+			CalculateDiscount ();
 		}
 
 		Command addCommand;
@@ -153,24 +155,30 @@ namespace MyMenu
 
 		async Task ApplyCouponMethod ()
 		{
-			var dependencyService = DependencyService.Get<IDataService> ();
 			IsBusy = true;
 			try {
+				var dependencyService = DependencyService.Get<IDataService> ();
 				var couponCode = await dependencyService.GetCouponAsync (Coupon);
 				if (couponCode == null) {
 					Discount = 0;
+					UpdateTotalPrice(); //Recalculate the total price, so we don't apply multiple coupons
+
+					return;
 				}
+
 				Discount = couponCode.Discount;
 
-				//Calculate the discount
-				UpdateTotalPrice(); //Recalculate the total price, so we don't apply multiple coupons
-
-				var discountedValue = TotalPrice * (Discount / 100d);
-				TotalPrice = TotalPrice - discountedValue;
+				UpdateTotalPrice(); 
 
 			} finally {
 				IsBusy = false;
 			}
+		}
+
+		void CalculateDiscount ()
+		{
+			var discountedValue = TotalPrice * (Discount / 100d);
+			TotalPrice = TotalPrice - discountedValue;
 		}
 
 		void CheckOutMethod ()
