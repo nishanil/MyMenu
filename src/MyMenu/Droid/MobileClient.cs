@@ -40,10 +40,10 @@ namespace MyMenu.Droid
 			return await App.Client.LoginAsync (Forms.Context, provider);
 		}
 
-		public void Logout ()
+		public async void LogoutAsync ()
 		{
 			CookieManager.Instance.RemoveAllCookie ();
-			App.Client.Logout ();
+			await App.Client.LogoutAsync ();
 		}
 	}
 }

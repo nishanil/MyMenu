@@ -43,13 +43,13 @@ namespace MyMenu.iOS
 			return await App.Client.LoginAsync (view, provider);
 		}
 
-		public void Logout ()
+		public async void LogoutAsync ()
 		{
 			foreach (var cookie in NSHttpCookieStorage.SharedStorage.Cookies) {
 				NSHttpCookieStorage.SharedStorage.DeleteCookie (cookie);
 			}
 
-			App.Client.Logout ();
+			await App.Client.LogoutAsync();
 		}
 	}
 }

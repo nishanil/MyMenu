@@ -7,6 +7,7 @@
 *.sln.docstates
 *.userprefs
 
+
 # Xamarin Components
 Components/
 
@@ -22,6 +23,7 @@ bld/
 [Oo]bj/
 [Pp]ackages/
 [Rr]eferences/
+[Pp]ublishProfiles/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -172,6 +174,5 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-src/MyMenu/Helpers.cs
 *.DS_Store
 *.pubxml

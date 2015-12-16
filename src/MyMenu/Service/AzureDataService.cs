@@ -38,7 +38,7 @@ namespace MyMenu
 
 		public AzureDataService ()
 		{
-			MobileService = new MobileServiceClient (App.ApplicationURL, App.GatewayURL, App.ApplicationKey);
+			MobileService = new MobileServiceClient (App.ApplicationURL);
 			foodTable = MobileService.GetTable<Food> ();
 			couponTable = MobileService.GetTable<Coupon> ();
 

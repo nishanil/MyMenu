@@ -28,7 +28,7 @@ namespace MyMenuAppService
             // To prevent Entity Framework from modifying your database schema, use a null database initializer
             // Database.SetInitializer(null);
 
-            app.UseMobileAppAuthentication(config);
+            //app.UseMobileAppAuthentication(config);
             app.UseWebApi(config);
         }
     }
