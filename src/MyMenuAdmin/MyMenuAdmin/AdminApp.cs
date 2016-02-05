@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using MyMenu;
 using Xamarin.Forms;
 
 namespace MyMenuAdmin
@@ -11,8 +11,10 @@ namespace MyMenuAdmin
     {
         public AdminApp()
         {
+            DependencyService.Get<IAzureClient>().Init();
             // The root page of your application
             MainPage = new HomePage();
+            
         }
 
         protected override void OnStart()

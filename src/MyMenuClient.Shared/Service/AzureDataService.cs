@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
-using MyMenu.Helpers;
+//using MyMenu.Helpers;
 
-[assembly: Dependency (typeof(AzureDataService))]
+//[assembly: Dependency (typeof(AzureDataService))]
 namespace MyMenu
 {
-	public class AzureDataService : IDataService, IAzureClient
+	public class AzureDataService //: IDataService
 	{
-		public MobileServiceClient MobileService { get; set; }
+        public static readonly string ApplicationURL = @"https://mymenu-demo.azurewebsites.net";
+
+        public MobileServiceClient MobileService { get; set; }
 
 		readonly IMobileServiceTable<Food> foodTable;
 		readonly IMobileServiceTable<Coupon> couponTable;
@@ -38,7 +40,7 @@ namespace MyMenu
 
 		public AzureDataService ()
 		{
-			MobileService = new MobileServiceClient (App.ApplicationURL);
+			MobileService = new MobileServiceClient (ApplicationURL);
 			foodTable = MobileService.GetTable<Food> ();
 			couponTable = MobileService.GetTable<Coupon> ();
 
@@ -47,7 +49,7 @@ namespace MyMenu
 			orderDetailsyncTable = MobileService.GetSyncTable<OrderDetail> ();
 			favoritesyncTable = MobileService.GetSyncTable<FavoriteItem> ();
 
-			InitializeStoreAsync ().Wait ();
+			InitializeStoreAsync ().Wait();
 		}
 
 		public async Task InitializeStoreAsync ()

@@ -1,10 +1,5 @@
 ﻿using MyMenu;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MyMenuAdmin
@@ -20,20 +15,20 @@ namespace MyMenuAdmin
         }
 
 
-        IDataService azureService;
+        private FoodManager manager;
         
         public FoodListViewModel()
         {
             // Since Android tabs appear on top, the repeating title does not make any sense
             Title = Device.OnPlatform<string>("Food Items", "My Menu (Admin)","");
-            azureService = DependencyService.Get<IDataService>();
-            //LoadFoodItems();
+            manager = DependencyService.Get<IAzureDataManager<Food>>() as FoodManager;
+            Device.BeginInvokeOnMainThread(async () => { await manager.SyncAsync(); });
         }
 
         public async void LoadFoodItems()
         {
             IsBusy = true;
-            FoodItems = new ObservableCollection<Food>(await azureService.GetFoodItemsAsync());
+            FoodItems = new ObservableCollection<Food>(await manager.GetAsync());
             IsBusy = false;
         }
     }

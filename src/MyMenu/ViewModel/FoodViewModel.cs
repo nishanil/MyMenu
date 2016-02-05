@@ -25,15 +25,10 @@
 // THE SOFTWARE.
 using System;
 using Xamarin.Forms;
-using MyMenu.Helpers;
 
 namespace MyMenu
 {
-	public enum RecordStatus
-	{
-		Inserted,
-		Deleted
-	}
+
 
 	public class FoodViewModel : BaseViewModel
 	{
@@ -56,19 +51,21 @@ namespace MyMenu
 			}
 		}
 
-		async void AddFavoriteMethod ()
-		{
-			var dataService = DependencyService.Get<IDataService> ();
+        public FavoriteManager FavoriteManager { get; } = DependencyService.Get<IAzureDataManager<FavoriteItem>>() as FavoriteManager;
 
-			var status = await dataService.SaveFavorite (new FavoriteItem {
+
+        async void AddFavoriteMethod ()
+		{
+			
+			await FavoriteManager.SaveAsync(new FavoriteItem {
 				FoodItemId = foodItem.Id,
 				UserId = Settings.CurrntUserId,
 				IsRemoved = false
 			});
 
-			IsFavourite = (status == RecordStatus.Inserted);
+			IsFavourite = true;
 
-			await dataService.SyncFavoriteItemsAysnc ();
+			await FavoriteManager.SyncAsync();
 		}
 
 		void AddToBasketMethod ()

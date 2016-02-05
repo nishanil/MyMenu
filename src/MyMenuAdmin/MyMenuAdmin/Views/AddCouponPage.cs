@@ -50,11 +50,11 @@ namespace MyMenuAdmin
 				Placeholder = "Discount",
 			};
 
-			var dataService = DependencyService.Get<IDataService> ();
+			var couponManager = DependencyService.Get<IAzureDataManager<Coupon>> ();
 
 			addButton.Clicked += async (sender, e) => {
 				var discountValue = Double.Parse (discount.Text);
-				await dataService.InsertCouponAsync (new Coupon{ Code = code.Text, Discount = discountValue });
+				await couponManager.SaveAsync (new Coupon{ Code = code.Text, Discount = discountValue });
 				await Navigation.PopModalAsync ();
 			};
 

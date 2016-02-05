@@ -63,18 +63,21 @@ namespace MyMenu
 			}
 		}
 
-		async Task PlaceOrder ()
-		{
-			var orderService = DependencyService.Get<IDataService> ();
+        public OrderManager OrderManager { get; } = DependencyService.Get<IAzureDataManager<Order>>() as OrderManager;
+        public OrderDetailManager OrderDetailManager { get; } = DependencyService.Get<IAzureDataManager<OrderDetail>>() as OrderDetailManager;
 
+
+        async Task PlaceOrder ()
+		{
+			
 			IsBusy = true;
 
 			try {
-				await orderService.InsertOrderAsync (order);
+				await OrderManager.SaveAsync(order);
 				
 				foreach (var item in orderDetails) {
 					item.OrderId = order.Id;
-					await orderService.InsertOrderDetailAsync (item);
+					await OrderDetailManager.SaveAsync(item);
 				}
 
 				var orderConfitm = DependencyService.Get<IOrderConfirm> ();

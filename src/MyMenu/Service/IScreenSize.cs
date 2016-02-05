@@ -28,7 +28,6 @@ using System;
 
 using Xamarin.Forms;
 using Microsoft.WindowsAzure.MobileServices;
-using MyMenu.Helpers;
 using System.Collections.Generic;
 
 namespace MyMenu

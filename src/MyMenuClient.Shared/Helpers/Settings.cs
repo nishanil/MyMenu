@@ -2,7 +2,7 @@
 using Refractored.Xam.Settings;
 using Refractored.Xam.Settings.Abstractions;
 
-namespace MyMenu.Helpers
+namespace MyMenu
 {
 	/// <summary>
 	/// This is the Settings static class that can be used in your Core solution or in any

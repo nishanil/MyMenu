@@ -36,7 +36,8 @@ namespace MyMenuAdmin
 		{
 			InitializeComponent ();
 			BindingContext = new CouponsViewModel ();
-		}
+
+        }
 
 		void Add_Clicked (object sender, EventArgs e)
 		{

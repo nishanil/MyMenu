@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMenu.Helpers
+namespace MyMenu
 {
     public static class StaticExtensions
     {

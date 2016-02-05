@@ -37,8 +37,14 @@ namespace MyMenu
 		{
 			Title = "Favourites";
 			FoodItems = new ObservableCollection<FoodViewModel> ();
-
-			LoadDataAsync ();
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                IsBusy = true;
+                await FoodManager.SyncAsync();
+                await FavoriteManager.SyncAsync(Settings.CurrntUserId);
+                IsBusy = false;
+            });
+            LoadDataAsync ();
 		}
 
 		public Command Refresh {
@@ -49,14 +55,17 @@ namespace MyMenu
 
 		Command refresh;
 
-		async Task LoadDataAsync ()
+        public FoodManager FoodManager { get; } = DependencyService.Get<IAzureDataManager<Food>>() as FoodManager;
+        public FavoriteManager FavoriteManager { get; } = DependencyService.Get<IAzureDataManager<FavoriteItem>>() as FavoriteManager;
+
+
+        async Task LoadDataAsync ()
 		{
 			try {
 				IsBusy = true;
 
-				var dataService = DependencyService.Get<IDataService> ();
-				var items = await dataService.GetFoodItemsAsync ();
-				var favorites = await dataService.GetUserFavoritesAsync ();
+				var items = await FoodManager.GetAsync();
+				var favorites = await FavoriteManager.GetAsync();
 
 				var fooditems = from fi in items
 				                join  fav in favorites on fi.Id equals fav.FoodItemId

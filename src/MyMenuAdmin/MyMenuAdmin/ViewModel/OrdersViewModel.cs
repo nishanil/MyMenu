@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyMenu;
-using MyMenu.Helpers;
 using Xamarin.Forms;
 
 namespace MyMenuAdmin.ViewModel
@@ -26,35 +24,36 @@ namespace MyMenuAdmin.ViewModel
         }
 
         public List<Order> Orders { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
+        
+        public OrderManager OrderManager { get; } = DependencyService.Get<IAzureDataManager<Order>>() as OrderManager;
+        public OrderDetailManager OrderDetailManager { get; } = DependencyService.Get<IAzureDataManager<OrderDetail>>() as OrderDetailManager;
 
 
         public OrdersViewModel()
         {
             Title = "Orders";
+            Device.BeginInvokeOnMainThread(async () => { await OrderManager.SyncAsync(); });
         }
 
         public async void LoadOrders()
         {
-            var azureService = DependencyService.Get<IDataService>();
             IsBusy = true;
-            Orders = await azureService.GetOrdersAsync();
-            OrderDetails = await azureService.GetOrderDetailsAsync();
-
+            Orders = await OrderManager?.GetAsync();
+           
             var orderVmList = new ObservableCollection<OrderItemViewModel>();
             foreach (var orderItem in Orders)
             {
                 var orderVm = new OrderItemViewModel
                 {
-                    OrderName = string.Format("Order: {0}", orderItem.Number),
+                    OrderName = $"Order: {orderItem.Number}",
                     DeliveryAddress = orderItem.Address,
                     CreatedDateTime = orderItem.CreatedDateTime,
                     OrderStatus = orderItem.Status
                 };
-                var orderDetailSpecificToOrder = OrderDetails.Where((detail => detail.OrderId == orderItem.Id));
+                var orderDetails = await OrderDetailManager?.GetOrderDetailsAsync(orderItem);
                 string formatter = "{0} ({1}), ";
                 var strBuilder = new StringBuilder();
-                foreach (var orderDetail in orderDetailSpecificToOrder)
+                foreach (var orderDetail in orderDetails)
                 {
                     strBuilder.Append(string.Format(formatter, orderDetail.FoodName, orderDetail.Quantity));
                 }
@@ -76,17 +75,16 @@ namespace MyMenuAdmin.ViewModel
         public async Task<OrderDetailViewModel> GetViewModelForOrderDetail(OrderItemViewModel selectedOrderItemViewModel)
         {
 
-            return await  Task.Run(() =>
+            return await  Task.Run(async () =>
             {
                 var selectedOrder = Orders.Find((order => selectedOrderItemViewModel.OrderId == order.Id));
+                var orderDetails = await OrderDetailManager?.GetOrderDetailsAsync(selectedOrder);
 
-                var orderDetailSpecificToOrder =
-                    OrderDetails.Where((detail => detail.OrderId == selectedOrder.Id)).ToList();
                 var orderDetailViewModel = new OrderDetailViewModel
                 {
                     SelectedOrderItemViewModel = selectedOrderItemViewModel,
                     SelectedOrder = selectedOrder,
-                    SelectedOrderDetails = orderDetailSpecificToOrder,
+                    SelectedOrderDetails = orderDetails,
 
                 };
                 return orderDetailViewModel;

@@ -7,10 +7,8 @@ using Newtonsoft.Json;
 
 namespace MyMenu
 {
-    public class Order
+    public class Order : BaseModel
     {
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
         public long Number { get; set; }
         public string SpecialInstruction { get; set; }
         public string Address { get; set; }
@@ -23,10 +21,7 @@ namespace MyMenu
         // Order Placed, Out for Delivery, Delivered 
         public string Status { get; set; }
         public bool HasFeedback { get; set; }
-
-        [Microsoft.WindowsAzure.MobileServices.CreatedAt]
-        public DateTime CreatedDateTime { get; set; }
-
+        
         public double TotalAmount { get; set; }
         public double Discount { get; set; }
         public string CouponId { get; set; }

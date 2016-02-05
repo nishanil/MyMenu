@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>c5069874-6e82-4ec9-a45d-6ed31c6060c3</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>MyMenuClient.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\StaticExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Manager\BaseDataManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Manager\CouponManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Manager\FavoriteManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Manager\FoodManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Manager\IAzureDataManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Manager\OrderManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\BaseModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Coupon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\FacebookProfile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\FavoriteItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Food.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\IAzureEntitiy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Order.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\OrderDetail.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\RecordStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AzureDataClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AzureDataService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\IAzureClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\IDataService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\BaseViewModel.cs" />
+  </ItemGroup>
+</Project>

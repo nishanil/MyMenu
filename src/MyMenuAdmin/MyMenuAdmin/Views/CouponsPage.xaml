@@ -3,8 +3,8 @@
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Add" Clicked="Add_Clicked" />
 	</ContentPage.ToolbarItems>
-	<ContentPage.Content>
-		<ListView IsPullToRefreshEnabled="true" SeparatorVisibility="None" RefreshCommand="{Binding Refresh}" IsRefreshing="{Binding IsBusy}" ItemsSource="{Binding Coupons}">
+	<ContentPage.Content>  
+		<ListView x:Name="myList" IsPullToRefreshEnabled="true" SeparatorVisibility="None" RefreshCommand="{Binding Refresh}" IsRefreshing="{Binding IsBusy}" ItemsSource="{Binding Coupons}">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<ViewCell>

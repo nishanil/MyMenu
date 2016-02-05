@@ -96,13 +96,10 @@ namespace MyMenuAdmin.ViewModel
 
                  try
                  {
-                     var azureService = DependencyService.Get<IDataService>();
+                     var manager = DependencyService.Get<IAzureDataManager<Food>>();
                      IsBusy = true;
-                     if (InEditMode)
-                         await azureService.UpdateFoodItemAsync(SelectedFood);
-                     else
-                         await azureService.InsertFoodItemAsync(SelectedFood);
-
+                     await manager.SaveAsync(SelectedFood);
+                     await manager.SyncAsync();
                      IsBusy = false;
                      if(CurrentPage!=null)
                      await CurrentPage.Navigation.PopAsync();
