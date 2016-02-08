@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:myMenu="clr-namespace:MyMenu;assembly=MyMenu"
+             x:Class="MyMenu.QuantityControl" x:Name="QuantityControlX">
+  <Grid ColumnSpacing="2" Padding="0">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"></ColumnDefinition>
+      <ColumnDefinition Width="20"></ColumnDefinition>
+      <ColumnDefinition Width="Auto"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    <Image Grid.Column="0" Source="minus.png">
+      <Image.Behaviors>
+        <myMenu:AddRemoveQtyBehavior x:Name="addImageBehavior" GroupName="{Binding Source={x:Reference QuantityControlX}, Path=GroupId}" Action="Remove"/>
+      </Image.Behaviors>
+    </Image>
+    <Label Grid.Column="1" BindingContext="{x:Reference addImageBehavior}" Text="{Binding Path=Quantity}" FontSize="15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+    <Image Grid.Column="2" Source="plus.png">
+      <Image.Behaviors>
+        <myMenu:AddRemoveQtyBehavior GroupName="{Binding Source={x:Reference QuantityControlX}, Path=GroupId}" Action="Add"/>
+      </Image.Behaviors>
+    </Image>
+  </Grid>
+</ContentView>

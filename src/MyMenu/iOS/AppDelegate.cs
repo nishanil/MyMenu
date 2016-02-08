@@ -40,7 +40,6 @@ namespace MyMenu.iOS
 	[Register ("AppDelegate")]
 	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
 	{
-		MobileServiceClient client;
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
@@ -56,11 +55,14 @@ namespace MyMenu.iOS
 			CurrentPlatform.Init ();
 			SQLitePCL.CurrentPlatform.Init ();
 
-			#endregion
-
-			LoadApplication (new App ());
+            #endregion
+            
+            UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent, false);
+            LoadApplication (new App ());
 			return base.FinishedLaunching (app, options);
 		}
+
+        
 
 
 

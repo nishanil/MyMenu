@@ -41,7 +41,7 @@ namespace MyMenu
             {
                 IsBusy = true;
                 await FoodManager.SyncAsync();
-                await FavoriteManager.SyncAsync(Settings.CurrntUserId);
+                await FavoriteManager.SyncAsync(Settings.CurrentUserId);
                 IsBusy = false;
             });
             LoadDataAsync ();

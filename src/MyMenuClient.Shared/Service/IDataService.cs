@@ -40,7 +40,7 @@ namespace MyMenu
 
 	//	#region Order Detail
 
-	//	Task<List<OrderDetail>> GetOrderDetailsAsync ();
+	//	Task<List<OrderDetail>> GetAsync ();
 
 	//	Task InsertOrderDetailAsync (OrderDetail orderDetail);
 

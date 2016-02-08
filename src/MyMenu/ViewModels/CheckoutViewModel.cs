@@ -165,7 +165,7 @@ namespace MyMenu
 
 				SpecialInstruction = view.Instructions,
 				Address = view.Address,
-				UserId = Settings.CurrntUserId,
+				UserId = Settings.CurrentUserId,
 				UserEmail = "nishanil@outlook.com", //TODO: get user email address
 				UserPhone = "0918892320619",
 				Payment = "Cash On Delivery",

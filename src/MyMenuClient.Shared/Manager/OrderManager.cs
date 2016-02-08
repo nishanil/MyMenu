@@ -16,7 +16,7 @@ namespace MyMenu
 
     public class OrderDetailManager : BaseDataManager<OrderDetail>
     {
-        public async Task<List<OrderDetail>> GetOrderDetailsAsync(Order order)
+        public async Task<List<OrderDetail>> GetAsync(Order order)
         {
             SetQuery("detailOnOrderId", SyncTable
                                         .CreateQuery()

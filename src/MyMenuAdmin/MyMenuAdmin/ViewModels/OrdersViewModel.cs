@@ -50,7 +50,7 @@ namespace MyMenuAdmin.ViewModel
                     CreatedDateTime = orderItem.CreatedDateTime,
                     OrderStatus = orderItem.Status
                 };
-                var orderDetails = await OrderDetailManager?.GetOrderDetailsAsync(orderItem);
+                var orderDetails = await OrderDetailManager?.GetAsync(orderItem);
                 string formatter = "{0} ({1}), ";
                 var strBuilder = new StringBuilder();
                 foreach (var orderDetail in orderDetails)
@@ -78,7 +78,7 @@ namespace MyMenuAdmin.ViewModel
             return await  Task.Run(async () =>
             {
                 var selectedOrder = Orders.Find((order => selectedOrderItemViewModel.OrderId == order.Id));
-                var orderDetails = await OrderDetailManager?.GetOrderDetailsAsync(selectedOrder);
+                var orderDetails = await OrderDetailManager?.GetAsync(selectedOrder);
 
                 var orderDetailViewModel = new OrderDetailViewModel
                 {

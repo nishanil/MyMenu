@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:controls="clr-namespace:MyMenu;assembly=MyMenu" 
+             Title="{Binding Title}" x:Class="MyMenu.HomePage" >
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Name="Favourites" Icon="favorite" Clicked="Favourites_Clicked"/>
+		<ToolbarItem Name="Profile" Icon="user" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
+    <RelativeLayout>
+		<ListView x:Name="menuItems" 
+      SeparatorColor="#EFEFF4"
+			HasUnevenRows="true" 
+			IsPullToRefreshEnabled="true"
+			RefreshCommand="{Binding RefreshCommand}"
+      ItemTapped="MenuItems_OnItemTapped"
+			IsRefreshing="{Binding IsBusy}"
+			ItemsSource="{Binding Items}" BackgroundColor="#EFEFF4">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Orientation="Vertical" BackgroundColor="White">
+							<RelativeLayout>
+								<Image x:Name="foodImage" Aspect="AspectFill" Source="{Binding FoodItem.ImageUrl}" HeightRequest="{Binding ImageHeight}" WidthRequest="{Binding ImageWidth}" />
+								<!--<controls:FavoriteButton Source="nofav" RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, &#xA;					                                        Constant=0}" RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, &#xA;					                 						Property=Width,&#xA;					                 						ElementName=foodImage,&#xA;					                                        Constant=-48}" />-->
+							</RelativeLayout>
+							<Grid Padding="8,0" RowSpacing="0" >
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="10" />
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto"  />
+								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition />
+									<RowDefinition />
+									<RowDefinition />
+								</Grid.RowDefinitions>
+								<Label Grid.Row="0" Grid.Column="1"  Text="{Binding FoodItem.Name}" VerticalOptions="Fill" FontSize="20" TextColor="#E91E63"/>
+								<Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  LineBreakMode="WordWrap" FontSize="10" Text="A baked flat bread garnished with flax seeds, served with spicy peanut better dip. So delicious, its hard to belive that something this tasty could be also be healthy!"   TextColor="Gray" />
+								<!--<controls:ImageButton Source="addcart" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"/>-->
+                <Label Text="{Binding Price}" FontSize="15" Grid.Column="2" Grid.Row="0" TextColor="#E91E63" HorizontalTextAlignment="End"/>
+							<!--Since list items repeat, group the Quantity control to FoodItem.Id to get unique set of Quanity increment and decrement -->	
+              <controls:QuantityControl x:Name="QuantityControl" Grid.Row="2" Grid.Column="2" GroupId="{Binding FoodItem.Id}" ></controls:QuantityControl>
+						  <!--<Label Grid.Column="1" Grid.Row="2" Text="{Binding Source={x:Reference QuantityControl}, Path=SelectedQuantity}"></Label>-->	
+            </Grid>
+						</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+     
+		</ListView>
+      <!--<BoxView Color="#EFEFF4" x:Name="redBox"
+             >-->
+        <Grid RowSpacing="1" ColumnSpacing="1" BackgroundColor="#EFEFF4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.91,Constant=0}"
+             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"
+             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.09,Constant=0}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="2"></RowDefinition>
+            <RowDefinition></RowDefinition>
+
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+          <BoxView Grid.Row="0" HeightRequest="5" Color="#E91E63" Grid.ColumnSpan="3"></BoxView>
+
+          <BoxView Grid.Column="0" Grid.Row="1" Color="#EFEFF4" Grid.ColumnSpan="3"></BoxView>
+          <Grid Grid.Row="1" Padding="5" Grid.Column="1" BackgroundColor="White">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"></ColumnDefinition>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+              <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Source="cart.png"></Image>
+            <Label Grid.Column="1" LineBreakMode="WordWrap" Text="2 Items" VerticalOptions="CenterAndExpand" FontSize="13" />
+            <Label Grid.Column="2" LineBreakMode="WordWrap" Text="$400" VerticalOptions="CenterAndExpand" FontSize="15" TextColor="#E91E63" HorizontalTextAlignment="End" />
+
+          </Grid>
+
+          <Grid Grid.Row="1" Grid.Column="2" BackgroundColor="White" Padding="4">
+            <Label Text="CHECKOUT" VerticalOptions="CenterAndExpand" FontSize="15" TextColor="#212121" HorizontalTextAlignment="End"/>
+
+          </Grid>
+        </Grid>
+      <!--</BoxView>-->
+      
+      
+    </RelativeLayout>
+  </ContentPage.Content>
+</ContentPage>

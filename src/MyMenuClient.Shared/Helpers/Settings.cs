@@ -11,13 +11,9 @@ namespace MyMenu
 	/// </summary>
 	public static class Settings
 	{
-		static ISettings AppSettings {
-			get {
-				return CrossSettings.Current;
-			}
-		}
+		static ISettings AppSettings => CrossSettings.Current;
 
-		#region Setting Constants
+	    #region Setting Constants
 
 		const string AccessTokenKey = "settings_key";
 		static readonly string AccessTokenDefault = string.Empty;
@@ -31,13 +27,13 @@ namespace MyMenu
 
 		const string UserIdKey = "useridkey";
 
-		static string UserIdDefault = string.Empty;
+		static readonly string UserIdDefault = string.Empty;
 
 		#endregion
 
 
 
-		public static string CurrntUserId {
+		public static string CurrentUserId {
 			get {
 				return AppSettings.GetValueOrDefault (UserIdKey, UserIdDefault);
 			}

@@ -32,34 +32,38 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="FavoriteButton.cs" />
+    <Compile Include="Behaviors\AddRemoveQtyBehavior.cs" />
+    <Compile Include="CustomControls\QuantityControl.xaml.cs">
+      <DependentUpon>QuantityControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FavoriteButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HomePage.xaml.cs">
+    <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.cs" />
-    <Compile Include="ViewModel\HomeViewModel.cs" />
-    <Compile Include="ViewModel\FoodViewModel.cs" />
-    <Compile Include="FoodItemCell.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\FoodViewModel.cs" />
+    <Compile Include="Views\FoodItemCell.cs" />
     <Compile Include="AuthHelpers.cs" />
-    <Compile Include="LoginPage.cs" />
+    <Compile Include="Views\LoginPage.cs" />
     <Compile Include="IMobileClient.cs" />
     <Compile Include="Service\IProgressDisplay.cs" />
-    <Compile Include="FavoritePage.xaml.cs">
+    <Compile Include="Views\FavoritePage.xaml.cs">
       <DependentUpon>FavoritePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\FavoriteViewModel.cs" />
-    <Compile Include="CheckoutPage.xaml.cs">
+    <Compile Include="ViewModels\FavoriteViewModel.cs" />
+    <Compile Include="Views\CheckoutPage.xaml.cs">
       <DependentUpon>CheckoutPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\CheckoutViewModel.cs" />
-    <Compile Include="ViewModel\OrderDetailsViewModel.cs" />
-    <Compile Include="OrderPage.xaml.cs">
+    <Compile Include="ViewModels\CheckoutViewModel.cs" />
+    <Compile Include="ViewModels\OrderDetailsViewModel.cs" />
+    <Compile Include="Views\OrderPage.xaml.cs">
       <DependentUpon>OrderPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\OrderViewModel.cs" />
-    <Compile Include="ViewModel\OrderConfirmViewModel.cs" />
-    <Compile Include="OrderConfirmPage.xaml.cs">
+    <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\OrderConfirmViewModel.cs" />
+    <Compile Include="Views\OrderConfirmPage.xaml.cs">
       <DependentUpon>OrderConfirmPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service\IScreenSize.cs" />
@@ -115,23 +119,28 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="HomePage.xaml">
+    <EmbeddedResource Include="Views\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="FavoritePage.xaml">
+    <EmbeddedResource Include="Views\FavoritePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="CheckoutPage.xaml">
+    <EmbeddedResource Include="Views\CheckoutPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrderPage.xaml">
+    <EmbeddedResource Include="Views\OrderPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrderConfirmPage.xaml">
+    <EmbeddedResource Include="Views\OrderConfirmPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="CustomControls\QuantityControl.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup />
   <Import Project="..\MyMenuClient.Shared\MyMenuClient.Shared.projitems" Label="Shared" />
   <Import Project="packages\Xamarin.Forms.2.0.0.6490\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('packages\Xamarin.Forms.2.0.0.6490\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

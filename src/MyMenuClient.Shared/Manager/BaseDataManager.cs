@@ -25,7 +25,7 @@ namespace MyMenu
 
         public IMobileServiceSyncTable<T> SyncTable { get; set; }
         
-        public async Task SyncAsync()
+        public virtual async Task SyncAsync()
         {
             CheckForInit();
             ReadOnlyCollection<MobileServiceTableOperationError> syncErrors = null;
@@ -51,11 +51,11 @@ namespace MyMenu
         {
             if (SyncTable == null)
             {
-                throw new Exception("SyncTable not intialized. Call the Init() first.");
+                throw new Exception("SyncTable not intialized. Call the Init() method first.");
             }
         }
 
-        public async Task HandleSyncErrors(ReadOnlyCollection<MobileServiceTableOperationError> syncErrors)
+        public virtual async Task HandleSyncErrors(ReadOnlyCollection<MobileServiceTableOperationError> syncErrors)
         {
             // Simple error/conflict handling. A real application would handle the various errors like network conditions,
             // server conflicts and others via the IMobileServiceSyncHandler.

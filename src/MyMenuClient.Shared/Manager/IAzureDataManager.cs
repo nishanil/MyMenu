@@ -9,7 +9,7 @@ using Microsoft.WindowsAzure.MobileServices.Sync;
 
 namespace MyMenu
 {
-    internal interface IAzureDataManager <T> where T : IAzureEntity
+    public interface IAzureDataManager <T> where T : IAzureEntity
     {
         void Init(MobileServiceSQLiteStore store);
         IMobileServiceSyncTable<T> SyncTable { get; set; }

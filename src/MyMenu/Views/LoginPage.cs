@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Microsoft.WindowsAzure.MobileServices;
 
@@ -71,14 +71,14 @@ namespace MyMenu
 				var userRecord = new User (App.Client.CurrentUser);
 				await table.InsertAsync (userRecord);
 				
-				Settings.CurrntUserId = userRecord.Id;
+				Settings.CurrentUserId = userRecord.Id;
 			} catch (Exception ex) {
 				await DisplayAlert ("Error", "We're unable to log you in at the moment. Try later!", "OK");
 				System.Diagnostics.Debug.WriteLine (ex.Message);
 			} finally {
 				progress.Dismiss ();
 			}
-
+		    await Task.Delay(500);
 			Application.Current.MainPage = new NavigationPage (new HomePage ()) {
 				BarBackgroundColor = Color.FromHex ("E91E63"),
 				BarTextColor = Color.White
