@@ -32,6 +32,9 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Behaviors\AddRemoveQtyBehavior.cs" />
     <Compile Include="CustomControls\QuantityControl.xaml.cs">
       <DependentUpon>QuantityControl.xaml</DependentUpon>
@@ -42,7 +45,6 @@
     <Compile Include="Views\FoodListPage.xaml.cs">
       <DependentUpon>FoodListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App.cs" />
     <Compile Include="ViewModels\FoodListPageViewModel.cs" />
     <Compile Include="ViewModels\FoodViewModel.cs" />
     <Compile Include="Views\FoodItemCell.cs" />
@@ -142,7 +144,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="App.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="..\MyMenuClient.Shared\MyMenuClient.Shared.projitems" Label="Shared" />
   <Import Project="packages\Xamarin.Forms.2.0.0.6490\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('packages\Xamarin.Forms.2.0.0.6490\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

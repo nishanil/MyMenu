@@ -48,13 +48,13 @@ namespace MyMenu
 
 		public string Instructions {
 			get {
-				return Comments.Text;
+				return "Test";
 			}
 		}
 
 		public string Address {
 			get {
-				return UserAddress.Text;
+				return "Test";
 			}
 		}
 

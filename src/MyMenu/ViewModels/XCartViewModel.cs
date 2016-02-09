@@ -41,10 +41,12 @@ namespace MyMenu
 
         private void CheckoutItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            IsEnabled = App.CheckoutItems.Count > 0;
-            TotalQuantity = App.CheckoutItems.Count() + " Items";
-            var price = App.CheckoutItems.Sum(_ => _.PricePerQty);
-            TotalPrice = $"{price:C}";
+            var count = App.CheckoutItems.Count;
+            IsEnabled = count > 0;
+            var item = count == 1 ? "Item" : "Items";
+            TotalQuantity = $"{count} {item}";
+            var tp = App.CheckoutItems.Sum(_ => _.PricePerQty);
+            TotalPrice = $"{tp:C}";
 
         }
     }

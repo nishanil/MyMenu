@@ -1,72 +1,100 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:MyMenu;assembly=MyMenu" x:Class="MyMenu.CheckoutPage" x:Name="myPage" Title="Summary">
-	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Check Out" Command="{Binding CheckOutCommand}" Clicked="chekout_Clicked" />
-	</ContentPage.ToolbarItems>
-	<ContentPage.Content>
-		<Grid BackgroundColor="White">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:controls="clr-namespace:MyMenu;assembly=MyMenu" x:Class="MyMenu.CheckoutPage" x:Name="myPage" Title="Cart">
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Text="Check Out" Command="{Binding CheckOutCommand}" Clicked="chekout_Clicked" />
+  </ContentPage.ToolbarItems>
+  <ContentPage.Content>
+    <!--<Grid BackgroundColor="#EFEFF4">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="40" />
 				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
-			<StackLayout Grid.Row="1" Orientation="Vertical" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
-				<ListView x:Name="summary" SeparatorVisibility="None" HasUnevenRows="true" VerticalOptions="Start" HeightRequest="300" BackgroundColor="White" ItemsSource="{Binding CheckoutItems}" Footer="{Binding PricingVm}" Header="ITEM SUMMARY">
-					<ListView.ItemTemplate>
-						<DataTemplate>
-							<ViewCell>
-								<Grid Padding="10" RowSpacing="1">
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="2*" />
-										<ColumnDefinition Width="Auto" />
-										<ColumnDefinition Width="10" />
-										<ColumnDefinition Width="Auto" />
-										<ColumnDefinition Width="*" />
-									</Grid.ColumnDefinitions>
-									<StackLayout Grid.Column="0" Orientation="Horizontal">
-										<controls:QuantityButton Source="add" VerticalOptions="Center" StyleId="add" />
-										<controls:QuantityButton Source="remove" VerticalOptions="Center" StyleId="remove" />
-									</StackLayout>
-									<Label Grid.Column="0" VerticalOptions="Center" XAlign="End" Text="{Binding Details.FoodName}" />
-									<Label Grid.Column="1" XAlign="End" VerticalOptions="Center" Text="{Binding Details.SellingPrice}" />
-									<Label Grid.Column="2" VerticalOptions="Center" XAlign="Center" FontSize="10" Text="X" />
-									<Label Grid.Column="3" VerticalOptions="Center" XAlign="Start" Text="{Binding Quantity}" />
-									<Label Grid.Column="4" XAlign="End" VerticalOptions="Center" Text="{Binding TotalPrice}" />
-								</Grid>
-							</ViewCell>
-						</DataTemplate>
-					</ListView.ItemTemplate>
-					<ListView.HeaderTemplate>
-						<DataTemplate>
-							<StackLayout Padding="8">
-								<Label Text="{Binding}" Font="12" TextColor="Gray" />
-							</StackLayout>
-						</DataTemplate>
-					</ListView.HeaderTemplate>
-					<ListView.FooterTemplate>
-						<DataTemplate>
-							<Grid Padding="10">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition />
-									<ColumnDefinition />
-								</Grid.ColumnDefinitions>
-								<Grid.RowDefinitions>
-									<RowDefinition />
-									<RowDefinition Height="*" />
-									<RowDefinition Height="*" />
-								</Grid.RowDefinitions>
-								<StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-									<Entry Placeholder="Coupon" Text="{Binding Coupon}" HorizontalOptions="EndAndExpand"/>
-									<Button Text="APPLY" Command="{Binding ApplyCoupon}"/>
-								</StackLayout>
-								<Label Grid.Column="0" Grid.Row="1" Text="Discount: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="14" TextColor="#212121" XAlign="End" />
-								<Label Grid.Column="1" Grid.Row="1" Text="{Binding Discount, StringFormat='{0:N} %'}" HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="14" TextColor="#212121" XAlign="End" />
-								<Label Grid.Column="0" Grid.Row="2" Text="Total: " HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="20" TextColor="#212121" XAlign="End" />
-								<Label Grid.Column="1" Grid.Row="2" Text="{Binding Price}" HorizontalOptions="EndAndExpand" VerticalOptions="Fill" FontSize="25" TextColor="#E91E63" XAlign="End" />
-							</Grid>
-						</DataTemplate>
-					</ListView.FooterTemplate>
-				</ListView>
-				<Grid Padding="8" VerticalOptions="Start">
+			</Grid.RowDefinitions>-->
+    <!--<StackLayout Grid.Row="1" Orientation="Vertical" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">-->
+    <Grid>
+      <ListView x:Name="summary"
+                    SeparatorColor="#EFEFF4"
+                    HasUnevenRows="true"
+                    VerticalOptions="Start"
+                    BackgroundColor="#EFEFF4"
+                    ItemsSource="{Binding CheckoutItems}"
+                    Footer="{Binding PricingVm}"
+                    Header="ITEMS SUMMARY">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <Grid RowSpacing="1" Padding="10" ColumnSpacing="4" BackgroundColor="White">
+                <Grid.RowDefinitions>
+                  <RowDefinition></RowDefinition>
+                  <RowDefinition></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="2*" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Style="{StaticResource FoodItemNameCartTextStyle}"
+                       Grid.ColumnSpan="5" VerticalOptions="Start" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Text="{Binding Details.FoodName}" />
+
+                <controls:QuantityControl Padding="5" x:Name="QuantityControl"
+                                          Grid.Row="1" Grid.Column="0"
+                                          GroupId="{Binding Details.FoodName}"
+                                        ></controls:QuantityControl>
+                <Label Grid.Row="1" Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Center" Style="{StaticResource FoodItemNameCartTextStyle}" FontSize="10" Text="X" />
+                <Label Grid.Row="1" Grid.Column="2" HorizontalTextAlignment="End" VerticalOptions="Center" Style="{StaticResource FoodItemNameCartTextStyle}" Text="{Binding Details.SellingPrice}" />
+                <Label Grid.Row="1" Grid.Column="4" HorizontalTextAlignment="End" VerticalOptions="Center" Style="{StaticResource FoodItemHeaderTextStyle}" Text="{Binding TotalPrice}" />
+              </Grid>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.HeaderTemplate>
+          <DataTemplate>
+            <StackLayout Padding="14">
+              <Label Text="{Binding}"  Style="{StaticResource FoodItemDescTextStyle}" />
+            </StackLayout>
+          </DataTemplate>
+        </ListView.HeaderTemplate>
+        <ListView.FooterTemplate>
+          <DataTemplate>
+            <Grid Padding="10" RowSpacing="0" ColumnSpacing="0" BackgroundColor="White">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+
+              </Grid.RowDefinitions>
+              <!--<Entry Grid.Row="0" Grid.Column="0" Placeholder="enter coupon code" Text="{Binding Coupon}" Style="{StaticResource FoodItemCartEntryStyle}"
+                         MinimumWidthRequest="150" HorizontalOptions="End"/>
+									<Button Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonRegularTextStyle}" Text="APPLY" Command="{Binding ApplyCoupon}"/>-->
+              <Label Grid.Column="0" Grid.Row="0" Text="Discount:" Style="{StaticResource FoodItemDescTextStyle}" VerticalOptions="End" HorizontalTextAlignment="End" />
+              <Label Grid.Column="1" Grid.Row="0" Text="{Binding Discount, StringFormat='{0:N} %'}" VerticalOptions="End" Style="{StaticResource FoodItemDescTextStyle}" HorizontalTextAlignment="End" />
+              <Label Grid.Column="0" Grid.Row="1" Text="Total: " Style="{StaticResource FoodItemDescTextStyle}" VerticalOptions="End" HorizontalTextAlignment="End" />
+              <Label Grid.Column="1" Grid.Row="1" Text="{Binding Price}" Style="{StaticResource FoodItemHeaderTextStyle}" VerticalOptions="End" HorizontalTextAlignment="End" />
+              <StackLayout Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Padding="14">
+                <Label Text="COUPONS"  Style="{StaticResource FoodItemDescTextStyle}" />
+              </StackLayout>
+
+              <StackLayout Grid.Row="4" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="12" Grid.Column="0" Grid.ColumnSpan="2">
+                <Entry Placeholder="enter coupon code" Text="{Binding Coupon}" Style="{StaticResource FoodItemCartEntryStyle}"
+                          HorizontalOptions="FillAndExpand"/>
+                <Button Style="{StaticResource ButtonRegularTextStyle}" Text="APPLY" Command="{Binding ApplyCoupon}"/>
+
+              </StackLayout>
+            </Grid>
+          </DataTemplate>
+        </ListView.FooterTemplate>
+      </ListView>
+      <!--<Grid Padding="8" VerticalOptions="Start">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" />
 						<RowDefinition Height="Auto" />
@@ -82,9 +110,15 @@
 					<Label Grid.Row="0" Text="ADDRESS" FontSize="12" TextColor="Gray" HorizontalOptions="StartAndExpand" />
 					<Editor Grid.Row="1" x:Name="UserAddress" HeightRequest="60" />
 				</Grid>
-			</StackLayout>
-			<ActivityIndicator Grid.Row="1" HeightRequest="50" WidthRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Color="#E91E63" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}">
-			</ActivityIndicator>
-		</Grid>
-	</ContentPage.Content>
+			-->
+      <!--</StackLayout>-->
+      <!--<ActivityIndicator Grid.Row="1" 
+                         HeightRequest="50" 
+                         WidthRequest="50" 
+                         VerticalOptions="Center" 
+                         HorizontalOptions="Center" 
+                         Color="#E91E63" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}">
+			</ActivityIndicator>-->
+    </Grid>
+  </ContentPage.Content>
 </ContentPage>

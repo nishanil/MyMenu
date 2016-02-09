@@ -34,7 +34,7 @@ namespace MyMenuAdmin.ViewModel
         {
             SelectedOrder.Status = updateStatus;
             SelectedOrder.SendSms = true;
-            await DependencyService.Get<IDataService>().UpdateOrderAsync(SelectedOrder);
+            await DependencyService.Get<IAzureDataManager<Order>>().SaveAsync(SelectedOrder);
         }
 
         public OrderDetailViewModel()

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MyMenu.App">
+  <Application.Resources>
+    <ResourceDictionary>
+      <Style x:Key="EntryRegularTextStyle" TargetType="Entry">
+        <Setter Property="FontFamily">
+          <OnPlatform x:TypeArguments="x:String">
+            <OnPlatform.iOS>AvenirNext-Regular</OnPlatform.iOS>
+          </OnPlatform>
+        </Setter>
+      </Style>
+      <Style x:Key="LabelHeaderTextStyle" TargetType="Label">
+        <Setter Property="FontFamily">
+          <OnPlatform x:TypeArguments="x:String">
+            <OnPlatform.iOS>AvenirNext-Regular</OnPlatform.iOS>
+          </OnPlatform>
+        </Setter>
+      </Style>
+      <Style x:Key="LabelRegularTextStyle" TargetType="Label">
+        <Setter Property="FontFamily">
+          <OnPlatform x:TypeArguments="x:String" iOS="AvenirNext-Medium"/>
+        </Setter>
+      </Style>
+      <Style x:Key="ButtonRegularTextStyle" TargetType="Button">
+        <Setter Property="FontFamily">
+          <OnPlatform x:TypeArguments="x:String" iOS="AvenirNext-Medium"/>
+        </Setter>
+        <Setter Property="TextColor" Value="#545454" />
+      </Style>
+      <Style x:Key="FoodItemHeaderTextStyle" TargetType="Label" BasedOn="{StaticResource LabelHeaderTextStyle}">
+        <Setter Property="TextColor" Value="#E91E63" />
+        <Setter Property="FontSize" Value="20" />
+      </Style>
+      <Style x:Key="FoodItemDescTextStyle" TargetType="Label" BasedOn="{StaticResource LabelRegularTextStyle}">
+        <Setter Property="TextColor" Value="#545454" />
+        <Setter Property="FontSize" Value="12" />
+      </Style>
+      <Style x:Key="QuantityTextStyle" TargetType="Label" BasedOn="{StaticResource LabelHeaderTextStyle}">
+        <Setter Property="TextColor" Value="#545454" />
+        <Setter Property="FontSize" Value="20" />
+      </Style>
+      <Style x:Key="FoodItemNameCartTextStyle" TargetType="Label" BasedOn="{StaticResource LabelRegularTextStyle}">
+        <Setter Property="TextColor" Value="#545454" />
+        <Setter Property="FontSize" Value="15" />
+      </Style>
+      <Style x:Key="FoodItemCartEntryStyle" TargetType="Entry" BasedOn="{StaticResource EntryRegularTextStyle}">
+        <Setter Property="TextColor" Value="#545454" />
+        <Setter Property="FontSize" Value="15" />
+      </Style>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>
