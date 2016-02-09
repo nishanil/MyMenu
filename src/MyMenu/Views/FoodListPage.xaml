@@ -2,7 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:controls="clr-namespace:MyMenu;assembly=MyMenu" 
-             Title="{Binding Title}" x:Class="MyMenu.HomePage" >
+             Title="{Binding Title}" x:Class="MyMenu.FoodListPage"
+             xmlns:myMenu="clr-namespace:MyMenu;assembly=MyMenu">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <myMenu:NullToBoolConverter x:Key="NullToBoolConverter"></myMenu:NullToBoolConverter>
+    </ResourceDictionary>
+  </ContentPage.Resources>
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Name="Favourites" Icon="favorite" Clicked="Favourites_Clicked"/>
 		<ToolbarItem Name="Profile" Icon="user" />
@@ -41,18 +47,17 @@
 								<!--<controls:ImageButton Source="addcart" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"/>-->
                 <Label Text="{Binding Price}" FontSize="15" Grid.Column="2" Grid.Row="0" TextColor="#E91E63" HorizontalTextAlignment="End"/>
 							<!--Since list items repeat, group the Quantity control to FoodItem.Id to get unique set of Quanity increment and decrement -->	
-              <controls:QuantityControl x:Name="QuantityControl" Grid.Row="2" Grid.Column="2" GroupId="{Binding FoodItem.Id}" ></controls:QuantityControl>
+              <controls:QuantityControl x:Name="QuantityControl" Grid.Row="2" Grid.Column="2" 
+                                        GroupId="{Binding FoodItem.Id}" QuantityChangedCommand="{Binding QuantityChangedCommand}" 
+                                        ></controls:QuantityControl>
 						  <!--<Label Grid.Column="1" Grid.Row="2" Text="{Binding Source={x:Reference QuantityControl}, Path=SelectedQuantity}"></Label>-->	
             </Grid>
 						</StackLayout>
 					</ViewCell>
 				</DataTemplate>
 			</ListView.ItemTemplate>
-     
 		</ListView>
-      <!--<BoxView Color="#EFEFF4" x:Name="redBox"
-             >-->
-        <Grid RowSpacing="1" ColumnSpacing="1" BackgroundColor="#EFEFF4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+    <Grid x:Name="xCart" BindingContext="{Binding CartViewModel}" IsVisible="{Binding IsEnabled}" RowSpacing="1" ColumnSpacing="1" BackgroundColor="#EFEFF4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.91,Constant=0}"
              RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"
              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.09,Constant=0}">
@@ -76,15 +81,14 @@
               <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Image Source="cart.png"></Image>
-            <Label Grid.Column="1" LineBreakMode="WordWrap" Text="2 Items" VerticalOptions="CenterAndExpand" FontSize="13" />
-            <Label Grid.Column="2" LineBreakMode="WordWrap" Text="$400" VerticalOptions="CenterAndExpand" FontSize="15" TextColor="#E91E63" HorizontalTextAlignment="End" />
+            <Label Grid.Column="1" LineBreakMode="WordWrap" Text="{Binding TotalQuantity}" VerticalOptions="CenterAndExpand" FontSize="13" />
+            <Label Grid.Column="2" LineBreakMode="WordWrap" Text="{Binding TotalPrice}" VerticalOptions="CenterAndExpand" FontSize="15" TextColor="#E91E63" HorizontalTextAlignment="End" />
 
           </Grid>
 
           <Grid Grid.Row="1" Grid.Column="2" BackgroundColor="White" Padding="4">
-            <Label Text="CHECKOUT" VerticalOptions="CenterAndExpand" FontSize="15" TextColor="#212121" HorizontalTextAlignment="End"/>
-
-          </Grid>
+            <Button Text="CHECKOUT" TextColor="#212121" FontSize="15" HorizontalOptions="End" Clicked="Checkout_Clicked"></Button>
+               </Grid>
         </Grid>
       <!--</BoxView>-->
       

@@ -3,10 +3,12 @@
 using Xamarin.Forms;
 using Microsoft.WindowsAzure.MobileServices;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace MyMenu
 {
-	public class App : Application
+	public class App : Application 
 	{
         public static readonly string ApplicationURL = @"https://mymenu-demo.azurewebsites.net";
         public static readonly string GatewayURL = @"https://mymenu-demo8eb72f69d7c94309a2d73935e5784b92.azurewebsites.net";
@@ -15,12 +17,12 @@ namespace MyMenu
         public static MobileServiceClient Client { get; private set; }
 
 		public static Size ScreenSize { get; set; }
-
-		public static List<Food> CheckoutItems {
+        
+		public static ObservableCollection<Food> CheckoutItems {
 			get;
 			set;
 		}
-
+        
 		public App ()
 		{
             var azureServiceClient = DependencyService.Get<IAzureClient>();
@@ -42,7 +44,7 @@ namespace MyMenu
 			}
 
 
-			CheckoutItems = new List<Food> ();
+		    CheckoutItems = new ObservableCollection<Food>();
 
 			var user = new MobileServiceUser (Settings.CurrentUser) {
 				MobileServiceAuthenticationToken = Settings.AccessToken
@@ -58,7 +60,7 @@ namespace MyMenu
 		void InitializeHomePage ()
 		{
 			
-			MainPage = new NavigationPage (new HomePage ()) {
+			MainPage = new NavigationPage (new FoodListPage ()) {
 				BarBackgroundColor = Color.FromHex ("E91E63"),
 				BarTextColor = Color.White
 			};

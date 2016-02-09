@@ -9,6 +9,7 @@
     <Import_RootNamespace>MyMenuClient.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\NullToBoolConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\StaticExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Manager\BaseDataManager.cs" />

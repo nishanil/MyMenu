@@ -11,13 +11,13 @@
     </Grid.ColumnDefinitions>
     <Image Grid.Column="0" Source="minus.png">
       <Image.Behaviors>
-        <myMenu:AddRemoveQtyBehavior x:Name="addImageBehavior" GroupName="{Binding Source={x:Reference QuantityControlX}, Path=GroupId}" Action="Remove"/>
+        <myMenu:AddRemoveQtyBehavior x:Name="RemoveImageBehavior" GroupName="{Binding Source={x:Reference QuantityControlX}, Path=GroupId}" Action="Remove"/>
       </Image.Behaviors>
     </Image>
-    <Label Grid.Column="1" BindingContext="{x:Reference addImageBehavior}" Text="{Binding Path=Quantity}" FontSize="15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+    <Label Grid.Column="1" BindingContext="{x:Reference AddImageBehavior}" Text="{Binding Path=Quantity}" FontSize="15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
     <Image Grid.Column="2" Source="plus.png">
       <Image.Behaviors>
-        <myMenu:AddRemoveQtyBehavior GroupName="{Binding Source={x:Reference QuantityControlX}, Path=GroupId}" Action="Add"/>
+        <myMenu:AddRemoveQtyBehavior x:Name="AddImageBehavior" GroupName="{Binding Source={x:Reference QuantityControlX}, Path=GroupId}" Action="Add"/>
       </Image.Behaviors>
     </Image>
   </Grid>

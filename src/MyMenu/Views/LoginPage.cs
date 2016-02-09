@@ -79,7 +79,7 @@ namespace MyMenu
 				progress.Dismiss ();
 			}
 		    await Task.Delay(500);
-			Application.Current.MainPage = new NavigationPage (new HomePage ()) {
+			Application.Current.MainPage = new NavigationPage (new FoodListPage ()) {
 				BarBackgroundColor = Color.FromHex ("E91E63"),
 				BarTextColor = Color.White
 			};

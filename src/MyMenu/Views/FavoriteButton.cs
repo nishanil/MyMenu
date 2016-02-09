@@ -54,7 +54,7 @@ namespace MyMenu
 
 		void Tap_Tapped (object sender, EventArgs e)
 		{
-			vm.AddFavorite.Execute (null);
+			//vm.AddFavorite.Execute (null);
 			Source = vm.IsFavourite ? "fav.png" : "nofav.png";
 		}
 	}
@@ -103,7 +103,7 @@ namespace MyMenu
 		void Tap_Tapped (object sender, EventArgs e)
 		{
 			Debug.WriteLine ("Add item tapped");
-			vm.AddToBasket.Execute (null);
+			//vm.AddToBasket.Execute (null);
 		}
 
 		readonly TapGestureRecognizer tap;
