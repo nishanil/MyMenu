@@ -6,21 +6,17 @@
     <ToolbarItem Text="Check Out" Command="{Binding CheckOutCommand}" Clicked="chekout_Clicked" />
   </ContentPage.ToolbarItems>
   <ContentPage.Content>
-    <!--<Grid BackgroundColor="#EFEFF4">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="40" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>-->
-    <!--<StackLayout Grid.Row="1" Orientation="Vertical" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">-->
-    <Grid>
+    <RelativeLayout>
       <ListView x:Name="summary"
-                    SeparatorColor="#EFEFF4"
-                    HasUnevenRows="true"
-                    VerticalOptions="Start"
-                    BackgroundColor="#EFEFF4"
-                    ItemsSource="{Binding CheckoutItems}"
-                    Footer="{Binding PricingVm}"
-                    Header="ITEMS SUMMARY">
+                  SeparatorColor="#EFEFF4"
+                  HasUnevenRows="true"
+                  VerticalOptions="Start"
+                  BackgroundColor="#EFEFF4"
+                  ItemsSource="{Binding CheckoutItems}"
+                  Footer="{Binding PricingVm}"
+                  Header="ITEMS SUMMARY"
+                  RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=1,Constant=0}">
+        >
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
@@ -73,9 +69,6 @@
                 <RowDefinition />
 
               </Grid.RowDefinitions>
-              <!--<Entry Grid.Row="0" Grid.Column="0" Placeholder="enter coupon code" Text="{Binding Coupon}" Style="{StaticResource FoodItemCartEntryStyle}"
-                         MinimumWidthRequest="150" HorizontalOptions="End"/>
-									<Button Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonRegularTextStyle}" Text="APPLY" Command="{Binding ApplyCoupon}"/>-->
               <Label Grid.Column="0" Grid.Row="0" Text="Discount:" Style="{StaticResource FoodItemDescTextStyle}" VerticalOptions="End" HorizontalTextAlignment="End" />
               <Label Grid.Column="1" Grid.Row="0" Text="{Binding Discount, StringFormat='{0:N} %'}" VerticalOptions="End" Style="{StaticResource FoodItemDescTextStyle}" HorizontalTextAlignment="End" />
               <Label Grid.Column="0" Grid.Row="1" Text="Total: " Style="{StaticResource FoodItemDescTextStyle}" VerticalOptions="End" HorizontalTextAlignment="End" />
@@ -94,7 +87,8 @@
           </DataTemplate>
         </ListView.FooterTemplate>
       </ListView>
-      <!--<Grid Padding="8" VerticalOptions="Start">
+    </RelativeLayout>
+    <!--<Grid Padding="8" VerticalOptions="Start">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" />
 						<RowDefinition Height="Auto" />
@@ -111,14 +105,14 @@
 					<Editor Grid.Row="1" x:Name="UserAddress" HeightRequest="60" />
 				</Grid>
 			-->
-      <!--</StackLayout>-->
-      <!--<ActivityIndicator Grid.Row="1" 
+    <!--</StackLayout>-->
+    <!--<ActivityIndicator Grid.Row="1" 
                          HeightRequest="50" 
                          WidthRequest="50" 
                          VerticalOptions="Center" 
                          HorizontalOptions="Center" 
                          Color="#E91E63" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}">
 			</ActivityIndicator>-->
-    </Grid>
+
   </ContentPage.Content>
 </ContentPage>
