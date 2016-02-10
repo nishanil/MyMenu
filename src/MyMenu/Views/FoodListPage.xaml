@@ -72,7 +72,12 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
           </Grid.ColumnDefinitions>
-          <Image Source="cart.png"></Image>
+          <Image Source="cart.png">
+            <Image.BackgroundColor>
+              <!--HACK: Fix Android Images later-->
+              <OnPlatform x:TypeArguments="Color" Android="#E91E63"></OnPlatform>
+            </Image.BackgroundColor>
+          </Image>
           <Label Grid.Column="1" LineBreakMode="WordWrap" Text="{Binding TotalQuantity}" VerticalOptions="CenterAndExpand"  Style="{StaticResource LabelRegularTextStyle}" />
           <Label Grid.Column="2" LineBreakMode="WordWrap" Text="{Binding TotalPrice}" VerticalOptions="CenterAndExpand" Style="{StaticResource LabelRegularTextStyle}" HorizontalTextAlignment="End" />
         </Grid>
