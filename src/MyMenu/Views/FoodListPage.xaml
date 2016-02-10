@@ -16,7 +16,9 @@
         RefreshCommand="{Binding RefreshCommand}"
         ItemTapped="MenuItems_OnItemTapped"
         IsRefreshing="{Binding IsBusy}"
-        ItemsSource="{Binding Items}" BackgroundColor="#EFEFF4">
+        ItemsSource="{Binding Items}" BackgroundColor="#EFEFF4"
+        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=1,Constant=0}">
+        >
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
@@ -74,7 +76,6 @@
           </Grid.ColumnDefinitions>
           <Image Source="cart.png">
             <Image.BackgroundColor>
-              <!--HACK: Fix Android Images later-->
               <OnPlatform x:TypeArguments="Color" Android="#E91E63"></OnPlatform>
             </Image.BackgroundColor>
           </Image>

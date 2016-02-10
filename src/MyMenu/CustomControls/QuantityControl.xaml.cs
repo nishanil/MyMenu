@@ -11,7 +11,6 @@ namespace MyMenu
             InitializeComponent();
 
             AddImageBehavior.PropertyChanged += ImageBehaviorOnPropertyChanged;
-            // NOT needed. As Quanity changed would fire for every item in a group.
             RemoveImageBehavior.PropertyChanged += ImageBehaviorOnPropertyChanged;
         }
         
