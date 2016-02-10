@@ -185,20 +185,14 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\nofav.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\fav.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\addcart.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\remove.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\add.png" />
     <AndroidResource Include="Resources\drawable-hdpi\check.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\remove.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\add.png" />
     <AndroidResource Include="Resources\drawable-mdpi\check.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\remove.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\add.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\check.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\remove.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\add.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\minus.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\plus.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\check.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\remove.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\add.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\minus.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\plus.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\check.png" />
   </ItemGroup>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -208,6 +202,24 @@
       <Version>1.3.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\minus.png" />
   </ItemGroup>
   <Import Project="..\packages\Xamarin.Forms.2.0.0.6490\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.0.0.6490\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
