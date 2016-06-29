@@ -1,41 +1,37 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenu", "MyMenu.csproj", "{D7727BF9-D553-410B-985B-305DDDA93D76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenu", "MyMenu\MyMenu.csproj", "{D7727BF9-D553-410B-985B-305DDDA93D76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenu.iOS", "iOS\MyMenu.iOS.csproj", "{2AB20A2F-465C-43A7-BC09-12D26A98555C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenu.iOS", "MyMenu\iOS\MyMenu.iOS.csproj", "{2AB20A2F-465C-43A7-BC09-12D26A98555C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenu.Droid", "Droid\MyMenu.Droid.csproj", "{604B2890-C139-42D7-AFEB-BF2CD23DB996}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenu.Droid", "MyMenu\Droid\MyMenu.Droid.csproj", "{604B2890-C139-42D7-AFEB-BF2CD23DB996}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenu.UITests", "UITests\MyMenu.UITests.csproj", "{B177FC2E-5E51-457E-B5F2-C9A8164E12D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenu.UITests", "MyMenu\UITests\MyMenu.UITests.csproj", "{B177FC2E-5E51-457E-B5F2-C9A8164E12D0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admin", "Admin", "{A598A4D1-595F-419D-855A-7FFD65431363}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenuAdmin", "..\MyMenuAdmin\MyMenuAdmin\MyMenuAdmin.csproj", "{3D98C78E-9CFF-4C97-9871-F3C07376EE79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenuAdmin", "MyMenuAdmin\MyMenuAdmin\MyMenuAdmin.csproj", "{3D98C78E-9CFF-4C97-9871-F3C07376EE79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenuAdmin.iOS", "..\MyMenuAdmin\MyMenuAdmin.iOS\MyMenuAdmin.iOS.csproj", "{898145DD-50AA-48D1-B9E0-B10367C9C111}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenuAdmin.iOS", "MyMenuAdmin\MyMenuAdmin.iOS\MyMenuAdmin.iOS.csproj", "{898145DD-50AA-48D1-B9E0-B10367C9C111}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenuAdmin.Droid", "..\MyMenuAdmin\MyMenuAdmin.Droid\MyMenuAdmin.Droid.csproj", "{7E56436C-A8D3-4AA5-A33A-5C237362A0FC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{0E3FAB7C-A095-436B-8A22-52DEE5475B35}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenuAppService", "..\MyMenu.Server\MyMenuAppService\MyMenuAppService.csproj", "{209FA716-A7AD-4095-BD70-C8710FC66FA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMenuAdmin.Droid", "MyMenuAdmin\MyMenuAdmin.Droid\MyMenuAdmin.Droid.csproj", "{7E56436C-A8D3-4AA5-A33A-5C237362A0FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{E1C17FB4-53DA-4E70-8D7A-56DB314CD8B8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{36C8492A-3C79-4A5B-9F0B-7FE34E1F2D73}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MyMenuClient.Shared", "..\MyMenuClient.Shared\MyMenuClient.Shared.shproj", "{C5069874-6E82-4EC9-A45D-6ED31C6060C3}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MyMenuClient.Shared", "MyMenuClient.Shared\MyMenuClient.Shared.shproj", "{C5069874-6E82-4EC9-A45D-6ED31C6060C3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consumer", "Consumer", "{F8FF8C89-8118-44DD-B34F-9B34D8EE6611}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\MyMenuClient.Shared\MyMenuClient.Shared.projitems*{c5069874-6e82-4ec9-a45d-6ed31c6060c3}*SharedItemsImports = 13
-		..\MyMenuClient.Shared\MyMenuClient.Shared.projitems*{d7727bf9-d553-410b-985b-305ddda93d76}*SharedItemsImports = 4
-		..\MyMenuClient.Shared\MyMenuClient.Shared.projitems*{3d98c78e-9cff-4c97-9871-f3c07376ee79}*SharedItemsImports = 4
+		MyMenuClient.Shared\MyMenuClient.Shared.projitems*{c5069874-6e82-4ec9-a45d-6ed31c6060c3}*SharedItemsImports = 13
+		MyMenuClient.Shared\MyMenuClient.Shared.projitems*{d7727bf9-d553-410b-985b-305ddda93d76}*SharedItemsImports = 4
+		MyMenuClient.Shared\MyMenuClient.Shared.projitems*{3d98c78e-9cff-4c97-9871-f3c07376ee79}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -361,46 +357,6 @@ Global
 		{7E56436C-A8D3-4AA5-A33A-5C237362A0FC}.Release|x86.ActiveCfg = Release|Any CPU
 		{7E56436C-A8D3-4AA5-A33A-5C237362A0FC}.Release|x86.Build.0 = Release|Any CPU
 		{7E56436C-A8D3-4AA5-A33A-5C237362A0FC}.Release|x86.Deploy.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Ad-Hoc|ARM.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Ad-Hoc|x86.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Ad-Hoc|x86.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.AppStore|ARM.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.AppStore|ARM.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.AppStore|x86.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.AppStore|x86.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|ARM.Build.0 = Debug|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|x86.Build.0 = Debug|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|ARM.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|ARM.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|iPhone.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|x86.ActiveCfg = Release|Any CPU
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -414,7 +370,6 @@ Global
 		{3D98C78E-9CFF-4C97-9871-F3C07376EE79} = {A598A4D1-595F-419D-855A-7FFD65431363}
 		{898145DD-50AA-48D1-B9E0-B10367C9C111} = {A598A4D1-595F-419D-855A-7FFD65431363}
 		{7E56436C-A8D3-4AA5-A33A-5C237362A0FC} = {A598A4D1-595F-419D-855A-7FFD65431363}
-		{209FA716-A7AD-4095-BD70-C8710FC66FA7} = {0E3FAB7C-A095-436B-8A22-52DEE5475B35}
 		{36C8492A-3C79-4A5B-9F0B-7FE34E1F2D73} = {E1C17FB4-53DA-4E70-8D7A-56DB314CD8B8}
 		{C5069874-6E82-4EC9-A45D-6ED31C6060C3} = {36C8492A-3C79-4A5B-9F0B-7FE34E1F2D73}
 		{F8FF8C89-8118-44DD-B34F-9B34D8EE6611} = {E1C17FB4-53DA-4E70-8D7A-56DB314CD8B8}
